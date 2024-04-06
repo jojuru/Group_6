@@ -16,7 +16,7 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Ryhmä 6 gitti toimii!!!!!!!!!!!"
+                Text="Ryhmä 6 gitti toimii!!!!!!!!!!! Pulli test"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
