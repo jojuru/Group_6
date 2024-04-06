@@ -20,7 +20,7 @@
             FontSize="32"
             HorizontalOptions="Center"
             SemanticProperties.HeadingLevel="Level1"
-            Text="Ryhmä 6 gitti toimii!!!!!!!!!!! -Pull testaus toimii!!!-" />
+            Text="Ryhmä 6 gitti toimii!!!!!!!!!!! -Pull testaus toimii!!!- AS gittitesti" />
 
          <Label
             FontSize="18"
