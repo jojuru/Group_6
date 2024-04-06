@@ -8,35 +8,33 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Mokkivaraus
-build_property.ProjectDir = C:\Users\sisum\OneDrive\Työpöytä\mokki\Group_6\Mokkivaraus\Mokkivaraus\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\
 
-[C:/Users/sisum/OneDrive/Työpöytä/mokki/Group_6/Mokkivaraus/Mokkivaraus/App.xaml]
+[D:/koodaus/ohjelmistotuotanto_1/projekti/Group_6/Mokkivaraus/Mokkivaraus/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Mokkivaraus.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[C:/Users/sisum/OneDrive/Työpöytä/mokki/Group_6/Mokkivaraus/Mokkivaraus/AppShell.xaml]
+[D:/koodaus/ohjelmistotuotanto_1/projekti/Group_6/Mokkivaraus/Mokkivaraus/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Mokkivaraus.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[C:/Users/sisum/OneDrive/Työpöytä/mokki/Group_6/Mokkivaraus/Mokkivaraus/MainPage.xaml]
+[D:/koodaus/ohjelmistotuotanto_1/projekti/Group_6/Mokkivaraus/Mokkivaraus/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Mokkivaraus.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
-[C:/Users/sisum/OneDrive/Työpöytä/mokki/Group_6/Mokkivaraus/Mokkivaraus/Resources/Styles/Colors.xaml]
+[D:/koodaus/ohjelmistotuotanto_1/projekti/Group_6/Mokkivaraus/Mokkivaraus/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Mokkivaraus.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[C:/Users/sisum/OneDrive/Työpöytä/mokki/Group_6/Mokkivaraus/Mokkivaraus/Resources/Styles/Styles.xaml]
+[D:/koodaus/ohjelmistotuotanto_1/projekti/Group_6/Mokkivaraus/Mokkivaraus/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Mokkivaraus.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml

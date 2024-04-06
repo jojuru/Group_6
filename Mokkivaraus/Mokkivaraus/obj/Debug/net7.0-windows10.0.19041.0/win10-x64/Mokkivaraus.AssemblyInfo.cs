@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Mokkivaraus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+439d4dbaae734d542d03f44d99d833b5ba7f8862")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Mokkivaraus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Mokkivaraus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
