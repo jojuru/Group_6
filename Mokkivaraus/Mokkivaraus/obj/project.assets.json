@@ -24028,11 +24028,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joona\\Desktop\\Project\\Mokkivaraus\\Mokkivaraus\\Mokkivaraus.csproj",
+      "projectUniqueName": "D:\\koodaus\\ohjelmistotuotanto_1\\Mokkivaraus\\Mokkivaraus\\Mokkivaraus.csproj",
       "projectName": "Mokkivaraus",
-      "projectPath": "C:\\Users\\Joona\\Desktop\\Project\\Mokkivaraus\\Mokkivaraus\\Mokkivaraus.csproj",
+      "projectPath": "D:\\koodaus\\ohjelmistotuotanto_1\\Mokkivaraus\\Mokkivaraus\\Mokkivaraus.csproj",
       "packagesPath": "C:\\Users\\Joona\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joona\\Desktop\\Project\\Mokkivaraus\\Mokkivaraus\\obj\\",
+      "outputPath": "D:\\koodaus\\ohjelmistotuotanto_1\\Mokkivaraus\\Mokkivaraus\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

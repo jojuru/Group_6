@@ -1,1 +1,1 @@
-C:\Users\Joona\Desktop\Project\Mokkivaraus\Mokkivaraus\Mokkivaraus.csproj;x64
+D:\koodaus\ohjelmistotuotanto_1\Mokkivaraus\Mokkivaraus\Mokkivaraus.csproj;x64

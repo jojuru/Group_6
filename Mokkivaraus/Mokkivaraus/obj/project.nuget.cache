@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zqi6SDOHr8pQgVMXjrQX2BzOIhTHO4uAFAZINX3FmggN+bTNrDvqjstsGIoRXEqhlLPh7ms+wnfY2YW4kItSVw==",
+  "dgSpecHash": "0L2d9kKwqJnOQTq8M/bHrXXX6Y9Q0WxGREYSoJVGukRWca8fyWgFXZWTTwegXrcmrJjav86MsjcJYNBLfpLRiQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Joona\\Desktop\\Project\\Mokkivaraus\\Mokkivaraus\\Mokkivaraus.csproj",
+  "projectFilePath": "D:\\koodaus\\ohjelmistotuotanto_1\\Mokkivaraus\\Mokkivaraus\\Mokkivaraus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joona\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
     "C:\\Users\\Joona\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
