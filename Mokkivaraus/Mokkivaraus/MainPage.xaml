@@ -15,6 +15,7 @@
             <Label Text="Village Newbies Oy"
                  HorizontalOptions="CenterAndExpand"
                  TextColor="#5271FF"
+                 FontFamily="PoppinsRegular"
                  FontSize="60"
                  Padding="30"
                        >
@@ -23,6 +24,7 @@
             <Button
             x:Name="VaraaMokkiBtn"
             Text="Varaa mökki"
+            FontFamily="PoppinsRegular"
             FontSize="20"
             BackgroundColor="Black"
             CornerRadius="0"
@@ -32,6 +34,7 @@
             <Button
             x:Name="AsiakkuudetBtn"
             Text="Asiakkuudet"
+            FontFamily="PoppinsRegular"
             FontSize="20"
             BackgroundColor="Black"
             CornerRadius="0"
@@ -41,6 +44,7 @@
             <Button
             x:Name="LaskutusBtn"
             Text="Laskutus"
+            FontFamily="PoppinsRegular"
             FontSize="20"
             BackgroundColor="Black"
             CornerRadius="0"
@@ -50,6 +54,7 @@
             <Button
             x:Name="RaportointiBtn"
             Text="Raportointi"
+            FontFamily="PoppinsRegular"
             FontSize="20"
             BackgroundColor="Black"
             CornerRadius="0"
@@ -59,6 +64,7 @@
             <Button
             x:Name="HallintaBtn"
             Text="Hallinta"
+            FontFamily="PoppinsRegular"
             FontSize="20"
             BackgroundColor="Black"
             CornerRadius="0"

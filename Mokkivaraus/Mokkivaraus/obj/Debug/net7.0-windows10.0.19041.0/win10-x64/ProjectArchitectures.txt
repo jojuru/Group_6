@@ -1,1 +1,1 @@
-D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\Mokkivaraus.csproj;x64
+F:\Mokkivaraus\Group_6\Mokkivaraus\Mokkivaraus\Mokkivaraus.csproj;x64
