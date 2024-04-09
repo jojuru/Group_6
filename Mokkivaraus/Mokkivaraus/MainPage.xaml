@@ -2,41 +2,71 @@
 <ContentPage
    x:Class="Mokkivaraus.MainPage"
    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+   Title=""
+   BackgroundImageSource="vuori.jpg"
+    >
 
-   <ScrollView>
-      <VerticalStackLayout
-         Padding="30,0"
-         Spacing="25"
-         VerticalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout 
+                Padding="30,0"
+                Spacing="20"
+                VerticalOptions="Center">
+            <Label Text="Village Newbies Oy"
+                 HorizontalOptions="CenterAndExpand"
+                 TextColor="#5271FF"
+                 FontSize="60"
+                 Padding="30"
+                       >
+            </Label>
 
-         <Image
-            HeightRequest="200"
-            HorizontalOptions="Center"
-            SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            Source="dotnet_bot.png" />
+            <Button
+            x:Name="VaraaMokkiBtn"
+            Text="Varaa mökki"
+            FontSize="20"
+            BackgroundColor="Black"
+            CornerRadius="0"
+            WidthRequest="280"
+            HorizontalOptions="CenterAndExpand"
+            />
+            <Button
+            x:Name="AsiakkuudetBtn"
+            Text="Asiakkuudet"
+            FontSize="20"
+            BackgroundColor="Black"
+            CornerRadius="0"
+            WidthRequest="280"
+            HorizontalOptions="CenterAndExpand"
+            />
+            <Button
+            x:Name="LaskutusBtn"
+            Text="Laskutus"
+            FontSize="20"
+            BackgroundColor="Black"
+            CornerRadius="0"
+            WidthRequest="280"
+            HorizontalOptions="CenterAndExpand"
+            />
+            <Button
+            x:Name="RaportointiBtn"
+            Text="Raportointi"
+            FontSize="20"
+            BackgroundColor="Black"
+            CornerRadius="0"
+            WidthRequest="280"
+            HorizontalOptions="CenterAndExpand"
+            />
+            <Button
+            x:Name="HallintaBtn"
+            Text="Hallinta"
+            FontSize="20"
+            BackgroundColor="Black"
+            CornerRadius="0"
+            WidthRequest="280"
+            HorizontalOptions="CenterAndExpand"
+            />
 
-         <Label
-            FontSize="32"
-            HorizontalOptions="Center"
-            SemanticProperties.HeadingLevel="Level1"
-            Text="Ryhmä 6 gitti toimii!!!!!!!!!!! -Pull testaus toimii!!!- AS gittitesti - Joona" />
-
-         <Label
-            FontSize="18"
-            HorizontalOptions="Center"
-            SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-            SemanticProperties.HeadingLevel="Level2"
-            Text="Welcome to .NET Multi-platform App UI" />
-
-         <Button
-            x:Name="CounterBtn"
-            Clicked="OnCounterClicked"
-            HorizontalOptions="Center"
-            SemanticProperties.Hint="Counts the number of times you click"
-            Text="Click me" />
-
-      </VerticalStackLayout>
+        </VerticalStackLayout>
    </ScrollView>
 
 </ContentPage>
