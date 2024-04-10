@@ -1,78 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-   x:Class="Mokkivaraus.MainPage"
-   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-   Title=""
-   BackgroundImageSource="vuori.jpg"
-    >
+    x:Class="Mokkivaraus.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title=""
+    BackgroundImageSource="vuori.jpg">
 
     <ScrollView>
-        <VerticalStackLayout 
-                Padding="30,0"
-                Spacing="20"
-                VerticalOptions="Center">
-            <Label Text="Village Newbies Oy"
-                 HorizontalOptions="CenterAndExpand"
-                 TextColor="#5271FF"
-                 FontFamily="PoppinsRegular"
-                 FontSize="60"
-                 Padding="30"
-                       >
-            </Label>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="20"
+            VerticalOptions="Center">
+            <Label
+                Padding="30"
+                FontFamily="PoppinsRegular"
+                FontSize="60"
+                HorizontalOptions="CenterAndExpand"
+                Text="Village Newbies Oy"
+                TextColor="#5271FF" />
 
             <Button
-            x:Name="VaraaMokkiBtn"
-            Text="Varaa mökki"
-            FontFamily="PoppinsRegular"
-            FontSize="20"
-            BackgroundColor="Black"
-            CornerRadius="0"
-            WidthRequest="280"
-            HorizontalOptions="CenterAndExpand"
-            />
+                x:Name="VaraaMokkiBtn"
+                BackgroundColor="Black"
+                Clicked="VaraaMokkiBtn_Clicked"
+                CornerRadius="0"
+                FontFamily="PoppinsRegular"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Varaa mökki"
+                TextColor="White"
+                WidthRequest="280" />
             <Button
-            x:Name="AsiakkuudetBtn"
-            Text="Asiakkuudet"
-            FontFamily="PoppinsRegular"
-            FontSize="20"
-            BackgroundColor="Black"
-            CornerRadius="0"
-            WidthRequest="280"
-            HorizontalOptions="CenterAndExpand"
-            />
+                x:Name="AsiakkuudetBtn"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                FontFamily="PoppinsRegular"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Asiakkuudet"
+                TextColor="White"
+                WidthRequest="280" />
             <Button
-            x:Name="LaskutusBtn"
-            Text="Laskutus"
-            FontFamily="PoppinsRegular"
-            FontSize="20"
-            BackgroundColor="Black"
-            CornerRadius="0"
-            WidthRequest="280"
-            HorizontalOptions="CenterAndExpand"
-            />
+                x:Name="LaskutusBtn"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                FontFamily="PoppinsRegular"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Laskutus"
+                TextColor="White"
+                WidthRequest="280" />
             <Button
-            x:Name="RaportointiBtn"
-            Text="Raportointi"
-            FontFamily="PoppinsRegular"
-            FontSize="20"
-            BackgroundColor="Black"
-            CornerRadius="0"
-            WidthRequest="280"
-            HorizontalOptions="CenterAndExpand"
-            />
+                x:Name="RaportointiBtn"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                FontFamily="PoppinsRegular"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Raportointi"
+                TextColor="White"
+                WidthRequest="280" />
             <Button
-            x:Name="HallintaBtn"
-            Text="Hallinta"
-            FontFamily="PoppinsRegular"
-            FontSize="20"
-            BackgroundColor="Black"
-            CornerRadius="0"
-            WidthRequest="280"
-            HorizontalOptions="CenterAndExpand"
-            />
+                x:Name="HallintaBtn"
+                BackgroundColor="Black"
+                CornerRadius="0"
+                FontFamily="PoppinsRegular"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Hallinta"
+                TextColor="White"
+                WidthRequest="280" />
 
         </VerticalStackLayout>
-   </ScrollView>
+    </ScrollView>
 
 </ContentPage>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mokkivaraus.VarausPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--  jakaa sivun kahtia  -->
+
+    <Grid BackgroundColor="#303030">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left side: Filters and search  -->
+        <VerticalStackLayout Grid.Column="0">
+            <Label
+                Margin="20"
+                FontSize="40"
+                Text="Mökkivaraus" />
+
+            <Label
+                Margin="20"
+                FontSize="26"
+                Text="Hae mökkiä" />
+
+            <HorizontalStackLayout Margin="10" Padding="5">
+                <Entry
+                    FontSize="20"
+                    Placeholder="Alue"
+                    WidthRequest="200" />
+                <Entry
+                    FontSize="20"
+                    Placeholder="Mökin nimi"
+                    WidthRequest="200" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Margin="10" Padding="5">
+                <Entry
+                    FontSize="20"
+                    Placeholder="Alkupäivä"
+                    WidthRequest="200" />
+                <Entry
+                    FontSize="20"
+                    Placeholder="Loppupäivä"
+                    WidthRequest="200" />
+            </HorizontalStackLayout>
+
+            <Label
+                Margin="20,40,20,0"
+                FontSize="26"
+                Text="Hinta" />
+
+            <HorizontalStackLayout Margin="10" Padding="5">
+                <Entry
+                    FontSize="20"
+                    Placeholder="min. hinta"
+                    WidthRequest="150" />
+                <Entry
+                    FontSize="20"
+                    Placeholder="max. hinta"
+                    WidthRequest="150" />
+            </HorizontalStackLayout>
+
+            <Label
+                Margin="20,40,20,0"
+                FontSize="26"
+                Text="Palvelut" />
+
+            <HorizontalStackLayout Margin="10" Padding="5">
+                <CheckBox x:Name="Porosafari" />
+                <Label FontSize="18" Text="Porosafari" />
+                <CheckBox x:Name="Airsoftaus" />
+                <Label FontSize="18" Text="Airsoftaus" />
+                <CheckBox x:Name="Koiravalijakkohajelu" />
+                <Label FontSize="18" Text="Koiravalijakkohajelu" />
+                <CheckBox x:Name="Vesisjokotteri" />
+                <Label FontSize="18" Text="Vesisjokotteri" />
+                <CheckBox x:Name="Hevosajelu" />
+                <Label FontSize="18" Text="Hevosajelu" />
+            </HorizontalStackLayout>
+
+            <Label
+                Margin="20,40,20,0"
+                FontSize="26"
+                Text="Varustelutaso" />
+
+            <HorizontalStackLayout Margin="10" Padding="5">
+                <CheckBox x:Name="TV" />
+                <Label FontSize="18" Text="TV" />
+                <CheckBox x:Name="Astianpesukone" />
+                <Label FontSize="18" Text="Astianpesukone" />
+                <CheckBox x:Name="Pyykinpesukone" />
+                <Label FontSize="18" Text="Pyykinpesukone" />
+                <CheckBox x:Name="Sauna" />
+                <Label FontSize="18" Text="Sauna" />
+                <CheckBox x:Name="Takka" />
+                <Label FontSize="18" Text="Takka" />
+            </HorizontalStackLayout>
+
+            <Button
+                Margin="20"
+                BackgroundColor="#4CAF50"
+                FontSize="20"
+                Text="Hae" />
+        </VerticalStackLayout>
+
+        <!--  Right side: Cabins  -->
+        <StackLayout Grid.Column="1" HorizontalOptions="Center">
+            <Label
+                Margin="20"
+                FontSize="24"
+                Text="Mökit tänne" />
+        </StackLayout>
+    </Grid>
+
+
+
+
+</ContentPage>
