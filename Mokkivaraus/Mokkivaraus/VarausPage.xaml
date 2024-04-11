@@ -3,224 +3,256 @@
     x:Class="Mokkivaraus.VarausPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <!--  jakaa sivun kahtia  -->
 
-    <Grid BackgroundColor="#303030">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <ScrollView>
+        <!--  jakaa sivun kahtia  -->
+        <Grid BackgroundColor="#303030">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!--  sivun vasen puoli, filterit ja haku  -->
-        <VerticalStackLayout Grid.Column="0">
-            <Button
-                Clicked="BackButton_Clicked"
-                HorizontalOptions="Start"
-                Text="back"
-                WidthRequest="150" />
-            <Label
-                Margin="20"
-                FontSize="40"
-                Text="Mökkivaraus" />
-
-            <Label
-                Margin="20"
-                FontSize="26"
-                Text="Hae mökkiä" />
-
-            <HorizontalStackLayout Margin="10" Padding="5">
-                <Entry
-                    FontSize="20"
-                    Placeholder="Alue"
-                    WidthRequest="200" />
-                <Entry
-                    FontSize="20"
-                    Placeholder="Mökin nimi"
-                    WidthRequest="200" />
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout Margin="10" Padding="5">
-                <Entry
-                    FontSize="20"
-                    Placeholder="Alkupäivä"
-                    WidthRequest="200" />
-                <Entry
-                    FontSize="20"
-                    Placeholder="Loppupäivä"
-                    WidthRequest="200" />
-            </HorizontalStackLayout>
-
-            <Label
-                Margin="20,40,20,0"
-                FontSize="26"
-                Text="Hinta" />
-
-            <HorizontalStackLayout Margin="10" Padding="5">
-                <Entry
-                    FontSize="20"
-                    Placeholder="min. hinta"
+            <!--  sivun vasen puoli, filterit ja haku  -->
+            <VerticalStackLayout Grid.Column="0">
+                <Button
+                    Clicked="BackButton_Clicked"
+                    HorizontalOptions="Start"
+                    Text="back"
                     WidthRequest="150" />
-                <Entry
-                    FontSize="20"
-                    Placeholder="max. hinta"
-                    WidthRequest="150" />
-            </HorizontalStackLayout>
+                <Label
+                    Margin="20"
+                    FontSize="40"
+                    Text="Mökkivaraus" />
 
-            <Label
-                Margin="20,40,20,0"
-                FontSize="26"
-                Text="Palvelut" />
+                <Label
+                    Margin="20"
+                    FontSize="26"
+                    Text="Hae mökkiä" />
 
-            <FlexLayout Margin="10" Padding="5">
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Porosafari"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Airsoftaus"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Koiravaljakkoajelu"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Vesiskootteri"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Hevosajelu"
-                    VerticalOptions="Center" />
-            </FlexLayout>
-
-            <Label
-                Margin="20,40,20,0"
-                FontSize="26"
-                Text="Varustelutaso" />
-
-            <FlexLayout Margin="10" Padding="5">
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="TV"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Astianpesukone"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Pyykinpesukone"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Sauna"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Takka"
-                    VerticalOptions="Center" />
-            </FlexLayout>
-
-        </VerticalStackLayout>
-
-        <!--  sivun oikea puoli, mökit  -->
-        <StackLayout
-            Grid.Column="1"
-            Padding="20"
-            BackgroundColor="Grey">
-            <Label
-                Margin="20"
-                FontSize="24"
-                HorizontalOptions="Center"
-                Text="Mökit tänne" />
-            <!--  lisätään mökit tänne  -->
-            <Frame BackgroundColor="White" HorizontalOptions="Center">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        FontAttributes="Bold"
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Entry
                         FontSize="20"
-                        Text="Mökki 1"
-                        TextColor="Black" />
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        FontSize="18"
-                        Text="Kuusikkopolu 11, 93830 RUKATUNTURI"
-                        TextColor="Black" />
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        FontSize="18"
-                        Text="Palvelut:"
-                        TextColor="Black" />
-                    <Label
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        FontSize="18"
-                        Text="Hinta:"
-                        TextColor="Black" />
+                        Placeholder="Alue"
+                        WidthRequest="200" />
+                    <Entry
+                        FontSize="20"
+                        Placeholder="Mökin nimi"
+                        WidthRequest="200" />
+                </HorizontalStackLayout>
 
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Entry
+                        FontSize="20"
+                        Placeholder="Alkupäivä"
+                        WidthRequest="200" />
+                    <Entry
+                        FontSize="20"
+                        Placeholder="Loppupäivä"
+                        WidthRequest="200" />
+                </HorizontalStackLayout>
+
+                <Label
+                    Margin="20,40,20,0"
+                    FontSize="26"
+                    Text="Hinta" />
+
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Entry
+                        FontSize="20"
+                        Placeholder="min. hinta"
+                        WidthRequest="150" />
+                    <Entry
+                        FontSize="20"
+                        Placeholder="max. hinta"
+                        WidthRequest="150" />
+                </HorizontalStackLayout>
+
+                <Label
+                    Margin="20,40,20,0"
+                    FontSize="26"
+                    Text="Palvelut" />
+
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox />
                     <Label
-                        Grid.Row="4"
-                        Grid.Column="0"
                         FontSize="18"
-                        Text="Kuvaus:"
-                        TextColor="Black" />
+                        Text="Porosafari"
+                        VerticalOptions="Center" />
+                    <CheckBox />
                     <Label
-                        Grid.Row="5"
-                        Grid.Column="0"
                         FontSize="18"
-                        Text="Henkilöstömäärä:"
-                        TextColor="Black" />
+                        Text="Airsoftaus"
+                        VerticalOptions="Center" />
+                    <CheckBox />
                     <Label
-                        Grid.Row="6"
-                        Grid.Column="0"
                         FontSize="18"
-                        Text="Varustelutaso:"
-                        TextColor="Black" />
+                        Text="Koiravaljakkoajelu"
+                        VerticalOptions="Center" />
 
-                    <Button
-                        Grid.Row="7"
-                        Grid.Column="1"
-                        BackgroundColor="#2e2e2e"
+                </FlexLayout>
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox />
+                    <Label
                         FontSize="18"
-                        HorizontalOptions="End"
-                        Text="Valitse"
-                        TextColor="White" />
-                </Grid>
-            </Frame>
+                        Text="Vesiskootteri"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Hevosajelu"
+                        VerticalOptions="Center" />
+                </FlexLayout>
 
-        </StackLayout>
-    </Grid>
+                <Label
+                    Margin="20,40,20,0"
+                    FontSize="26"
+                    Text="Varustelutaso" />
 
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="TV"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Astianpesukone"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Pyykinpesukone"
+                        VerticalOptions="Center" />
+                </FlexLayout>
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Sauna"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Takka"
+                        VerticalOptions="Center" />
+                </FlexLayout>
 
+            </VerticalStackLayout>
 
+            <!--  sivun oikea puoli, mökit  -->
+            <StackLayout
+                Grid.Column="1"
+                Padding="20"
+                BackgroundColor="#303030">
+                <Label
+                    Margin="20"
+                    FontSize="24"
+                    HorizontalOptions="Center"
+                    Text="Mökit tänne" />
+                <!--  lisätään mökit tänne  -->
+                <Border
+                    x:Name="mokkiBorder"
+                    Padding="7"
+                    BackgroundColor="white"
+                    HeightRequest="370"
+                    Stroke="black"
+                    StrokeShape="RoundRectangle 20,20,20,20"
+                    StrokeThickness="4"
+                    WidthRequest="700">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.RowSpan="6"
+                            Margin="5"
+                            Padding="0,3"
+                            BackgroundColor="black"
+                            Stroke="Black"
+                            StrokeShape="RoundRectangle 0,0,0,0">
+                            <Image
+                                Margin="6"
+                                Aspect="AspectFill"
+                                HeightRequest="200"
+                                Source="vuori.jpg"
+                                WidthRequest="200" />
+                        </Border>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Text="Mökki 1"
+                            TextColor="Black" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="Kuusikkopolu 11, 93830 RUKATUNTURI"
+                            TextColor="Black" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="Palvelut:"
+                            TextColor="Black" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="Hinta:"
+                            TextColor="Black" />
+
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="Kuvaus:"
+                            TextColor="Black" />
+                        <Label
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="Henkilöstömäärä:"
+                            TextColor="Black" />
+                        <Label
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="Varustelutaso:"
+                            TextColor="Black" />
+
+                        <Button
+                            x:Name="valitseBtn"
+                            Grid.Row="7"
+                            Grid.Column="2"
+                            BackgroundColor="#2e2e2e"
+                            Clicked="valitseBtn_Clicked"
+                            FontSize="18"
+                            HorizontalOptions="End"
+                            Text="Valitse"
+                            TextColor="White"
+                            WidthRequest="150" />
+                    </Grid>
+                </Border>
+
+            </StackLayout>
+        </Grid>
+    </ScrollView>
 
 </ContentPage>
