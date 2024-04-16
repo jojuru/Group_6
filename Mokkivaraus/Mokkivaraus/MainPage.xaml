@@ -4,73 +4,56 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title=""
-    BackgroundImageSource="vuori.jpg">
+    BackgroundImageSource="taustakuva_etusivu.png">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="20"
-            VerticalOptions="Center">
-            <Label
-                Padding="30"
-                FontFamily="PoppinsRegular"
-                FontSize="60"
-                HorizontalOptions="CenterAndExpand"
-                Text="Village Newbies Oy"
-                TextColor="#5271FF" />
+            VerticalOptions="End"
+            HorizontalOptions="FillAndExpand"
+            Margin="0,0,0,240"
+            >
 
-            <Button
+            <HorizontalStackLayout
+                Padding="30,0"
+                Spacing="60"
+                HorizontalOptions="Center"
+                >
+                
+                <Button
                 x:Name="VaraaMokkiBtn"
-                BackgroundColor="Black"
+                BackgroundColor="#DEE1E6"
                 Clicked="VaraaMokkiBtn_Clicked"
-                CornerRadius="0"
                 FontFamily="PoppinsRegular"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
                 Text="Varaa mökki"
-                TextColor="White"
+                TextColor="Black"
+                BorderColor="Black"
                 WidthRequest="280" />
-            <Button
-                x:Name="AsiakkuudetBtn"
-                BackgroundColor="Black"
-                CornerRadius="0"
+                <Button
+                x:Name="Laskutus_RaportointiBtn"
+                BackgroundColor="#DEE1E6"
                 FontFamily="PoppinsRegular"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Asiakkuudet"
-                TextColor="White"
+                Text="Laskutus ja Raportointi"
+                TextColor="Black"
+                BorderColor="Black"
                 WidthRequest="280" />
-            <Button
-                x:Name="LaskutusBtn"
-                BackgroundColor="Black"
-                CornerRadius="0"
+                <Button
+                x:Name="Hallinta_AsiakkuudetBtn"
+                BackgroundColor="#DEE1E6"
                 FontFamily="PoppinsRegular"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Laskutus"
-                TextColor="White"
+                Text="Hallinta ja Asiakkuudet"
+                TextColor="Black"
+                BorderColor="Black"
                 WidthRequest="280" />
-            <Button
-                x:Name="RaportointiBtn"
-                BackgroundColor="Black"
-                CornerRadius="0"
-                FontFamily="PoppinsRegular"
-                FontSize="20"
-                HorizontalOptions="CenterAndExpand"
-                Text="Raportointi"
-                TextColor="White"
-                WidthRequest="280" />
-            <Button
-                x:Name="HallintaBtn"
-                BackgroundColor="Black"
-                CornerRadius="0"
-                FontFamily="PoppinsRegular"
-                FontSize="20"
-                HorizontalOptions="CenterAndExpand"
-                Text="Hallinta"
-                TextColor="White"
-                WidthRequest="280" />
-
+            </HorizontalStackLayout>
+         
         </VerticalStackLayout>
     </ScrollView>
 
