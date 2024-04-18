@@ -29,13 +29,13 @@
     <AppXManifest Include="D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-04-16T10:37:59.859</Modified>
+      <Modified>2024-04-18T16:31:44.944</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-04-16T10:37:59.571</Modified>
+      <Modified>2024-04-18T16:31:44.722</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.runtimeconfig.json">
       <PackagePath>Mokkivaraus.runtimeconfig.json</PackagePath>
@@ -43,15 +43,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.dll">
       <PackagePath>Mokkivaraus.dll</PackagePath>
-      <Modified>2024-04-16T10:37:58.440</Modified>
+      <Modified>2024-04-18T16:31:43.863</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Mokkivaraus.exe</PackagePath>
-      <Modified>2024-04-16T10:37:58.475</Modified>
+      <Modified>2024-04-18T16:31:43.871</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json">
       <PackagePath>Mokkivaraus.deps.json</PackagePath>
-      <Modified>2024-04-12T09:37:44.439</Modified>
+      <Modified>2024-04-18T16:28:16.363</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Joona\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.11\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>

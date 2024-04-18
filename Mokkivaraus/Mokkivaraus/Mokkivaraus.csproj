@@ -53,6 +53,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="HallintaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="VarausPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

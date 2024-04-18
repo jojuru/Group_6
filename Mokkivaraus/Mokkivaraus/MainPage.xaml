@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title=""
+    NavigationPage.HasNavigationBar="False"
     BackgroundImageSource="taustakuva_etusivu.png">
 
     <ScrollView>
@@ -43,12 +44,13 @@
                 BorderColor="Black"
                 WidthRequest="280" />
                 <Button
-                x:Name="Hallinta_AsiakkuudetBtn"
+                x:Name="HallintaBtn"
                 BackgroundColor="#DEE1E6"
+                Clicked="HallintaBtn_Clicked"
                 FontFamily="PoppinsRegular"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Hallinta ja Asiakkuudet"
+                Text="Hallinta"
                 TextColor="Black"
                 BorderColor="Black"
                 WidthRequest="280" />
