@@ -1,6 +1,6 @@
 namespace Mokkivaraus;
 
-public partial class HallintaPage : ContentPage
+public partial class HallintaPage : TabbedPage
 {
 	public HallintaPage()
 	{

@@ -15,13 +15,11 @@
             HorizontalOptions="FillAndExpand"
             Margin="0,0,0,240"
             >
-
             <HorizontalStackLayout
                 Padding="30,0"
                 Spacing="60"
                 HorizontalOptions="Center"
                 >
-                
                 <Button
                 x:Name="VaraaMokkiBtn"
                 BackgroundColor="#DEE1E6"

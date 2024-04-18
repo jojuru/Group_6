@@ -1,16 +1,106 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Mokkivaraus.HallintaPage"
-             Title="HallintaPage"
-             NavigationPage.HasNavigationBar="False"
-             >
-    
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentPage>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Mokkivaraus.HallintaPage"
+            
+            Title="Hallinta">
+
+
+    <!-- Asiakkuudet -->
+    <ContentPage Title="Asiakkuudet" 
+                 NavigationPage.HasNavigationBar="False"
+                 >
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto" >
+            <!-- Oikea puoli -->
+            <VerticalStackLayout Grid.Column="0" Spacing="13">
+                <Label Text="Hae/luo asiakkuus" FontSize="Large" />
+                
+                <HorizontalStackLayout Spacing="13">
+                    <Entry Placeholder="Etunimi" WidthRequest="200"/> 
+                    <Entry Placeholder="Sukunimi" WidthRequest="200"/>
+                </HorizontalStackLayout>
+                <Entry WidthRequest="400" Placeholder="Lähiosoite" HorizontalOptions="Start"/>
+                <Entry WidthRequest="200" Placeholder="Postinumero" HorizontalOptions="Start"/>
+                <HorizontalStackLayout Spacing="13">
+                    <Entry WidthRequest="200" Placeholder="Puhelinnumero" HorizontalOptions="Start"/>
+                    <Entry WidthRequest="200" Placeholder="Sähköposti" HorizontalOptions="Start"/>
+                </HorizontalStackLayout>
+                    
+                <Button 
+                BackgroundColor="#DEE1E6"
+                WidthRequest="160"
+                HorizontalOptions="Start"
+                TextColor="Black"
+                BorderWidth="2"
+                BorderColor="Black"
+                Text="Luo uusi asiakas" />
+            </VerticalStackLayout>
+
+            <!-- vasen puoli -->
+            <VerticalStackLayout Grid.Column="1">
+                <!-- Add your content for the right side here -->
+                <Label Text="Right Side Content" />
+                <!-- More content can be added here -->
+            </VerticalStackLayout>
+        </Grid>
+    </ContentPage>
+
+    <!-- Alue -->
+    <ContentPage Title="Alue" 
+                 NavigationPage.HasNavigationBar="False">
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
+            <!-- Oikea puoli -->
+            <VerticalStackLayout Grid.Column="0" Spacing="13">
+
+                <Entry WidthRequest="400" Placeholder="Alueen nimi" HorizontalOptions="Start"/>
+                <HorizontalStackLayout Spacing="13">
+                    <Button 
+                    BackgroundColor="#DEE1E6"
+                    WidthRequest="160"
+                    HorizontalOptions="Start"
+                    TextColor="Black"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    Text="Luo uusi alue" />
+                                        <Button 
+                    BackgroundColor="#DEE1E6"
+                    WidthRequest="160"
+                    HorizontalOptions="Start"
+                    TextColor="Black"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    Text="Hae alue" />
+                </HorizontalStackLayout>
+                
+                
+            </VerticalStackLayout>
+
+            <!-- vasen puoli -->
+            <VerticalStackLayout Grid.Column="1">
+                <!-- Add your content for the right side here -->
+                <Label Text="Right Side Content" />
+                <!-- More content can be added here -->
+            </VerticalStackLayout>
+        </Grid>
+    </ContentPage>
+
+    <!-- Mökki -->
+    <ContentPage Title="Mökki" 
+             NavigationPage.HasNavigationBar="False">
+        <VerticalStackLayout>
+            <Label Text="Content for Tab 2"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ContentPage>
+
+    <!-- Palvelu -->
+    <ContentPage Title="Palvelu" 
+             NavigationPage.HasNavigationBar="False">
+        <VerticalStackLayout>
+            <Label Text="Content for Tab 2"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ContentPage>
+</TabbedPage>
