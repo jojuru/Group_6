@@ -1,29 +1,32 @@
+using Microsoft.UI.Xaml;
+using System.Collections.ObjectModel;
+
 namespace Mokkivaraus;
 
 public partial class VarausPage : ContentPage
 {
-    private bool isToggled = false;
+    public List<MokkiInfo> MokkiList { get; set; }
     public VarausPage()
 	{
 		InitializeComponent();
-	}
-    private async void BackButton_Clicked(object sender, EventArgs e)
-    {
-        await Navigation.PopAsync();
+
+        // Create some sample data
+        MokkiList = new List<MokkiInfo>
+        {
+            new MokkiInfo { Nimi = "Example Cottage 1", HenkiloCount = "4", Hinta = "100€ per night" },
+            new MokkiInfo { Nimi = "Example Cottage 2", HenkiloCount = "6", Hinta = "120€ per night" },
+            new MokkiInfo { Nimi = "Example Cottage 3", HenkiloCount = "2", Hinta = "80€ per night"  },
+            new MokkiInfo { Nimi = "Cozy Cabin Retreat", HenkiloCount = "4", Hinta = "120€ per night" },
+            new MokkiInfo { Nimi = "Lakefront Getaway", HenkiloCount = "6", Hinta = "200€ per night" },
+            new MokkiInfo { Nimi = "Forest Hideaway", HenkiloCount = "2", Hinta = "100€ per night" },
+            new MokkiInfo { Nimi = "Rustic Lakeside Cabin", HenkiloCount = "8", Hinta = "250€ per night" },
+            new MokkiInfo { Nimi = "Mountain Retreat Cottage", HenkiloCount = "3", Hinta = "150€ per night" }
+
+        };
+
+        BindingContext = this;
     }
     private void valitseBtn_Clicked(object sender, EventArgs e)
     {
-        // toggle valitseBtn joka muuttaa väriä
-        if (isToggled)
-        {
-            valitseBtn.BackgroundColor = Color.FromRgba(0,0,0, 255);
-            mokkiBorder.Stroke = Color.FromRgba(0, 0, 0, 255);
-        }
-        else
-        {
-            valitseBtn.BackgroundColor = Color.FromRgba(0, 255, 0, 120);
-            mokkiBorder.Stroke = Color.FromRgba(0, 255, 0, 120);
-        }
-        isToggled = !isToggled; 
     }
 }

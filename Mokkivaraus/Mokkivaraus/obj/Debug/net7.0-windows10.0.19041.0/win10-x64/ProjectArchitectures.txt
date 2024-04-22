@@ -1,1 +1,1 @@
-D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\Mokkivaraus.csproj;x64
+C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\Mokkivaraus.csproj;x64
