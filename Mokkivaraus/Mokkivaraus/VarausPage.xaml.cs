@@ -13,9 +13,9 @@ public partial class VarausPage : ContentPage
         // Create some sample data
         MokkiList = new List<MokkiInfo>
         {
-            new MokkiInfo { Nimi = "Example Cottage 1", HenkiloCount = "4", Hinta = "100€ per night" },
-            new MokkiInfo { Nimi = "Example Cottage 2", HenkiloCount = "6", Hinta = "120€ per night" },
-            new MokkiInfo { Nimi = "Example Cottage 3", HenkiloCount = "2", Hinta = "80€ per night"  },
+            new MokkiInfo { Nimi = "Example Cottage", HenkiloCount = "4", Hinta = "100€ per night" },
+            new MokkiInfo { Nimi = "2Example Cottage", HenkiloCount = "6", Hinta = "120€ per night" },
+            new MokkiInfo { Nimi = "3Example Cottage", HenkiloCount = "2", Hinta = "80€ per night"  },
             new MokkiInfo { Nimi = "Cozy Cabin Retreat", HenkiloCount = "4", Hinta = "120€ per night" },
             new MokkiInfo { Nimi = "Lakefront Getaway", HenkiloCount = "6", Hinta = "200€ per night" },
             new MokkiInfo { Nimi = "Forest Hideaway", HenkiloCount = "2", Hinta = "100€ per night" },
