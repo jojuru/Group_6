@@ -1,199 +1,219 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<TabbedPage
     x:Class="Mokkivaraus.VarausPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    NavigationPage.HasNavigationBar="False">
+    BarBackground="#f7f7f8"
+    BarTextColor="Black"
+    SelectedTabColor="#d5d9dd"
+    UnselectedTabColor="#f7f7f8">
 
+    <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False">
+        <!--  jakaa sivun kahtia  -->
+        <Grid BackgroundColor="Red">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-    <!--  jakaa sivun kahtia  -->
-    <Grid BackgroundColor="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <!--  sivun vasen puoli, filterit ja haku  -->
-        <VerticalStackLayout Grid.Column="0" BackgroundColor="#f7f7f8">
-            <Label
-                Margin="20"
-                FontSize="40"
-                Text="Mökkivaraus"
-                TextColor="Black" />
-
-            <HorizontalStackLayout Margin="10" Padding="5">
-                <Entry
-                    FontSize="20"
-                    Placeholder="Alue"
-                    TextColor="Black"
-                    WidthRequest="200" />
-                <Entry
-                    FontSize="20"
-                    Placeholder="Mökin nimi"
-                    TextColor="Black"
-                    WidthRequest="200" />
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout Margin="10" Padding="5">
-                <Entry
-                    FontSize="20"
-                    Placeholder="Alkupäivä"
-                    TextColor="Black"
-                    WidthRequest="200" />
-                <Entry
-                    FontSize="20"
-                    Placeholder="Loppupäivä"
-                    TextColor="Black"
-                    WidthRequest="200" />
-            </HorizontalStackLayout>
-
-            <Label
-                Margin="20,40,20,0"
-                FontSize="26"
-                Text="Hinta"
-                TextColor="Black" />
-
-            <HorizontalStackLayout Margin="10" Padding="5">
-                <Entry
-                    FontSize="20"
-                    Placeholder="min. hinta"
-                    TextColor="Black"
-                    WidthRequest="150" />
-                <Entry
-                    FontSize="20"
-                    Placeholder="max. hinta"
-                    TextColor="Black"
-                    WidthRequest="150" />
-            </HorizontalStackLayout>
-
-            <Label
-                Margin="20,40,20,0"
-                FontSize="26"
-                Text="Palvelut"
-                TextColor="Black" />
-
-            <FlexLayout Margin="10" Padding="5">
-                <CheckBox />
+            <!--  sivun vasen puoli, filterit ja haku  -->
+            <VerticalStackLayout Grid.Column="0" BackgroundColor="#f7f7f8">
                 <Label
-                    FontSize="18"
-                    Text="Porosafari"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-                <CheckBox />
+                    Margin="20"
+                    FontSize="40"
+                    Text="Mökkivaraus"
+                    TextColor="Black" />
+
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Entry
+                        BackgroundColor="#e5e9f0"
+                        FontSize="20"
+                        Placeholder="Alue"
+                        TextColor="Black"
+                        WidthRequest="200" />
+                    <Entry
+                        BackgroundColor="#e5e9f0"
+                        FontSize="20"
+                        Placeholder="Mökin nimi"
+                        TextColor="Black"
+                        WidthRequest="200" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Entry
+                        BackgroundColor="#e5e9f0"
+                        FontSize="20"
+                        Placeholder="Alkupäivä"
+                        TextColor="Black"
+                        WidthRequest="200" />
+                    <Entry
+                        BackgroundColor="#e5e9f0"
+                        FontSize="20"
+                        Placeholder="Loppupäivä"
+                        TextColor="Black"
+                        WidthRequest="200" />
+                </HorizontalStackLayout>
+
                 <Label
-                    FontSize="18"
-                    Text="Airsoftaus"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-                <CheckBox />
+                    Margin="20,40,20,0"
+                    FontSize="26"
+                    Text="Hinta"
+                    TextColor="Black" />
+
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Entry
+                        BackgroundColor="#e5e9f0"
+                        FontSize="20"
+                        Placeholder="min. hinta"
+                        TextColor="Black"
+                        WidthRequest="150" />
+                    <Entry
+                        BackgroundColor="#e5e9f0"
+                        FontSize="20"
+                        Placeholder="max. hinta"
+                        TextColor="Black"
+                        WidthRequest="150" />
+                </HorizontalStackLayout>
+
                 <Label
-                    FontSize="18"
-                    Text="Koiravaljakkoajelu"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
+                    Margin="20,40,20,0"
+                    FontSize="26"
+                    Text="Palvelut"
+                    TextColor="Black" />
 
-            </FlexLayout>
-            <FlexLayout Margin="10" Padding="5">
-                <CheckBox />
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox Margin="3" Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Porosafari"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox Margin="3" Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Airsoftaus"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox Margin="3" Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Koiravaljakkoajelu"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+
+                </FlexLayout>
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox Margin="3" Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Vesiskootteri"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox Margin="3" Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Hevosajelu"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                </FlexLayout>
+
                 <Label
-                    FontSize="18"
-                    Text="Vesiskootteri"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Hevosajelu"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-            </FlexLayout>
+                    Margin="20,40,20,0"
+                    FontSize="26"
+                    Text="Varustelutaso"
+                    TextColor="Black" />
 
-            <Label
-                Margin="20,40,20,0"
-                FontSize="26"
-                Text="Varustelutaso"
-                TextColor="Black" />
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="TV"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Astianpesukone"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Pyykinpesukone"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                </FlexLayout>
+                <FlexLayout Margin="10" Padding="5">
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Sauna"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                    <CheckBox />
+                    <Label
+                        FontSize="18"
+                        Text="Takka"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                </FlexLayout>
 
-            <FlexLayout Margin="10" Padding="5">
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="TV"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Astianpesukone"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Pyykinpesukone"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-            </FlexLayout>
-            <FlexLayout Margin="10" Padding="5">
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Sauna"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-                <CheckBox />
-                <Label
-                    FontSize="18"
-                    Text="Takka"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-            </FlexLayout>
+            </VerticalStackLayout>
 
-        </VerticalStackLayout>
+            <!--  sivun oikea puoli, mökit  -->
+            <ScrollView
+                Grid.Column="1"
+                BackgroundColor="Red"
+                VerticalScrollBarVisibility="Never">
+                <StackLayout Padding="10" BackgroundColor="#f7f7f8">
+                    <!--  lisätään mökit tänne  -->
+                    <CollectionView
+                        BackgroundColor="#f7f7f8"
+                        ItemsLayout="VerticalGrid, 3"
+                        ItemsSource="{Binding MokkiList}"
+                        VerticalScrollBarVisibility="Never">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    x:Name="mokkiBorder"
+                                    MinimumHeightRequest="500"
+                                    Stroke="White"
+                                    StrokeShape="RoundRectangle 20,20,20,20"
+                                    StrokeThickness="4"
+                                    WidthRequest="270">
+                                    <StackLayout Padding="20" BackgroundColor="White">
 
-        <!--  sivun oikea puoli, mökit  -->
-        <ScrollView
-            Grid.Column="1"
-            BackgroundColor="Red"
-            VerticalScrollBarVisibility="Never">
-            <StackLayout Padding="10" BackgroundColor="#f7f7f8">
-                <!--  lisätään mökit tänne  -->
-                <CollectionView
-                    BackgroundColor="#f7f7f8"
-                    ItemsLayout="VerticalGrid, 3"
-                    ItemsSource="{Binding MokkiList}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border
-                                x:Name="mokkiBorder"
-                                MinimumHeightRequest="500"
-                                Stroke="White"
-                                StrokeShape="RoundRectangle 20,20,20,20"
-                                StrokeThickness="4"
-                                WidthRequest="270">
-                                <StackLayout Padding="20" BackgroundColor="White">
+                                        <Image Source="vuori.jpg" />
 
-                                    <Image Source="vuori.jpg" />
+                                        <Label Text="{Binding Nimi}" TextColor="Black" />
 
-                                    <Label Text="{Binding Nimi}" TextColor="Black" />
+                                        <Label Text="{Binding HenkiloCount}" TextColor="Black" />
 
-                                    <Label Text="{Binding HenkiloCount}" TextColor="Black" />
-
-                                    <Label Text="{Binding Hinta}" TextColor="DarkRed" />
+                                        <Label Text="{Binding Hinta}" TextColor="DarkRed" />
 
 
-                                    <Button
-                                        BackgroundColor="DarkRed"
-                                        FontSize="15"
-                                        Text="TUTUSTU JA VARAA"
-                                        TextColor="White" />
+                                        <Button
+                                            BackgroundColor="DarkRed"
+                                            FontSize="15"
+                                            Text="TUTUSTU JA VARAA"
+                                            TextColor="White" />
 
-                                </StackLayout>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
-        </ScrollView>
-    </Grid>
-</ContentPage>
+                                    </StackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage>
+    <ContentPage
+        Title="Hae varauksia"
+        BackgroundColor="#f2f2f2"
+        NavigationPage.HasNavigationBar="False">
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="sda" />
+            <ToolbarItem Text="sda" />
+        </ContentPage.ToolbarItems>
+    </ContentPage>
+</TabbedPage>

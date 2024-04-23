@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Mokkivaraus;
 
-public partial class VarausPage : ContentPage
+public partial class VarausPage
 {
     public List<MokkiInfo> MokkiList { get; set; }
     public VarausPage()
