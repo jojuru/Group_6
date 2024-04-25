@@ -8,7 +8,9 @@
     SelectedTabColor="#464b50"
     UnselectedTabColor="#f2f2f2">
 
+
     <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False">
+
         <!--  jakaa sivun kahtia  -->
         <Grid BackgroundColor="#f7f7f8">
             <Grid.ColumnDefinitions>
@@ -17,14 +19,17 @@
             </Grid.ColumnDefinitions>
 
             <!--  sivun vasen puoli, filterit ja haku  -->
-            <VerticalStackLayout Grid.Column="0" BackgroundColor="#f7f7f8">
+            <VerticalStackLayout
+                Grid.Column="0"
+                Margin="60,30"
+                BackgroundColor="#f7f7f8">
                 <Label
-                    Margin="20"
                     FontSize="30"
                     Text="Syötä toiveet"
                     TextColor="Black" />
 
-                <HorizontalStackLayout Margin="5" Padding="10">
+                <!--  MÖKKI NIMI JA ALUE  -->
+                <HorizontalStackLayout Margin="0,10" Spacing="48">
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
@@ -35,23 +40,26 @@
                             Placeholder="Mökin nimi"
                             TextColor="Black"
                             WidthRequest="200" />
-                    </Border>
-                </HorizontalStackLayout>
 
-                <HorizontalStackLayout Margin="10" Padding="5">
+
+                    </Border>
                     <Border
+                        BackgroundColor="#e5e9f0"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
                         <Picker
                             x:Name="mokkiPicker"
-                            Background="#e5e9f0"
-                            BackgroundColor="Blue"
+                            Title="  Valitse Alue "
+                            Background="Transparent"
+                            BackgroundColor="Transparent"
                             FontSize="20"
-                            SelectedIndex="0"
+                            HeightRequest="80"
+                            SelectedIndex="1"
+                            SelectedItem="Alue"
                             TextColor="Black"
                             TitleColor="Black"
-                            WidthRequest="200">
+                            WidthRequest="400">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Alue</x:String>
@@ -65,39 +73,56 @@
                         </Picker>
                     </Border>
                 </HorizontalStackLayout>
-                <HorizontalStackLayout Margin="10" Padding="5">
+
+                <!--  SAAPUMINEN-LÄHTÖ  -->
+                <HorizontalStackLayout Padding="5" Spacing="125">
                     <Label
                         FontSize="20"
-                        Text="Saapuminen / Lähtö"
+                        Text="Saapuminen"
+                        TextColor="Black" />
+                    <Label
+                        FontSize="20"
+                        Text="Lähtö"
                         TextColor="Black" />
                 </HorizontalStackLayout>
-                <HorizontalStackLayout Margin="5" Padding="10">
+                <HorizontalStackLayout
+                    Margin="27,5"
+                    Padding="5"
+                    Spacing="120">
                     <Border
+                        BackgroundColor="#e5e9f0"
+                        Scale="1.5"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <DatePicker BackgroundColor="#e5e9f0" TextColor="Black" />
+                        StrokeThickness="2">
+                        <DatePicker
+                            BackgroundColor="Transparent"
+                            Scale="1.5"
+                            TextColor="Black" />
                     </Border>
-                    <Label
-                        FontSize="20"
-                        Text="---"
-                        TextColor="Black" />
                     <Border
+                        BackgroundColor="#e5e9f0"
+                        Scale="1.5"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <DatePicker BackgroundColor="#e5e9f0" TextColor="Black" />
+                        StrokeThickness="2">
+                        <DatePicker
+                            BackgroundColor="Transparent"
+                            Scale="1.5"
+                            TextColor="Black" />
                     </Border>
 
                 </HorizontalStackLayout>
 
+
+                <!--  HINTA  -->
                 <Label
-                    Margin="20,40,20,0"
+                    Margin="0,15"
                     FontSize="26"
                     Text="Hinta"
                     TextColor="Black" />
 
-                <HorizontalStackLayout Margin="10" Padding="5">
+                <HorizontalStackLayout Spacing="20">
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
@@ -105,6 +130,7 @@
                         <Entry
                             BackgroundColor="#e5e9f0"
                             FontSize="20"
+                            HeightRequest="66"
                             Placeholder="min. hinta"
                             TextColor="Black"
                             WidthRequest="150" />
@@ -122,88 +148,97 @@
                     </Border>
                 </HorizontalStackLayout>
 
+                <!--  PALVELUT  -->
                 <Label
-                    Margin="20,40,20,0"
+                    Margin="0,20"
                     FontSize="26"
                     Text="Palvelut"
                     TextColor="Black" />
 
-                <FlexLayout Margin="10" Padding="5">
-                    <CheckBox Margin="3" Scale="1.5" />
+                <HorizontalStackLayout Spacing="20">
+                    <CheckBox Scale="1.5" />
                     <Label
+                        Padding="0,0,25,0"
                         FontSize="18"
                         Text="Porosafari"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Margin="3" Scale="1.5" />
+                    <CheckBox Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Airsoftaus"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Margin="3" Scale="1.5" />
-                    <Label
-                        FontSize="18"
-                        Text="Koiravaljakkoajelu"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
 
-                </FlexLayout>
-                <FlexLayout Margin="10" Padding="5">
-                    <CheckBox Margin="3" Scale="1.5" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="0,10" Spacing="20">
+                    <CheckBox Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Vesiskootteri"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Margin="3" Scale="1.5" />
+                    <CheckBox Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Hevosajelu"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                </FlexLayout>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="20">
+                    <CheckBox Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Koiravaljakkoajelu"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
 
+                <!--  VARUSTELUTASO  -->
                 <Label
-                    Margin="20,40,20,0"
+                    Margin="0,20"
                     FontSize="26"
                     Text="Varustelutaso"
                     TextColor="Black" />
 
-                <FlexLayout Margin="10" Padding="5">
-                    <CheckBox Margin="3" Scale="1.5" />
+                <HorizontalStackLayout Spacing="20">
+                    <CheckBox Scale="1.5" Style="{StaticResource CustomCheckBoxStyle}" />
                     <Label
+                        Margin="20,0"
                         FontSize="18"
                         Text="TV"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Margin="3" Scale="1.5" />
+                    <CheckBox Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Astianpesukone"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Margin="3" Scale="1.5" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="0,10" Spacing="20">
+                    <CheckBox Scale="1.5" />
                     <Label
-                        FontSize="18"
-                        Text="Pyykinpesukone"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </FlexLayout>
-                <FlexLayout Margin="10" Padding="5">
-                    <CheckBox Margin="3" Scale="1.5" />
-                    <Label
+                        Padding="2,0"
                         FontSize="18"
                         Text="Sauna"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Margin="3" Scale="1.5" />
+                    <CheckBox Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Takka"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                </FlexLayout>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="20">
+                    <CheckBox Scale="1.5" />
+                    <Label
+                        FontSize="18"
+                        Text="Pyykinpesukone"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
 
             </VerticalStackLayout>
 
