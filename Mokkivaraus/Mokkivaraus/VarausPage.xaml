@@ -3,55 +3,92 @@
     x:Class="Mokkivaraus.VarausPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BarBackground="#f7f7f8"
+    BarBackground="#f2f2f2"
     BarTextColor="Black"
-    SelectedTabColor="#d5d9dd"
-    UnselectedTabColor="#f7f7f8">
+    SelectedTabColor="#464b50"
+    UnselectedTabColor="#f2f2f2">
 
     <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False">
         <!--  jakaa sivun kahtia  -->
-        <Grid BackgroundColor="Red">
+        <Grid BackgroundColor="#f7f7f8">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
             <!--  sivun vasen puoli, filterit ja haku  -->
             <VerticalStackLayout Grid.Column="0" BackgroundColor="#f7f7f8">
                 <Label
                     Margin="20"
-                    FontSize="40"
-                    Text="Mökkivaraus"
+                    FontSize="30"
+                    Text="Syötä toiveet"
                     TextColor="Black" />
 
-                <HorizontalStackLayout Margin="10" Padding="5">
-                    <Entry
-                        BackgroundColor="#e5e9f0"
-                        FontSize="20"
-                        Placeholder="Alue"
-                        TextColor="Black"
-                        WidthRequest="200" />
-                    <Entry
-                        BackgroundColor="#e5e9f0"
-                        FontSize="20"
-                        Placeholder="Mökin nimi"
-                        TextColor="Black"
-                        WidthRequest="200" />
+                <HorizontalStackLayout Margin="5" Padding="10">
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Entry
+                            BackgroundColor="#e5e9f0"
+                            FontSize="20"
+                            Placeholder="Mökin nimi"
+                            TextColor="Black"
+                            WidthRequest="200" />
+                    </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Margin="10" Padding="5">
-                    <Entry
-                        BackgroundColor="#e5e9f0"
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Picker
+                            x:Name="mokkiPicker"
+                            Background="#e5e9f0"
+                            BackgroundColor="Blue"
+                            FontSize="20"
+                            SelectedIndex="0"
+                            TextColor="Black"
+                            TitleColor="Black"
+                            WidthRequest="200">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Alue</x:String>
+                                    <x:String>Capuchin Monkey</x:String>
+                                    <x:String>Blue Monkey</x:String>
+                                    <x:String>Squirrel Monkey</x:String>
+                                    <x:String>Golden Lion Tamarin</x:String>
+                                    <x:String>Howler Monkey</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="10" Padding="5">
+                    <Label
                         FontSize="20"
-                        Placeholder="Alkupäivä"
-                        TextColor="Black"
-                        WidthRequest="200" />
-                    <Entry
-                        BackgroundColor="#e5e9f0"
+                        Text="Saapuminen / Lähtö"
+                        TextColor="Black" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="5" Padding="10">
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <DatePicker BackgroundColor="#e5e9f0" TextColor="Black" />
+                    </Border>
+                    <Label
                         FontSize="20"
-                        Placeholder="Loppupäivä"
-                        TextColor="Black"
-                        WidthRequest="200" />
+                        Text="---"
+                        TextColor="Black" />
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <DatePicker BackgroundColor="#e5e9f0" TextColor="Black" />
+                    </Border>
+
                 </HorizontalStackLayout>
 
                 <Label
@@ -61,18 +98,28 @@
                     TextColor="Black" />
 
                 <HorizontalStackLayout Margin="10" Padding="5">
-                    <Entry
-                        BackgroundColor="#e5e9f0"
-                        FontSize="20"
-                        Placeholder="min. hinta"
-                        TextColor="Black"
-                        WidthRequest="150" />
-                    <Entry
-                        BackgroundColor="#e5e9f0"
-                        FontSize="20"
-                        Placeholder="max. hinta"
-                        TextColor="Black"
-                        WidthRequest="150" />
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Entry
+                            BackgroundColor="#e5e9f0"
+                            FontSize="20"
+                            Placeholder="min. hinta"
+                            TextColor="Black"
+                            WidthRequest="150" />
+                    </Border>
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Entry
+                            BackgroundColor="#e5e9f0"
+                            FontSize="20"
+                            Placeholder="max. hinta"
+                            TextColor="Black"
+                            WidthRequest="150" />
+                    </Border>
                 </HorizontalStackLayout>
 
                 <Label
@@ -124,19 +171,19 @@
                     TextColor="Black" />
 
                 <FlexLayout Margin="10" Padding="5">
-                    <CheckBox />
+                    <CheckBox Margin="3" Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="TV"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox Margin="3" Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Astianpesukone"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox Margin="3" Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Pyykinpesukone"
@@ -144,13 +191,13 @@
                         VerticalOptions="Center" />
                 </FlexLayout>
                 <FlexLayout Margin="10" Padding="5">
-                    <CheckBox />
+                    <CheckBox Margin="3" Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Sauna"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox Margin="3" Scale="1.5" />
                     <Label
                         FontSize="18"
                         Text="Takka"
@@ -163,43 +210,47 @@
             <!--  sivun oikea puoli, mökit  -->
             <ScrollView
                 Grid.Column="1"
-                BackgroundColor="Red"
+                BackgroundColor="#f2f2f2"
                 VerticalScrollBarVisibility="Never">
-                <StackLayout Padding="10" BackgroundColor="#f7f7f8">
+                <StackLayout Margin="2" BackgroundColor="#f2f2f2">
                     <!--  lisätään mökit tänne  -->
                     <CollectionView
-                        BackgroundColor="#f7f7f8"
+                        BackgroundColor="#f2f2f2"
                         ItemsLayout="VerticalGrid, 3"
                         ItemsSource="{Binding MokkiList}"
                         VerticalScrollBarVisibility="Never">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Border
-                                    x:Name="mokkiBorder"
-                                    MinimumHeightRequest="500"
-                                    Stroke="White"
-                                    StrokeShape="RoundRectangle 20,20,20,20"
-                                    StrokeThickness="4"
-                                    WidthRequest="270">
-                                    <StackLayout Padding="20" BackgroundColor="White">
+                                <StackLayout>
+                                    <Border
+                                        x:Name="mokkiBorder"
+                                        HeightRequest="400"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 6,6,6,6"
+                                        StrokeThickness="1"
+                                        WidthRequest="290">
+                                        <StackLayout Padding="10" BackgroundColor="White">
 
-                                        <Image Source="vuori.jpg" />
+                                            <Border Stroke="Transparent" StrokeShape="RoundRectangle 8,8,8,8">
+                                                <Image Source="vuori.jpg" />
+                                            </Border>
 
-                                        <Label Text="{Binding Nimi}" TextColor="Black" />
+                                            <Label Text="{Binding Nimi}" TextColor="Black" />
 
-                                        <Label Text="{Binding HenkiloCount}" TextColor="Black" />
+                                            <Label Text="{Binding HenkiloCount}" TextColor="Black" />
 
-                                        <Label Text="{Binding Hinta}" TextColor="DarkRed" />
+                                            <Label Text="{Binding Hinta}" TextColor="Red" />
 
+                                            <Button
+                                                BackgroundColor="Red"
+                                                FontSize="15"
+                                                Text="TUTUSTU JA VARAA"
+                                                TextColor="White" />
 
-                                        <Button
-                                            BackgroundColor="DarkRed"
-                                            FontSize="15"
-                                            Text="TUTUSTU JA VARAA"
-                                            TextColor="White" />
-
-                                    </StackLayout>
-                                </Border>
+                                        </StackLayout>
+                                    </Border>
+                                    <BoxView HeightRequest="30" Color="Transparent" />
+                                </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -210,10 +261,6 @@
     <ContentPage
         Title="Hae varauksia"
         BackgroundColor="#f2f2f2"
-        NavigationPage.HasNavigationBar="False">
-        <ContentPage.ToolbarItems>
-            <ToolbarItem Text="sda" />
-            <ToolbarItem Text="sda" />
-        </ContentPage.ToolbarItems>
-    </ContentPage>
+        NavigationPage.HasNavigationBar="False" />
+    <ContentPage />
 </TabbedPage>
