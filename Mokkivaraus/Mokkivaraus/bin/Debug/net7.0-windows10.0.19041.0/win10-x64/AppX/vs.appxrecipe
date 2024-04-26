@@ -29,13 +29,13 @@
     <AppXManifest Include="D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-04-26T18:11:13.297</Modified>
+      <Modified>2024-04-26T21:37:48.901</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-04-26T18:11:13.040</Modified>
+      <Modified>2024-04-26T21:37:48.649</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.runtimeconfig.json">
       <PackagePath>Mokkivaraus.runtimeconfig.json</PackagePath>
@@ -43,11 +43,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.dll">
       <PackagePath>Mokkivaraus.dll</PackagePath>
-      <Modified>2024-04-26T18:11:11.984</Modified>
+      <Modified>2024-04-26T21:37:46.986</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Mokkivaraus.exe</PackagePath>
-      <Modified>2024-04-26T18:11:11.991</Modified>
+      <Modified>2024-04-26T21:37:46.997</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json">
       <PackagePath>Mokkivaraus.deps.json</PackagePath>
