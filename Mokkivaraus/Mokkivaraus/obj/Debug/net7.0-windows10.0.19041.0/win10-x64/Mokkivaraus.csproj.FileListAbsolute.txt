@@ -1961,3 +1961,5 @@ D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\obj\D
 D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
 D:\koodaus\ohjelmistotuotanto_1\projektiv2\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\taustakuva_etusivu.scale-100.png
 C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\taustakuva_etusivu.scale-100.png
+D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\f\Poppins-Regular.ttf
+D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\taustakuva_etusivu.scale-100.png

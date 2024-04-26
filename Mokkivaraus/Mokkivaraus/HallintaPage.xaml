@@ -12,14 +12,14 @@
                  >
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto" >
             <!-- Oikea puoli -->
-            <VerticalStackLayout Grid.Column="0" Spacing="13">
+            <VerticalStackLayout Grid.Column="0" Spacing="13" Padding="15">
                 <Label Text="Hae/luo asiakkuus" FontSize="Large" />
                 
                 <HorizontalStackLayout Spacing="13">
                     <Entry Placeholder="Etunimi" WidthRequest="200"/> 
                     <Entry Placeholder="Sukunimi" WidthRequest="200"/>
                 </HorizontalStackLayout>
-                <Entry WidthRequest="400" Placeholder="Lähiosoite" HorizontalOptions="Start"/>
+                <Entry WidthRequest="413" Placeholder="Lähiosoite" HorizontalOptions="Start"/>
                 <Entry WidthRequest="200" Placeholder="Postinumero" HorizontalOptions="Start"/>
                 <HorizontalStackLayout Spacing="13">
                     <Entry WidthRequest="200" Placeholder="Puhelinnumero" HorizontalOptions="Start"/>
@@ -50,7 +50,7 @@
                  NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!-- Oikea puoli -->
-            <VerticalStackLayout Grid.Column="0" Spacing="13">
+            <VerticalStackLayout Grid.Column="0" Spacing="13" Padding="15">
 
                 <Entry WidthRequest="400" Placeholder="Alueen nimi" HorizontalOptions="Start"/>
                 <HorizontalStackLayout Spacing="13">
@@ -87,20 +87,104 @@
     <!-- Mökki -->
     <ContentPage Title="Mökki" 
              NavigationPage.HasNavigationBar="False">
-        <VerticalStackLayout>
-            <Label Text="Content for Tab 2"
-               VerticalOptions="Center"
-               HorizontalOptions="Center" />
-        </VerticalStackLayout>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto" >
+            <!-- Oikea puoli -->
+            <VerticalStackLayout Grid.Column="0" Spacing="13" Padding="15">
+                <Label Text="Hae/luo Mökki" FontSize="Large" />
+
+                <HorizontalStackLayout Spacing="13">
+                    <Entry Placeholder="Mökki ID" WidthRequest="200"/>
+                    <Entry Placeholder="Mökin nimi" WidthRequest="200"/>
+                </HorizontalStackLayout>
+                <Entry WidthRequest="200" Placeholder="Alue" HorizontalOptions="Start"/>
+                <Entry WidthRequest="413" Placeholder="Lähiosoite" HorizontalOptions="Start"/>
+                <Entry WidthRequest="200" Placeholder="Postinumero" HorizontalOptions="Start"/>
+                <HorizontalStackLayout Spacing="13">
+                    <Entry WidthRequest="200" Placeholder="Hinta" HorizontalOptions="Start"/>
+                    <Entry WidthRequest="200" Placeholder="Hlö. määrä" HorizontalOptions="Start"/>
+                </HorizontalStackLayout>
+                <Entry WidthRequest="413" Placeholder="Kuvaus" HorizontalOptions="Start"/>
+                <Label Text="Varustelu" FontAttributes="Bold" FontSize="17"></Label>
+
+                <HorizontalStackLayout>
+                    <Label FontSize="14" Text="TV" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                    <CheckBox ></CheckBox>
+                    <Label FontSize="14" Text="Astianpesukone" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                    <CheckBox></CheckBox>
+                    <Label FontSize="14"  Text="Pyykinpesukone" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                    <CheckBox></CheckBox>
+                    <Label FontSize="14"  Text="Sauna" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                    <CheckBox></CheckBox>
+                    <Label FontSize="14" Text="Takka" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                    <CheckBox></CheckBox>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="12">
+                    <Button 
+                    BackgroundColor="#DEE1E6"
+                    WidthRequest="160"
+                    HorizontalOptions="Start"
+                    TextColor="Black"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    Text="Hae mökkiä" />
+                    <Button 
+                    BackgroundColor="#DEE1E6"
+                    WidthRequest="160"
+                    HorizontalOptions="Start"
+                    TextColor="Black"
+                    BorderWidth="2"
+                    BorderColor="Black"
+                    Text="Luo uusi mökki" />
+                </HorizontalStackLayout>
+ 
+                
+            </VerticalStackLayout>
+
+            <!-- vasen puoli -->
+            <VerticalStackLayout Grid.Column="1">
+                <!-- Add your content for the right side here -->
+                <Label Text="Right Side Content" />
+                <!-- More content can be added here -->
+            </VerticalStackLayout>
+        </Grid>
     </ContentPage>
 
     <!-- Palvelu -->
     <ContentPage Title="Palvelu" 
              NavigationPage.HasNavigationBar="False">
-        <VerticalStackLayout>
-            <Label Text="Content for Tab 2"
-               VerticalOptions="Center"
-               HorizontalOptions="Center" />
-        </VerticalStackLayout>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto" >
+            <!-- Oikea puoli -->
+            <VerticalStackLayout Grid.Column="0" Spacing="13" Padding="15">
+                <Label Text="Hae/luo palvelu" FontSize="Large" />
+
+                <HorizontalStackLayout Spacing="13">
+                    <Entry Placeholder="Palvelu ID" WidthRequest="200"/>
+                    <Entry Placeholder="Palvelun nimi" WidthRequest="200"/>
+                </HorizontalStackLayout>
+                <Entry WidthRequest="200" Placeholder="Alue" HorizontalOptions="Start"/>
+                <HorizontalStackLayout Spacing="13">
+                    <Entry WidthRequest="200" Placeholder="Hinta (sis alv 24%)" HorizontalOptions="Start"/>
+                    <Entry WidthRequest="200" Placeholder="Hinta alv 24%" HorizontalOptions="Start"/>
+                </HorizontalStackLayout>
+                <Entry WidthRequest="413" Placeholder="KUvaus" HorizontalOptions="Start"/>
+                
+                <Button 
+                BackgroundColor="#DEE1E6"
+                WidthRequest="160"
+                HorizontalOptions="Start"
+                TextColor="Black"
+                BorderWidth="2"
+                BorderColor="Black"
+                Text="Luo uusi palvelu" />
+            </VerticalStackLayout>
+
+            <!-- vasen puoli -->
+            <VerticalStackLayout Grid.Column="1">
+                <!-- Add your content for the right side here -->
+                <Label Text="Right Side Content" />
+                <!-- More content can be added here -->
+            </VerticalStackLayout>
+        </Grid>
     </ContentPage>
 </TabbedPage>
