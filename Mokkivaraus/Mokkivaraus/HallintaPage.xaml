@@ -38,8 +38,10 @@
 
             <!-- vasen puoli -->
             <VerticalStackLayout Grid.Column="1">
-                <!-- Add your content for the right side here -->
+                <!-- Alue lista -->
                 <Label Text="Right Side Content" />
+                
+
                 <!-- More content can be added here -->
             </VerticalStackLayout>
         </Grid>
@@ -78,8 +80,29 @@
             <!-- vasen puoli -->
             <VerticalStackLayout Grid.Column="1">
                 <!-- Add your content for the right side here -->
-                <Label Text="Right Side Content" />
-                <!-- More content can be added here -->
+                <Label x:Name="Test" Text="Right Side Content" />
+                <ListView x:Name="AlueListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="500" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                    x:Name="mokkiBorder"
+                                    HeightRequest="55"
+                                    Stroke="#7ED957"
+                                    StrokeShape="RoundRectangle 6,6,6,6"
+                                    StrokeThickness="1"
+                                    >   
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label VerticalOptions="Center"  WidthRequest="150" Padding="5" FontSize="15" Text="{Binding alue_id}" />
+                                        <Label VerticalOptions="Center"  WidthRequest="260" Padding="5" FontSize="15" Text="{Binding nimi}" />
+                                        <Button VerticalOptions="Center" HorizontalOptions="End" Padding="5" FontSize="15" Text="Muokkaa"
+                                BackgroundColor="#C61E21" TextColor="White"></Button>
+                                    </StackLayout>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </VerticalStackLayout>
         </Grid>
     </ContentPage>
