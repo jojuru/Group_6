@@ -44,7 +44,6 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Border
-                                    x:Name="mokkiBorder"
                                     HeightRequest="55"
                                     Stroke="#7ED957"
                                     StrokeShape="RoundRectangle 6,6,6,6"
@@ -110,7 +109,6 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Border
-                                    x:Name="mokkiBorder"
                                     HeightRequest="55"
                                     Stroke="#7ED957"
                                     StrokeShape="RoundRectangle 6,6,6,6"
@@ -191,9 +189,33 @@
 
             <!-- oikea puoli -->
             <VerticalStackLayout Grid.Column="1">
-                <!-- Add your content for the right side here -->
-                <Label Text="Right Side Content" />
-                <!-- More content can be added here -->
+                <ListView x:Name="MokkiListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="500" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                    HeightRequest="55"
+                                    Stroke="#7ED957"
+                                    StrokeShape="RoundRectangle 6,6,6,6"
+                                    StrokeThickness="1"
+                                    >
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding mokki_id}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding mokkinimi}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding postinro}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding alue}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding katuosoite}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding hinta}" />
+                                        <BoxView HorizontalOptions="FillAndExpand" Color="#ffffff"/>
+                                        <Button VerticalOptions="Center" HorizontalOptions="End" Padding="5" FontSize="15" Text="Muokkaa"
+                                        BackgroundColor="#C61E21" TextColor="White"></Button>
+                                    </StackLayout>
+
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </VerticalStackLayout>
         </Grid>
     </ContentPage>
@@ -229,9 +251,33 @@
 
             <!-- oikea puoli -->
             <VerticalStackLayout Grid.Column="1">
-                <!-- Add your content for the right side here -->
-                <Label Text="Right Side Content" />
-                <!-- More content can be added here -->
+                <ListView x:Name="PalveluListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="700" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                    HeightRequest="55"
+                                    Stroke="#7ED957"
+                                    StrokeShape="RoundRectangle 6,6,6,6"
+                                    StrokeThickness="1"
+                                    >
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding palvelu_id}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding nimi}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding alue}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding hinta}" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding kuvaus}" />
+
+                                        <BoxView HorizontalOptions="FillAndExpand" Color="#ffffff"/>
+                                        <Button VerticalOptions="Center" HorizontalOptions="End" Padding="5" FontSize="15" Text="Muokkaa"
+                                        BackgroundColor="#C61E21" TextColor="White"></Button>
+                                    </StackLayout>
+
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </VerticalStackLayout>
         </Grid>
     </ContentPage>

@@ -7,36 +7,44 @@ public partial class HallintaPage : TabbedPage
 {
     public ObservableCollection<Alue> AlueCollection { get; set; }
     public ObservableCollection<Asiakas> AsiakasCollection { get; set; }
+    public ObservableCollection<Mokki> MokkiCollection { get; set; }
+    public ObservableCollection<Palvelu> PalveluCollection { get; set; }
 
     static private String connstring = "server=localhost;uid=root;pwd=root;database=vn";
     public HallintaPage()
 	{
 		InitializeComponent();
+
         AlueCollection = new ObservableCollection<Alue>();
         AsiakasCollection = new ObservableCollection<Asiakas>();
+        MokkiCollection = new ObservableCollection<Mokki>();
+        PalveluCollection = new ObservableCollection<Palvelu>();
         BindingContext = this;
 		AlueListaLv.BindingContext = AlueCollection;
         AsiakasListaLv.BindingContext = AsiakasCollection;
+        MokkiListaLv.BindingContext = MokkiCollection;
+        PalveluListaLv.BindingContext = PalveluCollection;
 
 
-        AlueCollection = new ObservableCollection<Alue>();
-        BindingContext = this;
-        AlueListaLv.BindingContext = AlueCollection;
 
         SqlHaeKaikki();
     }
+
+    //Tietokanta kaikkien haut---------------------------------------------------------------------------------------------------------------------
 
     //hakee tietokannasta kaikki
     private void SqlHaeKaikki()
 	{
         SqlHaeAsiakkaat();
-        SqlHaeAlueet();
-
-	}
+        SqlHaeAlueet(); //Mokkit ja Palvelut käyttää alueita.
+        SqlHaeMokit();
+        SqlHaePalvelut();
+    }
 	
 	//hakee tietokannastta Alueet
 	private void SqlHaeAlueet()
 	{
+
 		MySqlConnection con = new MySqlConnection();
 		con.ConnectionString = connstring;
 		con.Open();
@@ -78,6 +86,67 @@ public partial class HallintaPage : TabbedPage
         }
         AsiakasListaLv.ItemsSource = AsiakasCollection;
     }
+
+    //hakee tietokannastta Mokit
+    private void SqlHaeMokit()
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+        string sql = "SELECT * FROM mokki";
+        MySqlCommand cmd = new MySqlCommand(sql, con);
+        MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Mokki MOKKI = new Mokki();
+            MOKKI.mokki_id = reader["mokki_id"].ToString();
+            MOKKI.alue_id = reader["alue_id"].ToString();
+            MOKKI.postinro = reader["postinro"].ToString();
+            MOKKI.mokkinimi = reader["mokkinimi"].ToString();
+            MOKKI.katuosoite = reader["katuosoite"].ToString();
+            MOKKI.hinta = reader["hinta"].ToString() + "€";
+            MOKKI.kuvaus = reader["kuvaus"].ToString();
+            MOKKI.hinta = reader["henkilomaara"].ToString();
+            MOKKI.kuvaus = reader["varustelu"].ToString();
+            //etsii alue collectionista oikean alueen id perusteella
+            var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
+            MOKKI.alue = mok.nimi;
+
+            MokkiCollection.Add(MOKKI);
+        }
+        MokkiListaLv.ItemsSource = MokkiCollection;
+    }
+
+    //hakee tietokannastta Palvelut
+    private void SqlHaePalvelut()
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+        string sql = "SELECT * FROM palvelu";
+        MySqlCommand cmd = new MySqlCommand(sql, con);
+        MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Palvelu PALVELU = new Palvelu();
+            PALVELU.palvelu_id = reader["palvelu_id"].ToString();
+            PALVELU.alue_id = reader["alue_id"].ToString();
+            PALVELU.nimi = reader["nimi"].ToString();
+            PALVELU.kuvaus = reader["kuvaus"].ToString();
+            PALVELU.hinta = reader["hinta"].ToString() + "€";
+            PALVELU.alv = reader["alv"].ToString() + "%";
+            //etsii alue collectionista oikean alueen id perusteella
+            var pal = AlueCollection.FirstOrDefault(p => p.alue_id == reader["alue_id"].ToString());
+            PALVELU.alue = pal.nimi;
+
+            PalveluCollection.Add(PALVELU);
+        }
+        PalveluListaLv.ItemsSource = PalveluCollection;
+    }
+
+    //Napit ----------------------------------------------------------------------------------------------------------------------------------------------
 
     //Hakee alueita alkean ensimmäisestä kirjaimesta
     private void AlueHaeBtn_Clicked(object sender, EventArgs e)
