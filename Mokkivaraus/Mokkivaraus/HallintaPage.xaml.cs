@@ -170,4 +170,47 @@ public partial class HallintaPage : TabbedPage
         }
         AlueListaLv.ItemsSource = AlueCollection;
     }
+
+    //Mökkien haku
+    private void MokkiHaeBtn_Clicked(object sender, EventArgs e)
+    {
+        MokkiCollection.Clear();
+        MokkiListaLv.ItemsSource = MokkiCollection;
+
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+
+        string sql = "SELECT * FROM mokki WHERE ";
+        sql = sql + "(mokki_id LIKE '" + MokkiMokkiidEnt.Text + "%') AND ";
+        sql = sql + "(mokkinimi LIKE '" + MokkiMokkinimiEnt.Text + "%') AND ";
+        sql = sql + "(katuosoite LIKE '" + MokkiKatuosoiteEnt.Text + "%') AND ";
+        sql = sql + "(postinro LIKE '" + MokkiPostinroEnt.Text + "%') AND ";
+        sql = sql + "(hinta LIKE '" + MokkiHintaEnt.Text + "%') AND ";
+        sql = sql + "(henkilomaara LIKE '" + MokkiHenkilomaaraEnt.Text + "%') AND ";
+        sql = sql + "(kuvaus LIKE '" + MokkiKuvausEnt.Text + "%')";
+
+        MySqlCommand cmd = new MySqlCommand(sql, con);
+        MySqlDataReader reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            Mokki MOKKI = new Mokki();
+            MOKKI.mokki_id = reader["mokki_id"].ToString();
+            MOKKI.alue_id = reader["alue_id"].ToString();
+            MOKKI.postinro = reader["postinro"].ToString();
+            MOKKI.mokkinimi = reader["mokkinimi"].ToString();
+            MOKKI.katuosoite = reader["katuosoite"].ToString();
+            MOKKI.hinta = reader["hinta"].ToString() + "€";
+            MOKKI.kuvaus = reader["kuvaus"].ToString();
+            MOKKI.hinta = reader["henkilomaara"].ToString();
+            MOKKI.kuvaus = reader["varustelu"].ToString();
+            //etsii alue collectionista oikean alueen id perusteella
+            var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
+            MOKKI.alue = mok.nimi;
+
+            MokkiCollection.Add(MOKKI);
+        }
+
+        MokkiListaLv.ItemsSource = MokkiCollection;
+    }
 }

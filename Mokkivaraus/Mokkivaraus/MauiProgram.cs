@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
+
 
 namespace Mokkivaraus
 {
@@ -7,6 +10,8 @@ namespace Mokkivaraus
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
