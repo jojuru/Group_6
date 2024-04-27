@@ -10,7 +10,7 @@ public partial class HallintaPage : TabbedPage
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
 
-    static private String connstring = "server=localhost;uid=root;pwd=root;database=vn";
+    static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
     public HallintaPage()
 	{
 		InitializeComponent();

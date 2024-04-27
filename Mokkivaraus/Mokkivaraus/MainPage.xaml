@@ -32,8 +32,9 @@
                 BorderColor="Black"
                 WidthRequest="280" />
                 <Button
-                x:Name="Laskutus_RaportointiBtn"
+                x:Name="LaskutusBtn"
                 BackgroundColor="#DEE1E6"
+                Clicked="LaskutusBtn_Clicked"
                 FontFamily="PoppinsRegular"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
