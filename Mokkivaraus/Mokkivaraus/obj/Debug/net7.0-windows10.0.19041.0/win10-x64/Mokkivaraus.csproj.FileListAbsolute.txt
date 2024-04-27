@@ -1982,6 +1982,7 @@ D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Deb
 D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\k5sprt64.dll
 D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\krb5_64.dll
 D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\krbcc64.dll
+<<<<<<< HEAD
 F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.exe
 F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xbf
 F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json
@@ -2331,3 +2332,6 @@ F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win1
 F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
 F:\Mokkivaraus\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
+=======
+D:\koodaus\ohjelmistotuotanto_1\projekti\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Microsoft.Extensions.Configuration.Binder.dll
+>>>>>>> 70c9445e95d56754cf66c73b5fab928e213f02d8

@@ -139,17 +139,17 @@
                 <Label Text="Hae/luo Mökki" FontSize="Large" />
 
                 <HorizontalStackLayout Spacing="13">
-                    <Entry Placeholder="Mökki ID" WidthRequest="200"/>
-                    <Entry Placeholder="Mökin nimi" WidthRequest="200"/>
+                    <Entry x:Name="MokkiMokkiidEnt" Placeholder="Mökki ID" WidthRequest="200"/>
+                    <Entry x:Name="MokkiMokkinimiEnt" Placeholder="Mökin nimi" WidthRequest="200"/>
                 </HorizontalStackLayout>
-                <Entry WidthRequest="200" Placeholder="Alue" HorizontalOptions="Start"/>
-                <Entry WidthRequest="413" Placeholder="Lähiosoite" HorizontalOptions="Start"/>
-                <Entry WidthRequest="200" Placeholder="Postinumero" HorizontalOptions="Start"/>
+                <Entry x:Name="MokkiAlueEnt" WidthRequest="200" Placeholder="Alue" HorizontalOptions="Start"/>
+                <Entry x:Name="MokkiKatuosoiteEnt" WidthRequest="413" Placeholder="Katuosoite" HorizontalOptions="Start"/>
+                <Entry x:Name="MokkiPostinroEnt" WidthRequest="200" Placeholder="Postinumero" HorizontalOptions="Start"/>
                 <HorizontalStackLayout Spacing="13">
-                    <Entry WidthRequest="200" Placeholder="Hinta" HorizontalOptions="Start"/>
-                    <Entry WidthRequest="200" Placeholder="Hlö. määrä" HorizontalOptions="Start"/>
+                    <Entry x:Name="MokkiHintaEnt" WidthRequest="200" Placeholder="Hinta" HorizontalOptions="Start"/>
+                    <Entry x:Name="MokkiHenkilomaaraEnt" WidthRequest="200" Placeholder="Hlö. määrä" HorizontalOptions="Start"/>
                 </HorizontalStackLayout>
-                <Entry WidthRequest="413" Placeholder="Kuvaus" HorizontalOptions="Start"/>
+                <Entry x:Name="MokkiKuvausEnt" WidthRequest="413" Placeholder="Kuvaus" HorizontalOptions="Start"/>
                 <Label Text="Varustelu" FontAttributes="Bold" FontSize="17"></Label>
 
                 <HorizontalStackLayout>
@@ -167,6 +167,8 @@
 
                 <HorizontalStackLayout Spacing="12">
                     <Button 
+                    x:Name="MokkiHaeBtn"
+                    Clicked="MokkiHaeBtn_Clicked"
                     BackgroundColor="#DEE1E6"
                     WidthRequest="160"
                     HorizontalOptions="Start"
