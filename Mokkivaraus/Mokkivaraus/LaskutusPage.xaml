@@ -65,7 +65,7 @@
             <!-- oikea puoli -->
             <VerticalStackLayout Grid.Column="1">
                 <!-- Laskulista -->
-                <ListView x:Name="AsiakasListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="500" >
+                <ListView x:Name="LaskuListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="500" >
                     <ListView.ItemTemplate >
                         <DataTemplate>
                             <ViewCell>
@@ -76,12 +76,17 @@
                                     StrokeThickness="1"
                                     >
                                     <StackLayout Orientation="Horizontal">
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="testitekstiä" TextColor="Black"/>
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding lasku_id}" TextColor="Black" />
+                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding summa, StringFormat='{}{0} euroa'}" TextColor="Black" />
+                                        <!--
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding asiakas_id}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding etunimi}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding sukunimi}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding postinnro}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding puhelinnro}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding email}" />
+                                        -->
                                         <BoxView HorizontalOptions="FillAndExpand" Color="#ffffff"/>
                                         <Button VerticalOptions="Center" HorizontalOptions="End" Padding="5" FontSize="15" Text="Muokkaa"
                                         BackgroundColor="#C61E21" TextColor="White"></Button>
