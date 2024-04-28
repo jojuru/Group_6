@@ -6,7 +6,7 @@ public partial class LaskutusPage : TabbedPage
 {	
 	public ObservableCollection<Laskutus> LaskutusCollection { get; set; }
 
-    static private String connstring = "server=localhost;uid=root;port=3306;pwd=Verorakoja123;database=vn";
+    static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
     public LaskutusPage()
 	{
 		InitializeComponent();
