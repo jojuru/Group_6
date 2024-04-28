@@ -24,6 +24,7 @@
                 Margin="60,30"
                 BackgroundColor="#f7f7f8">
                 <Label
+                    FontFamily="PoppinsRegular"
                     FontSize="30"
                     Text="Syötä toiveet"
                     TextColor="Black" />
@@ -36,6 +37,7 @@
                         StrokeThickness="3">
                         <Entry
                             BackgroundColor="#e5e9f0"
+                            FontFamily="PoppinsRegular"
                             FontSize="20"
                             Placeholder="Mökin nimi"
                             TextColor="Black"
@@ -53,6 +55,7 @@
                             Title="Valitse Alue"
                             Background="Transparent"
                             BackgroundColor="Transparent"
+                            FontFamily="PoppinsRegular"
                             FontSize="20"
                             HeightRequest="80"
                             ItemDisplayBinding="{Binding nimi}"
@@ -68,10 +71,12 @@
                 <!--  SAAPUMINEN-LÄHTÖ  -->
                 <HorizontalStackLayout Padding="5" Spacing="125">
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="20"
                         Text="Saapuminen"
                         TextColor="Black" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="20"
                         Text="Lähtö"
                         TextColor="Black" />
@@ -88,6 +93,7 @@
                         StrokeThickness="2">
                         <DatePicker
                             BackgroundColor="Transparent"
+                            FontFamily="PoppinsRegular"
                             Scale="1.5"
                             TextColor="Black" />
                     </Border>
@@ -99,6 +105,7 @@
                         StrokeThickness="2">
                         <DatePicker
                             BackgroundColor="Transparent"
+                            FontFamily="PoppinsRegular"
                             Scale="1.5"
                             TextColor="Black" />
                     </Border>
@@ -120,6 +127,7 @@
                         StrokeThickness="3">
                         <Entry
                             BackgroundColor="#e5e9f0"
+                            FontFamily="PoppinsRegular"
                             FontSize="20"
                             HeightRequest="66"
                             Placeholder="min. hinta"
@@ -132,6 +140,7 @@
                         StrokeThickness="3">
                         <Entry
                             BackgroundColor="#e5e9f0"
+                            FontFamily="PoppinsRegular"
                             FontSize="20"
                             Placeholder="max. hinta"
                             TextColor="Black"
@@ -142,6 +151,7 @@
                 <!--  PALVELUT  -->
                 <Label
                     Margin="0,20"
+                    FontFamily="PoppinsRegular"
                     FontSize="26"
                     Text="Palvelut"
                     TextColor="Black" />
@@ -150,12 +160,14 @@
                     <CheckBox Scale="1.5" />
                     <Label
                         Padding="0,0,25,0"
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Porosafari"
                         TextColor="Black"
                         VerticalOptions="Center" />
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Airsoftaus"
                         TextColor="Black"
@@ -165,12 +177,14 @@
                 <HorizontalStackLayout Margin="0,10" Spacing="20">
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Vesiskootteri"
                         TextColor="Black"
                         VerticalOptions="Center" />
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Hevosajelu"
                         TextColor="Black"
@@ -179,6 +193,7 @@
                 <HorizontalStackLayout Spacing="20">
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Koiravaljakkoajelu"
                         TextColor="Black"
@@ -188,6 +203,7 @@
                 <!--  VARUSTELUTASO  -->
                 <Label
                     Margin="0,20"
+                    FontFamily="PoppinsRegular"
                     FontSize="26"
                     Text="Varustelutaso"
                     TextColor="Black" />
@@ -196,12 +212,14 @@
                     <CheckBox Scale="1.5" Style="{StaticResource CustomCheckBoxStyle}" />
                     <Label
                         Margin="20,0"
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="TV"
                         TextColor="Black"
                         VerticalOptions="Center" />
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Astianpesukone"
                         TextColor="Black"
@@ -211,12 +229,14 @@
                     <CheckBox Scale="1.5" />
                     <Label
                         Padding="2,0"
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Sauna"
                         TextColor="Black"
                         VerticalOptions="Center" />
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Takka"
                         TextColor="Black"
@@ -225,6 +245,7 @@
                 <HorizontalStackLayout Spacing="20">
                     <CheckBox Scale="1.5" />
                     <Label
+                        FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Pyykinpesukone"
                         TextColor="Black"
@@ -251,28 +272,97 @@
                                 <StackLayout>
                                     <Border
                                         x:Name="mokkiBorder"
-                                        HeightRequest="400"
+                                        HeightRequest="630"
                                         Stroke="Transparent"
                                         StrokeShape="RoundRectangle 6,6,6,6"
                                         StrokeThickness="1"
-                                        WidthRequest="290">
-                                        <StackLayout Padding="10" BackgroundColor="White">
+                                        WidthRequest="360">
+                                        <StackLayout Padding="5" BackgroundColor="White">
 
                                             <Border Stroke="Transparent" StrokeShape="RoundRectangle 8,8,8,8">
                                                 <Image Source="vuori.jpg" />
                                             </Border>
 
-                                            <Label Text="{Binding mokkinimi}" TextColor="Black" />
+                                            <!--  mokkiid,mokkinimi,alue  -->
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="30"
+                                                TextColor="#4c77cb">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0}, {1},">
+                                                        <Binding Path="postinro" />
+                                                        <Binding Path="mokkinimi" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
 
-                                            <Label Text="{Binding henkilomaara}" TextColor="Black" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="30"
+                                                TextColor="#4c77cb">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0}">
+                                                        <Binding Converter="{StaticResource AlueIdToNimiConverter}" Path="alue_id" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <!--  henkilöt,palvelut,varusteet  -->
 
-                                            <Label Text="{Binding hinta}" TextColor="Red" />
+                                            <Label
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="18"
+                                                TextColor="Black"
+                                                VerticalOptions="EndAndExpand">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0} Henkilöä">
+                                                        <Binding Path="henkilomaara" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="18"
+                                                TextColor="Black"
+                                                VerticalOptions="EndAndExpand">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}Varusteet: {0}">
+                                                        <Binding Path="varustelu" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <!--  hinnat  -->
+                                            <Label
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="18"
+                                                TextColor="Red"
+                                                VerticalOptions="EndAndExpand">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}Viikkohinta     {0}€">
+                                                        <Binding Path="hinta" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+                                            <Label
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="18"
+                                                TextColor="Red"
+                                                VerticalOptions="EndAndExpand">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}Viikkoloppu     {0}€">
+                                                        <Binding Path="hinta" />
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
 
                                             <Button
                                                 BackgroundColor="Red"
                                                 FontSize="15"
+                                                HorizontalOptions="Center"
                                                 Text="TUTUSTU JA VARAA"
-                                                TextColor="White" />
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
 
                                         </StackLayout>
                                     </Border>

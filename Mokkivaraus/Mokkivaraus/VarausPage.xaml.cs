@@ -15,11 +15,19 @@ public partial class VarausPage
 
         AlueCollection = new ObservableCollection<Alue>();
         MokkiCollection = new ObservableCollection<Mokki>();
-
         BindingContext = this;
         MokkiListaLv.BindingContext = MokkiCollection;
 
+        //t‰m‰n avulla saadaan aluenimi labeliin 
+        // Create the converter and pass the AlueCollection
+        var converter = new AlueIdToNimiConverter(AlueCollection);
+        // Add the converter to the page resources
+        Resources = new ResourceDictionary();
+        Resources.Add("AlueIdToNimiConverter", converter);
+
+
         SqlHaeMokit();
+        //lis‰‰n alue pickeriin vaihtoehdoksi
         SqlHaeAlueet();
     }
     //hakee tietokannastta Mokit
@@ -73,9 +81,10 @@ public partial class VarausPage
                 alue_id = reader["alue_id"].ToString(),
                 nimi = reader["nimi"].ToString()
             };
+
             AlueCollection.Add(alue);
         }
-
+        
         AlueListaLv.ItemsSource = AlueCollection;
     }
     private void valitseBtn_Clicked(object sender, EventArgs e)
