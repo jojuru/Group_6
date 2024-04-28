@@ -49,28 +49,19 @@
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
                         <Picker
-                            x:Name="mokkiPicker"
-                            Title="  Valitse Alue "
+                            x:Name="AlueListaLv"
+                            Title="Valitse Alue"
                             Background="Transparent"
                             BackgroundColor="Transparent"
                             FontSize="20"
                             HeightRequest="80"
-                            SelectedIndex="1"
+                            ItemDisplayBinding="{Binding nimi}"
+                            ItemsSource="{Binding AlueCollection}"
+                            SelectedIndex="0"
                             SelectedItem="Alue"
                             TextColor="Black"
                             TitleColor="Black"
-                            WidthRequest="400">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Alue</x:String>
-                                    <x:String>Capuchin Monkey</x:String>
-                                    <x:String>Blue Monkey</x:String>
-                                    <x:String>Squirrel Monkey</x:String>
-                                    <x:String>Golden Lion Tamarin</x:String>
-                                    <x:String>Howler Monkey</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
+                            WidthRequest="400" />
                     </Border>
                 </HorizontalStackLayout>
 
@@ -250,9 +241,10 @@
                 <StackLayout Margin="2" BackgroundColor="#f2f2f2">
                     <!--  lisätään mökit tänne  -->
                     <CollectionView
+                        x:Name="MokkiListaLv"
                         BackgroundColor="#f2f2f2"
                         ItemsLayout="VerticalGrid, 3"
-                        ItemsSource="{Binding MokkiList}"
+                        ItemsSource="{Binding MokkiCollection}"
                         VerticalScrollBarVisibility="Never">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -270,11 +262,11 @@
                                                 <Image Source="vuori.jpg" />
                                             </Border>
 
-                                            <Label Text="{Binding Nimi}" TextColor="Black" />
+                                            <Label Text="{Binding mokkinimi}" TextColor="Black" />
 
-                                            <Label Text="{Binding HenkiloCount}" TextColor="Black" />
+                                            <Label Text="{Binding henkilomaara}" TextColor="Black" />
 
-                                            <Label Text="{Binding Hinta}" TextColor="Red" />
+                                            <Label Text="{Binding hinta}" TextColor="Red" />
 
                                             <Button
                                                 BackgroundColor="Red"

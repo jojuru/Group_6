@@ -1,39 +1,85 @@
+using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 
 namespace Mokkivaraus;
 
 public partial class VarausPage
 {
-    public List<MokkiInfo> MokkiList { get; set; }
+    public ObservableCollection<Alue> AlueCollection { get; set; }
+    public ObservableCollection<Mokki> MokkiCollection { get; set; }
+    static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
+
     public VarausPage()
 	{
 		InitializeComponent();
 
-        // Create some sample data
-        MokkiList = new List<MokkiInfo>
-        {
-            new MokkiInfo { Nimi = "Metsälammen Mökki", HenkiloCount = "4", Hinta = "120€ per yö" },
-            new MokkiInfo { Nimi = "Järvenrannan Huvila", HenkiloCount = "6", Hinta = "150€ per yö" },
-            new MokkiInfo { Nimi = "Talviturkin Tupa", HenkiloCount = "2", Hinta = "90€ per yö"  },
-            new MokkiInfo { Nimi = "Korpikuusen Kota", HenkiloCount = "4", Hinta = "130€ per yö" },
-            new MokkiInfo { Nimi = "Aurinkolammen Mökki", HenkiloCount = "6", Hinta = "180€ per yö" },
-            new MokkiInfo { Nimi = "Tunturituvan Taika", HenkiloCount = "2", Hinta = "110€ per yö" },
-            new MokkiInfo { Nimi = "Rantasaunan Riemu", HenkiloCount = "8", Hinta = "250€ per yö" },
-            new MokkiInfo { Nimi = "Kuusihuvilan Keidas", HenkiloCount = "3", Hinta = "140€ per yö" },
-            new MokkiInfo { Nimi = "Pikkutupa", HenkiloCount = "2", Hinta = "80€ per yö" },
-            new MokkiInfo { Nimi = "Kesäkumpu", HenkiloCount = "4", Hinta = "120€ per yö" },
-            new MokkiInfo { Nimi = "Kuusikulma", HenkiloCount = "6", Hinta = "150€ per yö" },
-            new MokkiInfo { Nimi = "Syysmaisema", HenkiloCount = "3", Hinta = "100€ per yö" },
-            new MokkiInfo { Nimi = "Talvikoto", HenkiloCount = "5", Hinta = "130€ per yö" },
-            new MokkiInfo { Nimi = "Kevätkeidas", HenkiloCount = "4", Hinta = "140€ per yö" },
-            new MokkiInfo { Nimi = "Kesämökki", HenkiloCount = "6", Hinta = "160€ per yö" },
-            new MokkiInfo { Nimi = "Talvimaja", HenkiloCount = "3", Hinta = "110€ per yö" }
-        };
-
+        AlueCollection = new ObservableCollection<Alue>();
+        MokkiCollection = new ObservableCollection<Mokki>();
 
         BindingContext = this;
+        MokkiListaLv.BindingContext = MokkiCollection;
+
+        SqlHaeMokit();
+        SqlHaeAlueet();
+    }
+    //hakee tietokannastta Mokit
+    private void SqlHaeMokit()
+    {
+        MokkiCollection.Clear(); // Clear the existing collection
+
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+
+        string sql = "SELECT * FROM mokki";
+        MySqlCommand cmd = new MySqlCommand(sql, con);
+        MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Mokki mokki = new Mokki
+            {
+                mokki_id = reader["mokki_id"].ToString(),
+                alue_id = reader["alue_id"].ToString(),
+                postinro = reader["postinro"].ToString(),
+                mokkinimi = reader["mokkinimi"].ToString(),
+                katuosoite = reader["katuosoite"].ToString(),
+                hinta = reader["hinta"].ToString(),
+                kuvaus = reader["kuvaus"].ToString(),
+                henkilomaara = reader["henkilomaara"].ToString(),
+                varustelu = reader["varustelu"].ToString()
+            };
+
+            MokkiCollection.Add(mokki);
+        }
+
+        MokkiListaLv.ItemsSource = MokkiCollection;
+    }
+    private void SqlHaeAlueet()
+    {
+        AlueCollection.Clear(); // Clear the existing collection
+
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+        string sql = "SELECT * FROM alue";
+        MySqlCommand cmd = new MySqlCommand(sql, con);
+        MySqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Alue alue = new Alue
+            {
+                alue_id = reader["alue_id"].ToString(),
+                nimi = reader["nimi"].ToString()
+            };
+            AlueCollection.Add(alue);
+        }
+
+        AlueListaLv.ItemsSource = AlueCollection;
     }
     private void valitseBtn_Clicked(object sender, EventArgs e)
     {
+
     }
 }
