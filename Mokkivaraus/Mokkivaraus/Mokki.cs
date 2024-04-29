@@ -18,6 +18,7 @@ namespace Mokkivaraus
         public string henkilomaara { get; set; }
         public string varustelu { get; set; }
         public string alue { get; set; }
+        public string palvelut { get; set; }
 
         public Mokki() { }
         public Mokki(string mokki_id, string alue_id, string postinro, string mokkinimi,
@@ -33,6 +34,22 @@ namespace Mokkivaraus
             this.henkilomaara = henkilomaara;
             this.varustelu = varustelu;
             this.alue = alue;
+        }
+        //varauspagelle konstruktori
+        public Mokki(string mokki_id, string alue_id, string postinro, string mokkinimi,
+            string katuosoite, string hinta, string kuvaus, string henkilomaara, string varustelu, string alue, string palvelut)
+        {
+            this.mokki_id = mokki_id;
+            this.alue_id = alue_id;
+            this.postinro = postinro;
+            this.mokkinimi = mokkinimi;
+            this.katuosoite = katuosoite;
+            this.hinta = hinta;
+            this.kuvaus = kuvaus;
+            this.henkilomaara = henkilomaara;
+            this.varustelu = varustelu;
+            this.alue = alue;
+            this.palvelut = palvelut;
         }
     }
 }

@@ -51,7 +51,7 @@
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
                         <Picker
-                            x:Name="AlueListaLv"
+                            x:Name="AlueListaPicker"
                             Title="Valitse Alue"
                             Background="Transparent"
                             BackgroundColor="Transparent"
@@ -209,7 +209,7 @@
                     TextColor="Black" />
 
                 <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" Style="{StaticResource CustomCheckBoxStyle}" />
+                    <CheckBox Scale="1.5" />
                     <Label
                         Margin="20,0"
                         FontFamily="PoppinsRegular"
@@ -255,6 +255,7 @@
             </VerticalStackLayout>
 
             <!--  sivun oikea puoli, mökit  -->
+
             <ScrollView
                 Grid.Column="1"
                 BackgroundColor="#f2f2f2"
@@ -291,7 +292,7 @@
                                                 TextColor="#4c77cb">
                                                 <Label.Text>
                                                     <MultiBinding StringFormat="{}{0}, {1},">
-                                                        <Binding Path="postinro" />
+                                                        <Binding Path="mokki_id" />
                                                         <Binding Path="mokkinimi" />
                                                     </MultiBinding>
                                                 </Label.Text>
@@ -301,43 +302,36 @@
                                                 FontAttributes="Bold"
                                                 FontFamily="PoppinsRegular"
                                                 FontSize="30"
-                                                TextColor="#4c77cb">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}{0}">
-                                                        <Binding Converter="{StaticResource AlueIdToNimiConverter}" Path="alue_id" />
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
-                                            <!--  henkilöt,palvelut,varusteet  -->
+                                                Text="{Binding alue}"
+                                                TextColor="#4c77cb" />
+                                            <!--  henkilo,palvelu,varustelu  -->
 
                                             <Label
                                                 FontFamily="PoppinsRegular"
-                                                FontSize="18"
+                                                FontSize="15"
+                                                Text="{Binding henkilomaara, StringFormat='{0} Henkilöä'}"
                                                 TextColor="Black"
-                                                VerticalOptions="EndAndExpand">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}{0} Henkilöä">
-                                                        <Binding Path="henkilomaara" />
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
+                                                VerticalOptions="StartAndExpand" />
+
                                             <Label
                                                 FontFamily="PoppinsRegular"
-                                                FontSize="18"
+                                                FontSize="15"
+                                                Text="{Binding palvelut, StringFormat='Palvelut: {0}'}"
                                                 TextColor="Black"
-                                                VerticalOptions="EndAndExpand">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}Varusteet: {0}">
-                                                        <Binding Path="varustelu" />
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
+                                                VerticalOptions="StartAndExpand" />
+
+                                            <Label
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="15"
+                                                Text="{Binding varustelu, StringFormat='Varustelu: {0}'}"
+                                                TextColor="Black"
+                                                VerticalOptions="StartAndExpand" />
+
                                             <!--  hinnat  -->
                                             <Label
                                                 FontFamily="PoppinsRegular"
                                                 FontSize="18"
-                                                TextColor="Red"
-                                                VerticalOptions="EndAndExpand">
+                                                TextColor="Red">
                                                 <Label.Text>
                                                     <MultiBinding StringFormat="{}Viikkohinta     {0}€">
                                                         <Binding Path="hinta" />
@@ -347,8 +341,7 @@
                                             <Label
                                                 FontFamily="PoppinsRegular"
                                                 FontSize="18"
-                                                TextColor="Red"
-                                                VerticalOptions="EndAndExpand">
+                                                TextColor="Red">
                                                 <Label.Text>
                                                     <MultiBinding StringFormat="{}Viikkoloppu     {0}€">
                                                         <Binding Path="hinta" />
@@ -358,7 +351,8 @@
 
                                             <Button
                                                 BackgroundColor="Red"
-                                                FontSize="15"
+                                                FontFamily="PoppinsRegular"
+                                                FontSize="18"
                                                 HorizontalOptions="Center"
                                                 Text="TUTUSTU JA VARAA"
                                                 TextColor="White"
