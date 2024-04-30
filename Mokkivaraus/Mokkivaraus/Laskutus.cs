@@ -13,6 +13,8 @@ namespace Mokkivaraus
         public string summa { get; set; }
         public string alv { get; set; }
         public string maksettu { get; set; }
+        public string etunimi { get; set; }
+        public string sukunimi { get; set; }
 
         public Laskutus() { }
 
@@ -23,6 +25,8 @@ namespace Mokkivaraus
             this.summa = summa;
             this.alv = alv;
             this.maksettu = maksettu;
+            this.etunimi = etunimi;
+            this.sukunimi = sukunimi;
         }
     }
 }

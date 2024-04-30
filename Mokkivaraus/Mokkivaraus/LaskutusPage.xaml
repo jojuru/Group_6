@@ -27,13 +27,19 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <Entry Placeholder="Varausnumero" WidthRequest="200" />
+                        <Entry x:Name="varausNumeroEntry"
+                               Placeholder="Varausnumero" 
+                               WidthRequest="200" 
+                               TextColor="Black"/>
                     </Border>
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <Entry Placeholder="Puhelinnumero" WidthRequest="200" />
+                        <Entry x:Name="puhelinNumeroEntry"
+                               Placeholder="Puhelinnumero" 
+                               WidthRequest="200" 
+                               TextColor="Black"/>
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
@@ -42,9 +48,11 @@
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
                         <Entry
+                            x:Name="sahkopostiEntry"
                             HorizontalOptions="Start"
                             Placeholder="Sähköposti"
-                            WidthRequest="200" />
+                            WidthRequest="200" 
+                            TextColor="Black"/>
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="13">
@@ -53,18 +61,22 @@
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
                         <Entry
+                            x:Name="etunimiEntry"
                             HorizontalOptions="Start"
                             Placeholder="Etunimi"
-                            WidthRequest="200" />
+                            WidthRequest="200" 
+                            TextColor="Black"/>
                     </Border>
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
                         <Entry
+                            x:Name="sukunimiEntry"
                             HorizontalOptions="Start"
                             Placeholder="Sukunimi"
-                            WidthRequest="200" />
+                            WidthRequest="200" 
+                            TextColor="Black"/>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -74,6 +86,7 @@
                     BorderWidth="2"
                     HorizontalOptions="Start"
                     Text="Hae laskuja"
+                    Clicked="LaskuHaeBtn_Clicked"
                     TextColor="Black"
                     WidthRequest="160" />
             </VerticalStackLayout>
@@ -81,6 +94,10 @@
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
                 <!--  Laskulista  -->
+                <Label
+                    FontSize="18"
+                    Text="Lasku | Etu- ja sukunimi | Summa | Maksettu?"
+                    TextColor="Black"></Label>
                 <ListView
                     x:Name="LaskuListaLv"
                     HorizontalOptions="Start"
@@ -98,19 +115,31 @@
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="testitekstiä"
-                                            TextColor="Black"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            Padding="2"
-                                            FontSize="15"
                                             Text="{Binding lasku_id}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
                                             Padding="2"
                                             FontSize="15"
+                                            Text="{Binding etunimi}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding sukunimi}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
                                             Text="{Binding summa, StringFormat='{}{0} euroa'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding maksettu}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <!--
