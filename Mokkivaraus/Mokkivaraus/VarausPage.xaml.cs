@@ -130,4 +130,8 @@ public partial class VarausPage
     {
         
     }
+    private void HaeButton_Clicked(object sender, EventArgs e)
+    {
+        
+    }
 }

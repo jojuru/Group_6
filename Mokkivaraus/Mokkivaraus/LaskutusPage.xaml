@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="Mokkivaraus.LaskutusPage"
-            
-            Title="Laskutus ja raportointi">
+<TabbedPage
+    x:Class="Mokkivaraus.LaskutusPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Laskutus ja raportointi">
 
 
-    <!-- Laskutus -->
-    <ContentPage Title="Laskutus" 
-                 NavigationPage.HasNavigationBar="False"
-                 BackgroundColor="GhostWhite">
-        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto" >
-            <!-- vasen puoli -->
-            <VerticalStackLayout Grid.Column="0" Spacing="13" Padding="15">
-                <Label Text="Hae laskuja" FontSize="Large" TextColor="Black"/>
+    <!--  Laskutus  -->
+    <ContentPage
+        Title="Laskutus"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
+            <!--  vasen puoli  -->
+            <VerticalStackLayout
+                Grid.Column="0"
+                Padding="15"
+                Spacing="13">
+                <Label
+                    FontSize="Large"
+                    Text="Hae laskuja"
+                    TextColor="Black" />
 
                 <HorizontalStackLayout Spacing="13">
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <Entry Placeholder="Varausnumero" WidthRequest="200"/>
+                        <Entry Placeholder="Varausnumero" WidthRequest="200" />
                     </Border>
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <Entry Placeholder="Puhelinnumero" WidthRequest="200"/>
+                        <Entry Placeholder="Puhelinnumero" WidthRequest="200" />
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
                     <Border
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="2">
-                        <Entry WidthRequest="200" Placeholder="Sähköposti" HorizontalOptions="Start"/>
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="2">
+                        <Entry
+                            HorizontalOptions="Start"
+                            Placeholder="Sähköposti"
+                            WidthRequest="200" />
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="13">
@@ -42,43 +52,67 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <Entry WidthRequest="200" Placeholder="Etunimi" HorizontalOptions="Start"/>
+                        <Entry
+                            HorizontalOptions="Start"
+                            Placeholder="Etunimi"
+                            WidthRequest="200" />
                     </Border>
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <Entry WidthRequest="200" Placeholder="Sukunimi" HorizontalOptions="Start"/>
+                        <Entry
+                            HorizontalOptions="Start"
+                            Placeholder="Sukunimi"
+                            WidthRequest="200" />
                     </Border>
                 </HorizontalStackLayout>
 
-                <Button 
-                BackgroundColor="#DEE1E6"
-                WidthRequest="160"
-                HorizontalOptions="Start"
-                TextColor="Black"
-                BorderWidth="2"
-                BorderColor="Black"
-                Text="Hae laskuja" />
+                <Button
+                    BackgroundColor="#DEE1E6"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Hae laskuja"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
 
-            <!-- oikea puoli -->
+            <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
-                <!-- Laskulista -->
-                <ListView x:Name="LaskuListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="500" >
-                    <ListView.ItemTemplate >
+                <!--  Laskulista  -->
+                <ListView
+                    x:Name="LaskuListaLv"
+                    HorizontalOptions="Start"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
+                    <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Border
                                     HeightRequest="55"
                                     Stroke="#7ED957"
                                     StrokeShape="RoundRectangle 6,6,6,6"
-                                    StrokeThickness="1"
-                                    >
+                                    StrokeThickness="1">
                                     <StackLayout Orientation="Horizontal">
-                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="testitekstiä" TextColor="Black"/>
-                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding lasku_id}" TextColor="Black" />
-                                        <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding summa, StringFormat='{}{0} euroa'}" TextColor="Black" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="testitekstiä"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding lasku_id}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding summa, StringFormat='{}{0} euroa'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
                                         <!--
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding asiakas_id}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding etunimi}" />
@@ -87,9 +121,15 @@
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding puhelinnro}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding email}" />
                                         -->
-                                        <BoxView HorizontalOptions="FillAndExpand" Color="#ffffff"/>
-                                        <Button VerticalOptions="Center" HorizontalOptions="End" Padding="5" FontSize="15" Text="Muokkaa"
-                                        BackgroundColor="#C61E21" TextColor="White"></Button>
+                                        <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
+                                        <Button
+                                            Padding="5"
+                                            BackgroundColor="#C61E21"
+                                            FontSize="15"
+                                            HorizontalOptions="End"
+                                            Text="Muokkaa"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
                                     </StackLayout>
 
                                 </Border>
@@ -98,19 +138,26 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <!-- More content can be added here -->
+                <!--  More content can be added here  -->
             </VerticalStackLayout>
         </Grid>
     </ContentPage>
 
-    <!-- Raportointi -->
-    <ContentPage Title="Raportointi" 
-                 NavigationPage.HasNavigationBar="False"
-                 BackgroundColor="GhostWhite">
+    <!--  Raportointi  -->
+    <ContentPage
+        Title="Raportointi"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
-            <!-- vasen puoli -->
-            <VerticalStackLayout Grid.Column="0" Spacing="13" Padding="15">
-                <Label Text="Luo raportti" FontSize="Large" TextColor="Black"/>
+            <!--  vasen puoli  -->
+            <VerticalStackLayout
+                Grid.Column="0"
+                Padding="15"
+                Spacing="13">
+                <Label
+                    FontSize="Large"
+                    Text="Luo raportti"
+                    TextColor="Black" />
 
                 <HorizontalStackLayout Spacing="13">
                     <Border
@@ -124,11 +171,11 @@
                             Background="Transparent"
                             BackgroundColor="Transparent"
                             FontSize="18"
+                            HeightRequest="50"
                             SelectedItem="Alue"
                             TextColor="Black"
                             TitleColor="Black"
-                            WidthRequest="340"
-                            HeightRequest="50">
+                            WidthRequest="340">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Capuchin Monkey</x:String>
@@ -138,46 +185,45 @@
                                     <x:String>Howler Monkey</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
-                            
+
                         </Picker>
                     </Border>
                 </HorizontalStackLayout>
-                <HorizontalStackLayout
-                    Spacing="90">
+                <HorizontalStackLayout Spacing="90">
                     <Border
                         BackgroundColor="Transparent"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <DatePicker
-                            BackgroundColor="Transparent"
-                            TextColor="Black" />
+                        <DatePicker BackgroundColor="Transparent" TextColor="Black" />
                     </Border>
                     <Border
                         BackgroundColor="Transparent"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <DatePicker
-                            BackgroundColor="Transparent"
-                            TextColor="Black" />
+                        <DatePicker BackgroundColor="Transparent" TextColor="Black" />
                     </Border>
                 </HorizontalStackLayout>
 
-                <Button 
+                <Button
                     BackgroundColor="#DEE1E6"
-                    WidthRequest="160"
-                    HorizontalOptions="Start"
-                    TextColor="Black"
-                    BorderWidth="2"
                     BorderColor="Black"
-                    Text="Luo raportti" />
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Luo raportti"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
-            <!-- oikea puoli -->
+            <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
-                <!-- Add your content for the right side here -->
-                <ListView x:Name="AlueListaLv" HeightRequest="560" HorizontalOptions="Start" WidthRequest="500" >
-                    <ListView.ItemTemplate >
+                <!--  Add your content for the right side here  -->
+                <ListView
+                    x:Name="AlueListaLv"
+                    HorizontalOptions="Start"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
+                    <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Border
@@ -186,12 +232,27 @@
                                     StrokeShape="RoundRectangle 6,6,6,6"
                                     StrokeThickness="1">
                                     <StackLayout Orientation="Horizontal">
-                                        <Label VerticalOptions="Center"  WidthRequest="100" Padding="5" FontSize="15" Text="{Binding alue_id}" />
-                                        <Label VerticalOptions="Center"  WidthRequest="100" Padding="5" FontSize="15" Text="{Binding nimi}" />
-                                        <BoxView HorizontalOptions="FillAndExpand" Color="#ffffff"/>
-                                        <Button VerticalOptions="Center" HorizontalOptions="End" Padding="5" FontSize="15" Text="Muokkaa"
-                                            BackgroundColor="#C61E21" TextColor="White">
-                                        </Button>
+                                        <Label
+                                            Padding="5"
+                                            FontSize="15"
+                                            Text="{Binding alue_id}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="100" />
+                                        <Label
+                                            Padding="5"
+                                            FontSize="15"
+                                            Text="{Binding nimi}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="100" />
+                                        <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
+                                        <Button
+                                            Padding="5"
+                                            BackgroundColor="#C61E21"
+                                            FontSize="15"
+                                            HorizontalOptions="End"
+                                            Text="Muokkaa"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
                                     </StackLayout>
                                 </Border>
                             </ViewCell>

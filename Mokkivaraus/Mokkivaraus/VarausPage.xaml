@@ -21,7 +21,7 @@
             <!--  sivun vasen puoli, filterit ja haku  -->
             <VerticalStackLayout
                 Grid.Column="0"
-                Margin="60,30"
+                Margin="60,10"
                 BackgroundColor="#f7f7f8">
                 <Label
                     FontFamily="PoppinsRegular"
@@ -251,6 +251,13 @@
                         TextColor="Black"
                         VerticalOptions="Center" />
                 </HorizontalStackLayout>
+
+                <Button
+                    BackgroundColor="#9dabc4"
+                    Clicked="HaeButton_Clicked"
+                    FontSize="25"
+                    Text="hae"
+                    TextColor="Black" />
 
             </VerticalStackLayout>
 
