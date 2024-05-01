@@ -52,7 +52,15 @@ public partial class VarausPage
             MOKKI.hinta = reader["hinta"].ToString();
             MOKKI.kuvaus = reader["kuvaus"].ToString();
             MOKKI.henkilomaara = reader["henkilomaara"].ToString();
+            // Split the varustelu string into individual items and join them with ", "
             MOKKI.varustelu = reader["varustelu"].ToString();
+            string[] varusteluItems = MOKKI.varustelu.Split(',');
+            for (int i = 0; i < varusteluItems.Length; i++)
+            {
+                varusteluItems[i] = char.ToUpper(varusteluItems[i][0]) + varusteluItems[i].Substring(1);
+            }
+            MOKKI.varustelu = string.Join(", ", varusteluItems);
+
             //etsii alue collectionista oikean alueen id perusteella
             var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
             MOKKI.alue = mok.nimi;

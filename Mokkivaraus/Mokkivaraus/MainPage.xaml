@@ -7,53 +7,69 @@
     BackgroundImageSource="taustakuva_etusivu.png"
     NavigationPage.HasNavigationBar="False">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Margin="0,0,0,240"
+    <VerticalStackLayout
+        Margin="0,0,0,240"
+        Padding="30,0"
+        HorizontalOptions="FillAndExpand"
+        Spacing="20"
+        VerticalOptions="End">
+        <HorizontalStackLayout
             Padding="30,0"
-            HorizontalOptions="FillAndExpand"
-            Spacing="20"
-            VerticalOptions="End">
-            <HorizontalStackLayout
-                Padding="30,0"
-                HorizontalOptions="Center"
-                Spacing="60">
+            HorizontalOptions="Center"
+            Spacing="60">
+            <Border
+                Stroke="Black"
+                StrokeShape="RoundRectangle 14,14,14,14"
+                StrokeThickness="2">
                 <Button
                     x:Name="VaraaMokkiBtn"
-                    BackgroundColor="#DEE1E6"
-                    BorderColor="Black"
+                    BackgroundColor="#e5e9f0"
+                    BorderColor="Transparent"
                     Clicked="VaraaMokkiBtn_Clicked"
                     FontFamily="PoppinsRegular"
                     FontSize="20"
+                    HeightRequest="55"
                     HorizontalOptions="CenterAndExpand"
                     Text="Varaa mökki"
                     TextColor="Black"
-                    WidthRequest="280" />
+                    WidthRequest="290" />
+            </Border>
+            <Border
+                Stroke="Black"
+                StrokeShape="RoundRectangle 14,14,14,14"
+                StrokeThickness="2">
                 <Button
                     x:Name="LaskutusBtn"
-                    BackgroundColor="#DEE1E6"
-                    BorderColor="Black"
+                    BackgroundColor="#e5e9f0"
+                    BorderColor="Transparent"
                     Clicked="LaskutusBtn_Clicked"
                     FontFamily="PoppinsRegular"
                     FontSize="20"
+                    HeightRequest="55"
                     HorizontalOptions="CenterAndExpand"
                     Text="Laskutus ja Raportointi"
                     TextColor="Black"
-                    WidthRequest="280" />
+                    WidthRequest="290" />
+            </Border>
+            <Border
+                Stroke="Black"
+                StrokeShape="RoundRectangle 14,14,14,14"
+                StrokeThickness="2">
                 <Button
                     x:Name="HallintaBtn"
-                    BackgroundColor="#DEE1E6"
-                    BorderColor="Black"
+                    BackgroundColor="#e5e9f0"
+                    BorderColor="Transparent"
                     Clicked="HallintaBtn_Clicked"
                     FontFamily="PoppinsRegular"
                     FontSize="20"
+                    HeightRequest="55"
                     HorizontalOptions="CenterAndExpand"
                     Text="Hallinta"
                     TextColor="Black"
-                    WidthRequest="280" />
-            </HorizontalStackLayout>
+                    WidthRequest="290" />
+            </Border>
+        </HorizontalStackLayout>
 
-        </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 
 </ContentPage>
