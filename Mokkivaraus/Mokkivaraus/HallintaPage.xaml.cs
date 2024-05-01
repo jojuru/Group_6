@@ -44,7 +44,7 @@ public partial class HallintaPage : TabbedPage
 	//hakee tietokannastta Alueet
 	private void SqlHaeAlueet()
 	{
-
+        AlueCollection.Clear();
 		MySqlConnection con = new MySqlConnection();
 		con.ConnectionString = connstring;
 		con.Open();
@@ -212,5 +212,28 @@ public partial class HallintaPage : TabbedPage
         }
 
         MokkiListaLv.ItemsSource = MokkiCollection;
+    }
+
+    //luonti napit***************
+
+    //Uude alueen luonti
+    private void AlueLuoBtn_Clicked(object sender, EventArgs e)
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+        string sql = $"INSERT INTO alue (nimi) VALUES ('{AlueNimiEnt.Text}')";
+        MySqlCommand insertCmd = new MySqlCommand(sql, con);
+        try
+        {
+            insertCmd.ExecuteNonQuery();
+        }
+        catch (Exception error)
+        {
+            DisplayAlert("Alert", error.Message, "OK");
+        }
+
+
+        SqlHaeAlueet();
     }
 }

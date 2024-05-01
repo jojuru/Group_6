@@ -133,6 +133,8 @@
                     WidthRequest="400" />
                 <HorizontalStackLayout Spacing="13">
                     <Button
+                        x:Name="AlueLuoBtn"
+                        Clicked="AlueLuoBtn_Clicked"
                         BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
