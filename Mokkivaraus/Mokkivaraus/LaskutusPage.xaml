@@ -96,7 +96,7 @@
                 <!--  Laskulista  -->
                 <Label
                     FontSize="18"
-                    Text="Lasku | Etu- ja sukunimi | Summa | Maksettu?"
+                    Text="Lasku nro | Etu- ja sukunimi | Summa | Maksettu?"
                     TextColor="Black"></Label>
                 <ListView
                     x:Name="LaskuListaLv"
@@ -115,7 +115,7 @@
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="{Binding lasku_id}"
+                                            Text="{Binding lasku_id, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
@@ -127,19 +127,19 @@
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="{Binding sukunimi}"
+                                            Text="{Binding sukunimi, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="{Binding summa, StringFormat='{}{0} euroa'}"
+                                            Text="{Binding summa, StringFormat='{}{0} euroa |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="{Binding maksettu}"
+                                            Text="{Binding maksettu, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <!--
@@ -196,25 +196,21 @@
                         StrokeThickness="2">
                         <Picker
                             x:Name="AluePicker"
-                            Title=" Alueet"
+                            Title=" Valitse alue"
+                            ItemsSource="{Binding Alueet}"
+                            SelectedItem="{Binding ValittuAlue}"
+                            ItemDisplayBinding="{Binding nimi}"
                             Background="Transparent"
                             BackgroundColor="Transparent"
                             FontSize="18"
-                            HeightRequest="50"
-                            SelectedItem="Alue"
+                            HeightRequest="70"
                             TextColor="Black"
                             TitleColor="Black"
                             WidthRequest="340">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Capuchin Monkey</x:String>
-                                    <x:String>Blue Monkey</x:String>
-                                    <x:String>Squirrel Monkey</x:String>
-                                    <x:String>Golden Lion Tamarin</x:String>
-                                    <x:String>Howler Monkey</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
+                            <!--
 
+                            -->
+                                
                         </Picker>
                     </Border>
                 </HorizontalStackLayout>
@@ -224,18 +220,25 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <DatePicker BackgroundColor="Transparent" TextColor="Black" />
+                        <DatePicker 
+                            x:Name="startDatePicker"
+                            BackgroundColor="Transparent" 
+                            TextColor="Black" />
                     </Border>
                     <Border
                         BackgroundColor="Transparent"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <DatePicker BackgroundColor="Transparent" TextColor="Black" />
+                        <DatePicker 
+                            x:Name="endDatePicker"
+                            BackgroundColor="Transparent" 
+                            TextColor="Black" />
                     </Border>
                 </HorizontalStackLayout>
 
                 <Button
+                    Clicked="LuoRaportti_Clicked"
                     BackgroundColor="#DEE1E6"
                     BorderColor="Black"
                     BorderWidth="2"
@@ -264,24 +267,18 @@
                                         <Label
                                             Padding="5"
                                             FontSize="15"
-                                            Text="{Binding alue_id}"
+                                            Text="{Binding mokkinimi}"
+                                            TextColor="Black"
                                             VerticalOptions="Center"
                                             WidthRequest="100" />
                                         <Label
                                             Padding="5"
                                             FontSize="15"
-                                            Text="{Binding nimi}"
+                                            Text="{Binding katuosoite}"
+                                            TextColor="Black"
                                             VerticalOptions="Center"
                                             WidthRequest="100" />
                                         <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
-                                        <Button
-                                            Padding="5"
-                                            BackgroundColor="#C61E21"
-                                            FontSize="15"
-                                            HorizontalOptions="End"
-                                            Text="Muokkaa"
-                                            TextColor="White"
-                                            VerticalOptions="Center" />
                                     </StackLayout>
                                 </Border>
                             </ViewCell>
