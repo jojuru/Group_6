@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Mokkivaraus;
 
-public partial class VarausPage
+public partial class VarausPage : TabbedPage
 {
     public ObservableCollection<Alue> AlueCollection { get; set; }
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
@@ -127,11 +127,7 @@ public partial class VarausPage
             servicesByArea[alueNimi].Add(palveluNimi);
         }
 
-        // Print out the services for each area
-        foreach (var kvp in servicesByArea)
-        {
-            string servicesList = string.Join(", ", kvp.Value);
-        }
+
     }
 
     private void valitseBtn_Clicked(object sender, EventArgs e)
@@ -141,5 +137,9 @@ public partial class VarausPage
     private void HaeButton_Clicked(object sender, EventArgs e)
     {
         
+    }
+    private async void TutustuButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MokkiPage(AlueCollection, MokkiCollection, PalveluCollection, servicesByArea));
     }
 }

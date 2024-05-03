@@ -19,247 +19,254 @@
             </Grid.ColumnDefinitions>
 
             <!--  sivun vasen puoli, filterit ja haku  -->
-            <VerticalStackLayout
-                Grid.Column="0"
-                Margin="60,10"
-                BackgroundColor="#f7f7f8">
-                <Label
-                    FontFamily="PoppinsRegular"
-                    FontSize="30"
-                    Text="Syötä toiveet"
-                    TextColor="Black" />
-
-                <!--  MÖKKI NIMI JA ALUE  -->
-                <HorizontalStackLayout Margin="0,10" Spacing="48">
-                    <Border
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="20"
-                            Placeholder="Mökin nimi"
-                            TextColor="Black"
-                            WidthRequest="200" />
-
-
-                    </Border>
-                    <Border
-                        BackgroundColor="#e5e9f0"
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <Picker
-                            x:Name="AlueListaPicker"
-                            Title="Valitse Alue"
-                            Background="Transparent"
-                            BackgroundColor="Transparent"
-                            FontFamily="PoppinsRegular"
-                            FontSize="20"
-                            HeightRequest="80"
-                            ItemDisplayBinding="{Binding nimi}"
-                            ItemsSource="{Binding AlueCollection}"
-                            SelectedIndex="0"
-                            SelectedItem="Alue"
-                            TextColor="Black"
-                            TitleColor="Black"
-                            WidthRequest="400" />
-                    </Border>
-                </HorizontalStackLayout>
-
-                <!--  SAAPUMINEN-LÄHTÖ  -->
-                <HorizontalStackLayout Padding="5" Spacing="125">
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Margin="60,10"
+                    BackgroundColor="#f7f7f8"
+                    Spacing="-6">
                     <Label
                         FontFamily="PoppinsRegular"
-                        FontSize="20"
-                        Text="Saapuminen"
+                        FontSize="30"
+                        Text="Syötä toiveet"
                         TextColor="Black" />
+
+                    <!--  MÖKKI NIMI JA ALUE  -->
+                    <HorizontalStackLayout Margin="0,10" Spacing="48">
+                        <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="3">
+                            <Entry
+                                BackgroundColor="#e5e9f0"
+                                FontFamily="PoppinsRegular"
+                                FontSize="20"
+                                Placeholder="Mökin nimi"
+                                TextColor="Black"
+                                WidthRequest="200" />
+
+
+                        </Border>
+                        <Border
+                            BackgroundColor="#e5e9f0"
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="3">
+                            <Picker
+                                x:Name="AlueListaPicker"
+                                Title="Valitse Alue"
+                                Background="Transparent"
+                                BackgroundColor="Transparent"
+                                FontFamily="PoppinsRegular"
+                                FontSize="20"
+                                HeightRequest="80"
+                                ItemDisplayBinding="{Binding nimi}"
+                                ItemsSource="{Binding AlueCollection}"
+                                SelectedIndex="0"
+                                SelectedItem="Alue"
+                                TextColor="Black"
+                                TitleColor="Black"
+                                WidthRequest="400" />
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <!--  SAAPUMINEN-LÄHTÖ  -->
+                    <HorizontalStackLayout Padding="5" Spacing="125">
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="Saapuminen"
+                            TextColor="Black" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="Lähtö"
+                            TextColor="Black" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                        Margin="27,5"
+                        Padding="5"
+                        Spacing="120">
+                        <Border
+                            BackgroundColor="#e5e9f0"
+                            Scale="1.5"
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="2">
+                            <DatePicker
+                                BackgroundColor="Transparent"
+                                FontFamily="PoppinsRegular"
+                                Scale="1.5"
+                                TextColor="Black" />
+                        </Border>
+                        <Border
+                            BackgroundColor="#e5e9f0"
+                            Scale="1.5"
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="2">
+                            <DatePicker
+                                BackgroundColor="Transparent"
+                                FontFamily="PoppinsRegular"
+                                Scale="1.5"
+                                TextColor="Black" />
+                        </Border>
+
+                    </HorizontalStackLayout>
+
+
+                    <!--  HINTA  -->
                     <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="20"
-                        Text="Lähtö"
+                        Margin="0,15"
+                        FontSize="26"
+                        Text="Hinta"
                         TextColor="Black" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout
-                    Margin="27,5"
-                    Padding="5"
-                    Spacing="120">
-                    <Border
-                        BackgroundColor="#e5e9f0"
-                        Scale="1.5"
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="2">
-                        <DatePicker
-                            BackgroundColor="Transparent"
+
+                    <HorizontalStackLayout Spacing="20">
+                        <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="3">
+                            <Entry
+                                BackgroundColor="#e5e9f0"
+                                FontFamily="PoppinsRegular"
+                                FontSize="20"
+                                HeightRequest="66"
+                                Placeholder="min. hinta"
+                                TextColor="Black"
+                                WidthRequest="150" />
+                        </Border>
+                        <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="3">
+                            <Entry
+                                BackgroundColor="#e5e9f0"
+                                FontFamily="PoppinsRegular"
+                                FontSize="20"
+                                Placeholder="max. hinta"
+                                TextColor="Black"
+                                WidthRequest="150" />
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <!--  PALVELUT  -->
+                    <Label
+                        Margin="0,20"
+                        FontFamily="PoppinsRegular"
+                        FontSize="26"
+                        Text="Palvelut"
+                        TextColor="Black" />
+
+                    <HorizontalStackLayout Spacing="20">
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            Padding="0,0,25,0"
                             FontFamily="PoppinsRegular"
-                            Scale="1.5"
-                            TextColor="Black" />
-                    </Border>
-                    <Border
-                        BackgroundColor="#e5e9f0"
-                        Scale="1.5"
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="2">
-                        <DatePicker
-                            BackgroundColor="Transparent"
-                            FontFamily="PoppinsRegular"
-                            Scale="1.5"
-                            TextColor="Black" />
-                    </Border>
-
-                </HorizontalStackLayout>
-
-
-                <!--  HINTA  -->
-                <Label
-                    Margin="0,15"
-                    FontSize="26"
-                    Text="Hinta"
-                    TextColor="Black" />
-
-                <HorizontalStackLayout Spacing="20">
-                    <Border
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="20"
-                            HeightRequest="66"
-                            Placeholder="min. hinta"
+                            FontSize="18"
+                            Text="Porosafari"
                             TextColor="Black"
-                            WidthRequest="150" />
-                    </Border>
-                    <Border
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
+                            VerticalOptions="Center" />
+                        <CheckBox Scale="1.5" />
+                        <Label
                             FontFamily="PoppinsRegular"
-                            FontSize="20"
-                            Placeholder="max. hinta"
+                            FontSize="18"
+                            Text="Airsoftaus"
                             TextColor="Black"
-                            WidthRequest="150" />
-                    </Border>
-                </HorizontalStackLayout>
+                            VerticalOptions="Center" />
 
-                <!--  PALVELUT  -->
-                <Label
-                    Margin="0,20"
-                    FontFamily="PoppinsRegular"
-                    FontSize="26"
-                    Text="Palvelut"
-                    TextColor="Black" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Margin="0,10" Spacing="20">
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Vesiskootteri"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Hevosajelu"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="20">
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Koiravaljakkoajelu"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
+                    <!--  VARUSTELUTASO  -->
                     <Label
-                        Padding="0,0,25,0"
+                        Margin="0,20"
                         FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Porosafari"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Airsoftaus"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
+                        FontSize="26"
+                        Text="Varustelutaso"
+                        TextColor="Black" />
 
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Margin="0,10" Spacing="20">
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Vesiskootteri"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Hevosajelu"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Koiravaljakkoajelu"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="20">
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            Margin="20,0"
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="TV"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Astianpesukone"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Margin="0,10" Spacing="20">
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            Padding="2,0"
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Sauna"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Takka"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="20">
+                        <CheckBox Scale="1.5" />
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="18"
+                            Text="Pyykinpesukone"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-                <!--  VARUSTELUTASO  -->
-                <Label
-                    Margin="0,20"
-                    FontFamily="PoppinsRegular"
-                    FontSize="26"
-                    Text="Varustelutaso"
-                    TextColor="Black" />
+                    <Button
+                        Margin="0,15"
+                        BackgroundColor="#b2f7ab"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="HaeButton_Clicked"
+                        FontFamily="PoppinsRegular"
+                        FontSize="25"
+                        Text="Hae"
+                        TextColor="Black" />
 
-                <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        Margin="20,0"
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="TV"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Astianpesukone"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Margin="0,10" Spacing="20">
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        Padding="2,0"
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Sauna"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Takka"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Pyykinpesukone"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-
-                <Button
-                    BackgroundColor="#9dabc4"
-                    Clicked="HaeButton_Clicked"
-                    FontSize="25"
-                    Text="hae"
-                    TextColor="Black" />
-
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
 
             <!--  sivun oikea puoli, mökit  -->
 
@@ -360,6 +367,7 @@
                                                 BackgroundColor="Red"
                                                 FontFamily="PoppinsRegular"
                                                 FontSize="18"
+                                                Clicked="TutustuButton_Clicked"
                                                 HorizontalOptions="Center"
                                                 Text="TUTUSTU JA VARAA"
                                                 TextColor="White"
