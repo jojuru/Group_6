@@ -1,29 +1,26 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace Mokkivaraus;
 
 public partial class MokkiPage : ContentPage
 {
-    public ObservableCollection<Alue> AlueCollection { get; set; }
-    public ObservableCollection<Mokki> MokkiCollection { get; set; }
-    public ObservableCollection<Palvelu> PalveluCollection { get; set; }
-    public Dictionary<string, List<string>> ServicesByArea { get; set; }
+    public ObservableCollection<Mokki> ClickedMokkiList { get; }
+    static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
 
-    public MokkiPage(
-        ObservableCollection<Alue> alueCollection,
-        ObservableCollection<Mokki> mokkiCollection,
-        ObservableCollection<Palvelu> palveluCollection,
-        Dictionary<string, List<string>> servicesByArea)
-    {
-        Main();
-        AlueCollection = alueCollection;
-        MokkiCollection = mokkiCollection;
-        PalveluCollection = palveluCollection;
-        ServicesByArea = servicesByArea;
-    }
-    public void Main()
+    public MokkiPage(Mokki clickedMokki)
     {
         InitializeComponent();
+        ClickedMokkiList = new ObservableCollection<Mokki> { clickedMokki };
+        BindingContext = this;
+        // Print all properties of the clickedMokki object
+        foreach (var property in typeof(Mokki).GetProperties())
+        {
+            var value = property.GetValue(clickedMokki);
+            Debug.WriteLine($"{property.Name}: {value}");
+        }
+
     }
+
 
 }

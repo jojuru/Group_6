@@ -70,49 +70,7 @@
                         </Border>
                     </HorizontalStackLayout>
 
-                    <!--  SAAPUMINEN-LÄHTÖ  -->
-                    <HorizontalStackLayout Padding="5" Spacing="125">
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="20"
-                            Text="Saapuminen"
-                            TextColor="Black" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="20"
-                            Text="Lähtö"
-                            TextColor="Black" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout
-                        Margin="27,5"
-                        Padding="5"
-                        Spacing="120">
-                        <Border
-                            BackgroundColor="#e5e9f0"
-                            Scale="1.5"
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="2">
-                            <DatePicker
-                                BackgroundColor="Transparent"
-                                FontFamily="PoppinsRegular"
-                                Scale="1.5"
-                                TextColor="Black" />
-                        </Border>
-                        <Border
-                            BackgroundColor="#e5e9f0"
-                            Scale="1.5"
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="2">
-                            <DatePicker
-                                BackgroundColor="Transparent"
-                                FontFamily="PoppinsRegular"
-                                Scale="1.5"
-                                TextColor="Black" />
-                        </Border>
 
-                    </HorizontalStackLayout>
 
 
                     <!--  HINTA  -->
@@ -347,25 +305,19 @@
                                                 FontSize="18"
                                                 TextColor="Red">
                                                 <Label.Text>
-                                                    <MultiBinding StringFormat="{}Viikkohinta     {0}€">
-                                                        <Binding Path="hinta" />
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
-                                            <Label
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="18"
-                                                TextColor="Red">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}Viikkoloppu     {0}€">
+                                                    <MultiBinding StringFormat="{}Päivähinta     {0}€">
                                                         <Binding Path="hinta" />
                                                     </MultiBinding>
                                                 </Label.Text>
                                             </Label>
 
                                             <Button
+                                                x:Name="TutustuButton_{Binding mokki_id}"
                                                 BackgroundColor="Red"
+                                                BorderColor="Black"
+                                                BorderWidth="2"
                                                 Clicked="TutustuButton_Clicked"
+                                                CommandParameter="{Binding .}"
                                                 FontFamily="PoppinsRegular"
                                                 FontSize="18"
                                                 HorizontalOptions="Center"

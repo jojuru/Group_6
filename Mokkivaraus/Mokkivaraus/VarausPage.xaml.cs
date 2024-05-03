@@ -10,7 +10,7 @@ public partial class VarausPage : TabbedPage
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
     // grouppaa aktiviteetit alueen mukaan
-    public Dictionary<string, List<string>> servicesByArea = new Dictionary<string, List<string>>();
+    public Dictionary<string, List<string>> ServicesByArea = new Dictionary<string, List<string>>();
 
     static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
 
@@ -66,9 +66,9 @@ public partial class VarausPage : TabbedPage
             MOKKI.alue = mok.nimi;
 
             // Fetch the list of services for this mokki from servicesByArea
-            if (servicesByArea.ContainsKey(MOKKI.alue))
+            if (ServicesByArea.ContainsKey(MOKKI.alue))
             {
-                string servicesString = string.Join(", ", servicesByArea[MOKKI.alue]);
+                string servicesString = string.Join(", ", ServicesByArea[MOKKI.alue]);
                 MOKKI.palvelut = servicesString;
             }
 
@@ -120,13 +120,12 @@ public partial class VarausPage : TabbedPage
             string palveluNimi = reader["nimi"].ToString();
 
             // tehd‰‰n uusi lista alueelle jos sit‰ ei ole
-            if (!servicesByArea.ContainsKey(alueNimi))
+            if (!ServicesByArea.ContainsKey(alueNimi))
             {
-                servicesByArea[alueNimi] = new List<string>();
+                ServicesByArea[alueNimi] = new List<string>();
             }
-            servicesByArea[alueNimi].Add(palveluNimi);
+            ServicesByArea[alueNimi].Add(palveluNimi);
         }
-
 
     }
 
@@ -140,6 +139,13 @@ public partial class VarausPage : TabbedPage
     }
     private async void TutustuButton_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MokkiPage(AlueCollection, MokkiCollection, PalveluCollection, servicesByArea));
+        var button = sender as Button;
+        var clickedMokki = button?.CommandParameter as Mokki; // Assuming Mokki is the data type of your item
+
+        if (clickedMokki != null)
+        {
+            // Pass the clicked Mokki object as a parameter to the MokkiPage
+            await Navigation.PushAsync(new MokkiPage(clickedMokki));
+        }
     }
 }
