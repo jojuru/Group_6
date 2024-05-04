@@ -8,9 +8,10 @@ public partial class LaskutusPage : TabbedPage
 	public ObservableCollection<Laskutus> LaskutusCollection { get; set; }
     public ObservableCollection<Alue> Alueet { get; set; }
     public ObservableCollection<Mokki> Mokit { get; set; }
+    public ObservableCollection<PalveluRaportti> Palvelut { get; set; }
 
 
-    static private String connstring = "server=localhost;uid=root;port=3306;pwd=Verorakoja123;database=vn";
+    static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
     public LaskutusPage()
 	{
 		InitializeComponent();
@@ -19,6 +20,8 @@ public partial class LaskutusPage : TabbedPage
         LaskuListaLv.BindingContext = LaskutusCollection;
         Mokit = new ObservableCollection<Mokki>();
         AlueListaLv.ItemsSource = Mokit;
+
+        Palvelut = new ObservableCollection<PalveluRaportti>();
 
         HaeLaskutAsiakkaalle();
         LataaAlueet();
@@ -52,9 +55,9 @@ public partial class LaskutusPage : TabbedPage
         var sukunimi = sukunimiEntry.Text;
         var varausNumero = varausNumeroEntry.Text;
         var sahkoposti = sahkopostiEntry.Text;
-        var puhelinnumero = puhelinNumeroEntry.Text;
+        var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, l.summa, l.alv, l.maksettu FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id ");
+        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -65,6 +68,9 @@ public partial class LaskutusPage : TabbedPage
             conditions.Add("v.varaus_id LIKE @varausId");
         if (!string.IsNullOrEmpty(sahkoposti))
             conditions.Add("a.email LIKE @email");
+        if (!string.IsNullOrEmpty(puhelinnro))
+            conditions.Add("a.puhelinnro LIKE @puhelinnro");
+
 
         if (conditions.Count > 0)
         {
@@ -83,6 +89,9 @@ public partial class LaskutusPage : TabbedPage
             cmd.Parameters.AddWithValue("@varausId", $"%{varausNumero}%");
         if (!string.IsNullOrEmpty(sahkoposti))
             cmd.Parameters.AddWithValue("@email", $"%{sahkoposti}%");
+        if (!string.IsNullOrEmpty(puhelinnro))
+            cmd.Parameters.AddWithValue("@puhelinnro", $"%{puhelinnro}%");
+
 
         var reader = cmd.ExecuteReader();
         LaskutusCollection.Clear();
@@ -97,7 +106,8 @@ public partial class LaskutusPage : TabbedPage
                 varaus_id = reader["varaus_id"].ToString(),
                 summa = reader["summa"].ToString(),
                 alv = reader["alv"].ToString(),
-                maksettu = reader["maksettu"].ToString()
+                maksettu = reader["maksettu"].ToString(),
+                puhelinnro = reader["puhelinnro"].ToString()
             };
             LaskutusCollection.Add(laskutus);
         }
@@ -112,9 +122,9 @@ public partial class LaskutusPage : TabbedPage
         var sukunimi = sukunimiEntry.Text;
         var varausNumero = varausNumeroEntry.Text;
         var sahkoposti = sahkopostiEntry.Text;
-        var puhelinnumero = puhelinNumeroEntry.Text;
+        var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, l.summa, l.alv, l.maksettu FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id ");
+        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id ");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -125,6 +135,8 @@ public partial class LaskutusPage : TabbedPage
             conditions.Add("v.varaus_id LIKE @varausId");
         if (!string.IsNullOrEmpty(sahkoposti))
             conditions.Add("a.email LIKE @email");
+        if (!string.IsNullOrEmpty(puhelinnro))
+            conditions.Add("a.puhelinnro LIKE @puhelinnro");
 
         if (conditions.Count > 0)
         {
@@ -143,6 +155,8 @@ public partial class LaskutusPage : TabbedPage
             cmd.Parameters.AddWithValue("@varausId", $"%{varausNumero}%");
         if (!string.IsNullOrEmpty(sahkoposti))
             cmd.Parameters.AddWithValue("@email", $"%{sahkoposti}%");
+        if (!string.IsNullOrEmpty(puhelinnro))
+            cmd.Parameters.AddWithValue("@puhelinnro", $"%{puhelinnro}%");
 
         var reader = cmd.ExecuteReader();
         LaskutusCollection.Clear();
@@ -157,7 +171,8 @@ public partial class LaskutusPage : TabbedPage
                 varaus_id = reader["varaus_id"].ToString(),
                 summa = reader["summa"].ToString(),
                 alv = reader["alv"].ToString(),
-                maksettu = reader["maksettu"].ToString()
+                maksettu = reader["maksettu"].ToString(),
+                puhelinnro = reader["puhelinnro"].ToString()
             };
             LaskutusCollection.Add(laskutus);
         }
@@ -170,7 +185,7 @@ public partial class LaskutusPage : TabbedPage
     // ladataan alueiden nimet raportoinnin aluevalintalistaan
     private void LataaAlueet()
     {
-        //string connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
+
         using (MySqlConnection con = new MySqlConnection(connstring))
         {
             con.Open();
@@ -204,7 +219,10 @@ public partial class LaskutusPage : TabbedPage
         DateTime endDate = endDatePicker.Date;
         if (startDate <= endDate)
         {
+            varatutMokitLabel.Text = $"Varatut mökit aikavälillä {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}";
+            varatutPalvelutLabel.Text = $"Varatut palvelut aikavälillä {startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}";
             HaeVaratutMokit(startDate, endDate);
+            HaeVaratutPalvelut(startDate, endDate);
         }
         else
         {
@@ -212,7 +230,7 @@ public partial class LaskutusPage : TabbedPage
         }
     }
 
-    // raportille tietojen haku
+    // Raportille tietojen haku
     private void HaeVaratutMokit(DateTime alkuPvm, DateTime loppuPvm)
     {
         if (AluePicker.SelectedItem == null)
@@ -228,19 +246,19 @@ public partial class LaskutusPage : TabbedPage
             return;
         }
 
-        //string connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
         using (MySqlConnection con = new MySqlConnection(connstring))
         {
             try
             {
                 con.Open();
                 string query = @"
-                    SELECT m.mokkinimi, m.katuosoite
-                    FROM mokki m
-                    JOIN varaus v ON m.mokki_id = v.mokki_id
-                    JOIN alue a ON m.alue_id = a.alue_id
-                    WHERE a.nimi = @ValittuAlue AND v.varattu_alkupvm <= @LoppuPvm AND v.varattu_loppupvm >= @AlkuPvm
-                    GROUP BY m.mokkinimi, m.katuosoite";
+                SELECT m.mokkinimi, m.katuosoite, m.postinro, a.nimi AS alue_nimi
+                FROM mokki m
+                JOIN varaus v ON m.mokki_id = v.mokki_id
+                JOIN alue a ON m.alue_id = a.alue_id
+                WHERE a.nimi = @ValittuAlue AND 
+                      v.varattu_alkupvm <= @LoppuPvm AND 
+                      v.varattu_loppupvm >= @AlkuPvm";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@ValittuAlue", valittuAlue.nimi);
                 cmd.Parameters.AddWithValue("@AlkuPvm", alkuPvm.ToString("yyyy-MM-dd"));
@@ -253,7 +271,9 @@ public partial class LaskutusPage : TabbedPage
                     Mokit.Add(new Mokki
                     {
                         mokkinimi = reader["mokkinimi"].ToString(),
-                        katuosoite = reader["katuosoite"].ToString()
+                        katuosoite = reader["katuosoite"].ToString(),
+                        postinro = reader["postinro"].ToString(),
+                        alue = reader["alue_nimi"].ToString()
                     });
                 }
             }
@@ -267,5 +287,63 @@ public partial class LaskutusPage : TabbedPage
             }
         }
     }
+    // Haetaan varatut palvelut
+    private void HaeVaratutPalvelut(DateTime alkuPvm, DateTime loppuPvm)
+    {
+        if (AluePicker.SelectedItem == null)
+        {
+            DisplayAlert("Valinta puuttuu", "Valitse alue ennen hakua.", "OK");
+            return;
+        }
 
+        Alue valittuAlue = AluePicker.SelectedItem as Alue;
+        if (valittuAlue == null)
+        {
+            DisplayAlert("Virhe", "Valittu alue on virheellinen.", "OK");
+            return;
+        }
+
+        using (MySqlConnection con = new MySqlConnection(connstring))
+        {
+            try
+            {
+                con.Open();
+                string query = @"
+                    SELECT p.nimi AS palvelun_nimi, COUNT(vp.varaus_id) AS varaus_maara
+                    FROM varauksen_palvelut vp
+                    JOIN varaus v ON vp.varaus_id = v.varaus_id
+                    JOIN palvelu p ON vp.palvelu_id = p.palvelu_id
+                    JOIN alue a ON p.alue_id = a.alue_id
+                    WHERE a.nimi = @ValittuAlue AND 
+                          v.varattu_alkupvm <= @LoppuPvm AND 
+                          v.varattu_loppupvm >= @AlkuPvm
+                    GROUP BY p.nimi";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@ValittuAlue", valittuAlue.nimi);
+                cmd.Parameters.AddWithValue("@AlkuPvm", alkuPvm.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@LoppuPvm", loppuPvm.ToString("yyyy-MM-dd"));
+
+
+                var reader = cmd.ExecuteReader();
+                Palvelut.Clear();
+                while (reader.Read())
+                {
+                    Palvelut.Add(new PalveluRaportti
+                    {
+                        palvelun_nimi = reader["palvelun_nimi"].ToString(),
+                        varaus_maara = Convert.ToInt32(reader["varaus_maara"])
+                    });
+                }
+                PalvelutListaLv.ItemsSource = Palvelut;
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Virhe", "Tietokantavirhe: " + ex.Message, "OK");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+    }
 }

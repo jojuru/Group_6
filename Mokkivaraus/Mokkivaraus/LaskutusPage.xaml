@@ -133,6 +133,12 @@
                                         <Label
                                             Padding="2"
                                             FontSize="15"
+                                            Text="{Binding puhelinnro, StringFormat='{0} |'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
                                             Text="{Binding summa, StringFormat='{}{0} euroa |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
@@ -247,14 +253,96 @@
                     TextColor="Black"
                     WidthRequest="160" />
             </VerticalStackLayout>
-            <!--  oikea puoli  -->
+
+            <!-- oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
-                <!--  Add your content for the right side here  -->
+                <Label
+                x:Name="varatutMokitLabel"
+                Text="Varatut mökit aikavälillä"
+                TextColor="Black"
+                FontSize="Large" />
+                <Label
+                Text="Alue | Mökin nimi | Katuosoite | Postinumero"
+                TextColor="Black"
+                FontSize="18" />
                 <ListView
-                    x:Name="AlueListaLv"
-                    HorizontalOptions="Start"
-                    VerticalScrollBarVisibility="Never"
-                    WidthRequest="800">
+                x:Name="AlueListaLv"
+                HorizontalOptions="Start"
+                VerticalScrollBarVisibility="Never"
+                WidthRequest="800">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                HeightRequest="55"
+                                Stroke="#7ED957"
+                                StrokeShape="RoundRectangle 6,6,6,6"
+                                StrokeThickness="1">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                        Padding="5"
+                                        FontSize="15"
+                                        Text="{Binding alue}"
+                                        TextColor="Black"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="100" />
+                                        <BoxView
+                                        WidthRequest="1"
+                                        HeightRequest="20"
+                                        BackgroundColor="Black"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Padding="5"
+                                        FontSize="15"
+                                        Text="{Binding mokkinimi}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="100" />
+                                        <BoxView
+                                        WidthRequest="1"
+                                        HeightRequest="20"
+                                        BackgroundColor="Black"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Padding="5"
+                                        FontSize="15"
+                                        Text="{Binding katuosoite}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="150" />
+                                        <BoxView
+                                        WidthRequest="1"
+                                        HeightRequest="20"
+                                        BackgroundColor="Black"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Padding="5"
+                                        FontSize="15"
+                                        Text="{Binding postinro}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="150" />
+                                    </StackLayout>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label
+                x:Name="varatutPalvelutLabel"
+                Text="Varatut palvelut aikavälillä"
+                TextColor="Black"
+                FontSize="Large" />
+                <Label
+                Text="Palvelun nimi | Varausmäärä"
+                TextColor="Black"
+                FontSize="18" />
+                <ListView
+                x:Name="PalvelutListaLv"
+                HorizontalOptions="Start"
+                VerticalScrollBarVisibility="Never"
+                WidthRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -265,20 +353,24 @@
                                     StrokeThickness="1">
                                     <StackLayout Orientation="Horizontal">
                                         <Label
-                                            Padding="5"
-                                            FontSize="15"
-                                            Text="{Binding mokkinimi}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center"
-                                            WidthRequest="100" />
+                                        Padding="5"
+                                        FontSize="15"
+                                        Text="{Binding palvelun_nimi}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+                                        <BoxView
+                                        WidthRequest="1"
+                                        HeightRequest="20"
+                                        BackgroundColor="Black"
+                                        VerticalOptions="Center" />
                                         <Label
-                                            Padding="5"
-                                            FontSize="15"
-                                            Text="{Binding katuosoite}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center"
-                                            WidthRequest="100" />
-                                        <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
+                                        Padding="5"
+                                        FontSize="15"
+                                        Text="{Binding varaus_maara, StringFormat='{0} varaus(ta)'}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="100" />
                                     </StackLayout>
                                 </Border>
                             </ViewCell>
