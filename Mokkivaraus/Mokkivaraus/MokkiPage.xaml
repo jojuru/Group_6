@@ -237,51 +237,69 @@
         </ScrollView>
 
         <ScrollView Grid.Column="1" BackgroundColor="#f2f2f2">
-            <StackLayout>
+            <StackLayout
+                Margin="0,30"
+                Padding="70,0"
+                Spacing="5">
                 <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].mokki_id}"
-                    TextColor="Black" />
+                    FontAttributes="Bold"
+                    FontFamily="PoppinsRegular"
+                    FontSize="50"
+                    TextColor="Black">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{0}, {1}">
+                            <Binding Path="ClickedMokkiList[0].mokki_id" />
+                            <Binding Path="ClickedMokkiList[0].mokkinimi" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+                <Border
+                    HeightRequest="500"
+                    HorizontalOptions="StartAndExpand"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 15,15,15,15"
+                    VerticalOptions="StartAndExpand">
+                    <Image Aspect="Fill" Source="vuori.jpg" />
+                </Border>
+
                 <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].alue_id}"
-                    TextColor="Black" />
-                <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].postinro}"
-                    TextColor="Black" />
-                <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].mokkinimi}"
-                    TextColor="Black" />
-                <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].katuosoite}"
-                    TextColor="Black" />
-                <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].hinta}"
-                    TextColor="Black" />
-                <Label
-                    FontSize="Large"
+                    Margin="0,0,0,40"
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
                     Text="{Binding ClickedMokkiList[0].kuvaus}"
                     TextColor="Black" />
                 <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].henkilomaara}"
-                    TextColor="Black" />
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    TextColor="Black"
+                    VerticalOptions="StartAndExpand">
+                    <Label.Text>
+                        <MultiBinding StringFormat="{}{1}, {0} | {2}">
+                            <Binding Path="ClickedMokkiList[0].postinro" />
+                            <Binding Path="ClickedMokkiList[0].katuosoite" />
+                            <Binding Path="ClickedMokkiList[0].alue" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
                 <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].varustelu}"
-                    TextColor="Black" />
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="{Binding ClickedMokkiList[0].henkilomaara, StringFormat='Henkilöt: {0} henkilöä'}"
+                    TextColor="Black"
+                    VerticalOptions="StartAndExpand" />
+
                 <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].alue}"
-                    TextColor="Black" />
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="{Binding ClickedMokkiList[0].palvelut, StringFormat='Palvelut lähellä: {0}'}"
+                    TextColor="Black"
+                    VerticalOptions="StartAndExpand" />
                 <Label
-                    FontSize="Large"
-                    Text="{Binding ClickedMokkiList[0].palvelut}"
-                    TextColor="Black" />
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="{Binding ClickedMokkiList[0].varustelu, StringFormat='Varusteet: {0}'}"
+                    TextColor="Black"
+                    VerticalOptions="StartAndExpand" />
             </StackLayout>
         </ScrollView>
 
