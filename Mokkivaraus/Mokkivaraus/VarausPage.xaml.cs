@@ -135,7 +135,8 @@ public partial class VarausPage : TabbedPage
     }
     private void HaeButton_Clicked(object sender, EventArgs e)
     {
-        
+
+
     }
     private async void TutustuButton_Clicked(object sender, EventArgs e)
     {

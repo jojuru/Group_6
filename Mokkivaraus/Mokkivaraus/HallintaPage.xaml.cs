@@ -233,7 +233,6 @@ public partial class HallintaPage : TabbedPage
             DisplayAlert("Alert", error.Message, "OK");
         }
 
-
         SqlHaeAlueet();
     }
 }

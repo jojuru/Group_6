@@ -45,6 +45,7 @@
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
                         <DatePicker
+                            x:Name="saapuminenDate"
                             BackgroundColor="Transparent"
                             FontFamily="PoppinsRegular"
                             Scale="1.5"
@@ -56,8 +57,7 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
-                        <DatePicker
-                            BackgroundColor="Transparent"
+                        <DatePicker x:Name="lahtoDate" BackgroundColor="Transparent"
                             FontFamily="PoppinsRegular"
                             Scale="1.5"
                             TextColor="Black" />
@@ -75,6 +75,7 @@
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
                         <Entry
+                            x:Name="etunimi_Ent"
                             BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
@@ -86,8 +87,7 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
+                        <Entry x:Name="sukunimi_Ent" BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
                             Placeholder="Sukunimi"
@@ -103,8 +103,7 @@
                     StrokeShape="RoundRectangle 3,3,3,3"
                     StrokeThickness="3"
                     WidthRequest="432">
-                    <Entry
-                        BackgroundColor="#e5e9f0"
+                    <Entry x:Name="lahiosoite_Ent" BackgroundColor="#e5e9f0"
                         FontFamily="PoppinsRegular"
                         FontSize="20"
                         Placeholder="Lähiosoite"
@@ -118,8 +117,7 @@
                     StrokeShape="RoundRectangle 3,3,3,3"
                     StrokeThickness="3"
                     WidthRequest="200">
-                    <Entry
-                        BackgroundColor="#e5e9f0"
+                    <Entry x:Name="postinro_Ent" BackgroundColor="#e5e9f0"
                         FontFamily="PoppinsRegular"
                         FontSize="20"
                         Placeholder="Postinumero"
@@ -131,8 +129,7 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
+                        <Entry x:Name="puhelinnro_Ent" BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
                             Placeholder="Puhelinnumero"
@@ -143,8 +140,7 @@
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
+                        <Entry x:Name="email_Ent" BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
                             Placeholder="Sähköposti"
@@ -160,7 +156,7 @@
                     Text="Lasku"
                     TextColor="Black" />
                 <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
+                    <CheckBox Scale="1.5" x:Name="paperiBox"/>
                     <Label
                         FontFamily="PoppinsRegular"
                         FontSize="18"
@@ -169,6 +165,7 @@
                         VerticalOptions="Center" />
                     <CheckBox Scale="1.5" />
                     <Label
+                        x:Name="emailBox"
                         FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Sähköposti"
@@ -183,14 +180,14 @@
                     Text="Laskulle valitut palvelut"
                     TextColor="Black" />
                 <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
+                    <CheckBox Scale="1.5" x:Name="porosafariBox"/>
                     <Label
                         FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Porosafari"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Scale="1.5" />
+                    <CheckBox Scale="1.5" x:Name="koiravaljakkoBox"/>
                     <Label
                         FontFamily="PoppinsRegular"
                         FontSize="18"
@@ -199,7 +196,7 @@
                         VerticalOptions="Center" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Margin="0,10" Spacing="20">
-                    <CheckBox Scale="1.5" />
+                    <CheckBox Scale="1.5" x:Name="vesiskootteriBox"/>
                     <Label
                         FontFamily="PoppinsRegular"
                         FontSize="18"
@@ -208,14 +205,14 @@
                         VerticalOptions="Center" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="20">
-                    <CheckBox Scale="1.5" />
+                    <CheckBox Scale="1.5" x:Name="airsoftBox"/>
                     <Label
                         FontFamily="PoppinsRegular"
                         FontSize="18"
                         Text="Airsoftaus"
                         TextColor="Black"
                         VerticalOptions="Center" />
-                    <CheckBox Scale="1.5" />
+                    <CheckBox Scale="1.5" x:Name="hevosajeluBox"/>
                     <Label
                         FontFamily="PoppinsRegular"
                         FontSize="18"
@@ -228,6 +225,7 @@
                     Margin="0,15"
                     BackgroundColor="#b2f7ab"
                     BorderColor="Black"
+                    Clicked="VarausBtnClicked"
                     BorderWidth="2"
                     FontFamily="PoppinsRegular"
                     FontSize="25"
@@ -298,6 +296,12 @@
                     FontFamily="PoppinsRegular"
                     FontSize="26"
                     Text="{Binding ClickedMokkiList[0].varustelu, StringFormat='Varusteet: {0}'}"
+                    TextColor="Black"
+                    VerticalOptions="StartAndExpand" />
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="{Binding ClickedMokkiList[0].hinta, StringFormat='Hinta: {0}€'}"
                     TextColor="Black"
                     VerticalOptions="StartAndExpand" />
             </StackLayout>
