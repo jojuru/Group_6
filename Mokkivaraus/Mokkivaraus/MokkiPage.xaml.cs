@@ -24,28 +24,35 @@ public partial class MokkiPage : ContentPage
     }
     private async void VarausBtnClicked(object sender, EventArgs e)
     {
-        // 1.Ensin luodaan uusi asiakas tietokantaan
-        // Get user input values from the Entry elements
-        string etunimi = etunimi_Ent.Text;
-        string sukunimi = sukunimi_Ent.Text;
-        string postinro = postinro_Ent.Text;
-        string lahiosoite = lahiosoite_Ent.Text;
-        string email = email_Ent.Text;
-        string puhelinnro = puhelinnro_Ent.Text;
+        //ALKU
+        bool asiakasSuccess = false;
+        bool varausSuccess = false;
+        bool laskuSuccess = false;
 
-        // Check if any of the input fields are empty
-        if (string.IsNullOrEmpty(etunimi) || string.IsNullOrEmpty(sukunimi) || string.IsNullOrEmpty(postinro) || string.IsNullOrEmpty(lahiosoite) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(puhelinnro))
-        {
-            DisplayAlert("Virhe", "Tietoja puuttuu", "ok");
-            return; 
-        }
-
-        int asiakasId = 0;
-
-        string asiakas_sql = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro); SELECT LAST_INSERT_ID();";
-        // Insert the new customer into the database
         try
         {
+            // 1.Ensin luodaan uusi asiakas tietokantaan
+            // Get user input values from the Entry elements
+            string etunimi = etunimi_Ent.Text;
+            string sukunimi = sukunimi_Ent.Text;
+            string postinro = postinro_Ent.Text;
+            string lahiosoite = lahiosoite_Ent.Text;
+            string email = email_Ent.Text;
+            string puhelinnro = puhelinnro_Ent.Text;
+
+            // Check if any of the input fields are empty
+            if (string.IsNullOrEmpty(etunimi) || string.IsNullOrEmpty(sukunimi) || string.IsNullOrEmpty(postinro) || string.IsNullOrEmpty(lahiosoite) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(puhelinnro))
+            {
+                DisplayAlert("Virhe", "Tietoja puuttuu", "ok");
+                return;
+            }
+
+            int asiakasId = 0;
+
+            string asiakas_sql = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) " +
+                                "VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro); SELECT LAST_INSERT_ID();";
+
+            // Syötetään tiedot sql
             using (MySqlConnection connection = new MySqlConnection(connstring))
             {
                 connection.Open();
@@ -63,42 +70,22 @@ public partial class MokkiPage : ContentPage
                 }
             }
 
-            // Update the UI to reflect the new customer (optional)
-            // You can refresh the page or update specific UI elements
-            // You can also use the asiakasId value for further operations
-            Debug.WriteLine($"Asiakas_id: {asiakasId}");
+            Debug.WriteLine($"luotu asiakas_id: {asiakasId}");
+            asiakasSuccess = true;
 
-            DisplayAlert("Onnistui", "Varaus tehty!", "ok");
-            etunimi_Ent.Text = "";
-            sukunimi_Ent.Text = "";
-            postinro_Ent.Text = "";
-            lahiosoite_Ent.Text = "";
-            email_Ent.Text = "";
-            puhelinnro_Ent.Text = "";
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("SQL virhe", "tarkista postinro " + ex, "ok");
-        }
+            // 2. Sitten luodaan uusi varaus tietokantaan
+            DateTime alkupvm = saapuminenDate.Date;
+            DateTime loppupvm = lahtoDate.Date;
+            DateTime varattupvm = DateTime.Now.AddMinutes(-5);
 
-        // 2.Sitten luodaan uusi varaus 
-        DateTime alkupvm = saapuminenDate.Date;
-        DateTime loppupvm = lahtoDate.Date;
-        DateTime varattupvm = DateTime.Now.AddMinutes(-5);
+            int varausId = 0;
+            string varaus_sql = "INSERT INTO vn.varaus (asiakas_id, mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
+                                 "VALUES (@asiakas_id, @mokki_id, @varattu_pvm, @vahvistus_pvm, @varattu_alkupvm, @varattu_loppupvm); SELECT LAST_INSERT_ID();";
 
-
-
-        int varausId = 0;
-        string varaus_sql = "INSERT INTO vn.varaus (asiakas_id, mokki_id, varattu_pvm, vahvistus_pvm, varattu_alkupvm, varattu_loppupvm) " +
-            "VALUES (@asiakas_id, @mokki_id, @varattu_pvm, @vahvistus_pvm, @varattu_alkupvm, @varattu_loppupvm); SELECT LAST_INSERT_ID();";
-
-        try
-        {
             using (MySqlConnection connection = new MySqlConnection(connstring))
             {
                 connection.Open();
 
-                // Create a MySqlCommand object
                 using (MySqlCommand cmd = new MySqlCommand(varaus_sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@asiakas_id", asiakasId);
@@ -111,13 +98,51 @@ public partial class MokkiPage : ContentPage
                     varausId = Convert.ToInt32(await cmd.ExecuteScalarAsync());
                 }
             }
-            Debug.WriteLine($"Varaus onnuistui, id: " + varausId);
+            Debug.WriteLine("Varaus onnuistui, id: " + varausId);
+            varausSuccess = true;
+
+            // 3. Luodaan lasku tietokantaan
+            string lasku_sql = "INSERT INTO vn.lasku (varaus_id, summa, alv, maksettu) " +
+                                "VALUES (@varaus_id, @summa, @alv, @maksettu)";
+
+
+            using (MySqlConnection connection = new MySqlConnection(connstring))
+            {
+                connection.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand(lasku_sql, connection))
+                {
+                    cmd.Parameters.AddWithValue("@varaus_id", varausId);
+                    cmd.Parameters.AddWithValue("@summa", 804.00);
+                    cmd.Parameters.AddWithValue("@alv", 155.61);
+                    cmd.Parameters.AddWithValue("@maksettu", 1);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            Debug.WriteLine($"Lasku onnuistui");
+
+            laskuSuccess = true;
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex.Message);
+            // Handle exceptions for each operation separately
+            Debug.WriteLine("Error: " + ex.Message);
+            DisplayAlert("SQL virhe", ex.Message, "OK");
         }
 
+        // Display "Onnistui" only if all operations were successful
+        if (asiakasSuccess && varausSuccess && laskuSuccess)
+        {
+            DisplayAlert("Onnistui", "Varaus tehty!", "OK");
+            // Clear input fields 
+            etunimi_Ent.Text = "";
+            sukunimi_Ent.Text = "";
+            postinro_Ent.Text = "";
+            lahiosoite_Ent.Text = "";
+            email_Ent.Text = "";
+            puhelinnro_Ent.Text = "";
+        }
     }
 
 }
