@@ -91,6 +91,7 @@ public partial class HallintaPage : TabbedPage
     //hakee tietokannastta Mokit
     private void SqlHaeMokit()
     {
+        MokkiCollection.Clear();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
         con.Open();
@@ -259,27 +260,98 @@ public partial class HallintaPage : TabbedPage
 
         SqlHaeAsiakkaat();
     }
+
+    //Uude Mökin luonti
+    private void MokkiLuoBtn_Clicked(object sender, EventArgs e)
+    {
+        //checkboksit
+        List<string> selectedItems = new List<string>();
+        if (VarusteluTvCb.IsChecked)
+            selectedItems.Add("tv");
+        if (VarusteluAstianpesukoneCb.IsChecked)
+            selectedItems.Add("astianpesukone");
+        if (VarusteluPyykinpesukoneCb.IsChecked)
+            selectedItems.Add("pyykinpesukone");
+        if (VarusteluSaunaCb.IsChecked)
+            selectedItems.Add("sauna");
+        if (VarusteluTakkaCb.IsChecked)
+            selectedItems.Add("takka");
+        string VARUSTELU = string.Join(",", selectedItems);
+
+        //muuttaa alueen nimen Idksi tietokantaan.
+        String ALUE_ID = null;
+        foreach (var item in AlueCollection)
+        {
+            if (item.nimi == MokkiAlueEnt.Text)
+            {
+                ALUE_ID = item.alue_id;
+            }
+        }
+
+        if (ALUE_ID == null)
+        {
+            DisplayAlert("Alert", "Aluetta ei löydetty tietokannasta", "OK");
+        }
+        else
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = connstring;
+            con.Open();
+            string sql = $"INSERT INTO mokki (mokkinimi, alue_id, " +
+                $"katuosoite, postinro, hinta, henkilomaara, kuvaus, varustelu) " +
+                $"VALUES ('{MokkiMokkinimiEnt.Text}',{ALUE_ID}, '{MokkiKatuosoiteEnt.Text}', " +
+                $"'{MokkiPostinroEnt.Text}', {MokkiHintaEnt.Text}, {MokkiHenkilomaaraEnt.Text}, " +
+                $"'{MokkiKuvausEnt.Text}', '{VARUSTELU}')";
+            MySqlCommand insertCmd = new MySqlCommand(sql, con);
+            try
+            {
+                insertCmd.ExecuteNonQuery();
+            }
+            catch (Exception error)
+            {
+                DisplayAlert("Alert", error.Message, "OK");
+            }
+
+            SqlHaeMokit();
+        }
+    }
     //Uude palvelun luonti
     private void PalveluLuoBtn_Clicked(object sender, EventArgs e)
     {
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = connstring;
-        con.Open();
-        string sql = $"INSERT INTO palvelu (palvelu_id, nimi, alue_id, hinta, alv, kuvaus) " +
-            $"VALUES ({PalveluIdEnt.Text},'{PalveluNimiEnt.Text}', {PalveluAlueEnt.Text}, " +
-            $"{PalveluHintaEnt.Text}, {PalveluAlvEnt.Text}, " +
-            $"'{PalveluKuvausEnt.Text}')";
-        MySqlCommand insertCmd = new MySqlCommand(sql, con);
-        try
+        //muuttaa alueen nimen Idksi tietokantaan.
+        String ALUE_ID = null;
+        foreach (var item in AlueCollection)
         {
-            insertCmd.ExecuteNonQuery();
-        }
-        catch (Exception error)
-        {
-            DisplayAlert("Alert", error.Message, "OK");
+            if(item.nimi == PalveluAlueEnt.Text)
+            {
+                ALUE_ID = item.alue_id;
+            }
         }
 
-        SqlHaePalvelut();
+        if ( ALUE_ID == null)
+        {
+            DisplayAlert("Alert", "Aluetta ei löydetty tietokannasta", "OK");
+        }
+        else { 
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = connstring;
+            con.Open();
+            string sql = $"INSERT INTO palvelu (palvelu_id, nimi, alue_id, hinta, alv, kuvaus) " +
+                $"VALUES ({PalveluIdEnt.Text},'{PalveluNimiEnt.Text}', {ALUE_ID}, " +
+                $"{PalveluHintaEnt.Text}, {PalveluAlvEnt.Text}, " +
+                $"'{PalveluKuvausEnt.Text}')";
+            MySqlCommand insertCmd = new MySqlCommand(sql, con);
+            try
+            {
+                insertCmd.ExecuteNonQuery();
+            }
+            catch (Exception error)
+            {
+                DisplayAlert("Alert", error.Message, "OK");
+            }
+
+            SqlHaePalvelut();
+        }
     }
 
 }

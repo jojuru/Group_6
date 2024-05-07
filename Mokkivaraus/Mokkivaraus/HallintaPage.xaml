@@ -272,31 +272,31 @@
                         FontSize="14"
                         Text="TV"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox x:Name="VarusteluTvCb"/>
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Astianpesukone"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox x:Name="VarusteluAstianpesukoneCb"/>
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Pyykinpesukone"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox x:Name="VarusteluPyykinpesukoneCb"/>
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Sauna"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox x:Name="VarusteluSaunaCb"/>
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Takka"
                         VerticalOptions="Center" />
-                    <CheckBox />
+                    <CheckBox x:Name="VarusteluTakkaCb"/>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Spacing="12">
@@ -311,6 +311,8 @@
                         TextColor="Black"
                         WidthRequest="160" />
                     <Button
+                        x:Name="MokkiLuoBtn"
+                        Clicked="MokkiLuoBtn_Clicked"
                         BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
