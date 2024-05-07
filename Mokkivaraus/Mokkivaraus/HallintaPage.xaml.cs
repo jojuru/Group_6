@@ -122,6 +122,7 @@ public partial class HallintaPage : TabbedPage
     //hakee tietokannastta Palvelut
     private void SqlHaePalvelut()
     {
+        PalveluCollection.Clear();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
         con.Open();
@@ -236,7 +237,7 @@ public partial class HallintaPage : TabbedPage
 
         SqlHaeAlueet();
     }
-
+    //Uuden asiakkuuden luonti
     private void AsiakkuusLuoBtn_Clicked(object sender, EventArgs e)
     {
         MySqlConnection con = new MySqlConnection();
@@ -258,4 +259,27 @@ public partial class HallintaPage : TabbedPage
 
         SqlHaeAsiakkaat();
     }
+    //Uude palvelun luonti
+    private void PalveluLuoBtn_Clicked(object sender, EventArgs e)
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+        string sql = $"INSERT INTO palvelu (palvelu_id, nimi, alue_id, hinta, alv, kuvaus) " +
+            $"VALUES ({PalveluIdEnt.Text},'{PalveluNimiEnt.Text}', {PalveluAlueEnt.Text}, " +
+            $"{PalveluHintaEnt.Text}, {PalveluAlvEnt.Text}, " +
+            $"'{PalveluKuvausEnt.Text}')";
+        MySqlCommand insertCmd = new MySqlCommand(sql, con);
+        try
+        {
+            insertCmd.ExecuteNonQuery();
+        }
+        catch (Exception error)
+        {
+            DisplayAlert("Alert", error.Message, "OK");
+        }
+
+        SqlHaePalvelut();
+    }
+
 }
