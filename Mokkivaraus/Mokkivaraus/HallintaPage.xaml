@@ -17,29 +17,35 @@
                 <Label FontSize="Large" Text="Hae/luo asiakkuus" />
 
                 <HorizontalStackLayout Spacing="13">
-                    <Entry Placeholder="Etunimi" WidthRequest="200" />
-                    <Entry Placeholder="Sukunimi" WidthRequest="200" />
+                    <Entry x:Name="AsiakkuusEtunimiEnt"  Placeholder="Etunimi" WidthRequest="200" />
+                    <Entry x:Name="AsiakkuusSukunimiEnt" Placeholder="Sukunimi" WidthRequest="200" />
                 </HorizontalStackLayout>
                 <Entry
+                    x:Name="AsiakkuusLahiosoiteEnt"
                     HorizontalOptions="Start"
                     Placeholder="Lähiosoite"
                     WidthRequest="413" />
                 <Entry
+                    x:Name="AsiakkuusPostinroEnt"
                     HorizontalOptions="Start"
                     Placeholder="Postinumero"
                     WidthRequest="200" />
                 <HorizontalStackLayout Spacing="13">
                     <Entry
+                        x:Name="AsiakkuusPuhelinnroEnt"
                         HorizontalOptions="Start"
                         Placeholder="Puhelinnumero"
                         WidthRequest="200" />
                     <Entry
+                        x:Name="AsiakkuusEmailEnt"
                         HorizontalOptions="Start"
                         Placeholder="Sähköposti"
                         WidthRequest="200" />
                 </HorizontalStackLayout>
 
                 <Button
+                    x:Name="AsiakkuusLuoBtn"
+                    Clicked="AsiakkuusLuoBtn_Clicked"
                     BackgroundColor="#DEE1E6"
                     BorderColor="Black"
                     BorderWidth="2"

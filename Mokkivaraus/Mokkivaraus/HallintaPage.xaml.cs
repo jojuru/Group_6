@@ -65,6 +65,7 @@ public partial class HallintaPage : TabbedPage
     //hakee tietokannastta Asiakkaat
     private void SqlHaeAsiakkaat()
 	{
+        AsiakasCollection.Clear();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
         con.Open();
@@ -234,5 +235,27 @@ public partial class HallintaPage : TabbedPage
         }
 
         SqlHaeAlueet();
+    }
+
+    private void AsiakkuusLuoBtn_Clicked(object sender, EventArgs e)
+    {
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+        string sql = $"INSERT INTO asiakas (etunimi, sukunimi, lahiosoite, postinro, email, puhelinnro) " +
+            $"VALUES ('{AsiakkuusEtunimiEnt.Text}', '{AsiakkuusSukunimiEnt.Text}', " +
+            $"'{AsiakkuusLahiosoiteEnt.Text}', '{AsiakkuusPostinroEnt.Text}', " +
+            $"'{AsiakkuusEmailEnt.Text}', '{AsiakkuusPuhelinnroEnt.Text}')";
+        MySqlCommand insertCmd = new MySqlCommand(sql, con);
+        try
+        {
+            insertCmd.ExecuteNonQuery();
+        }
+        catch (Exception error)
+        {
+            DisplayAlert("Alert", error.Message, "OK");
+        }
+
+        SqlHaeAsiakkaat();
     }
 }
