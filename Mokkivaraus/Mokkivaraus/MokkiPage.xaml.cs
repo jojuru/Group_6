@@ -1,5 +1,6 @@
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Mokkivaraus;
@@ -22,12 +23,30 @@ public partial class MokkiPage : ContentPage
         }
 
     }
+    private void OnDateChanged(object sender, PropertyChangedEventArgs e)
+    {
+        //muokataan hintaLabel teksti jos datepickeriss‰ tehd‰‰n muutoksia
+        if (e.PropertyName == "Date")
+        {
+            DateTime alkupvm = saapuminenDate.Date;
+            DateTime loppupvm = lahtoDate.Date;
+            int daysDifference = (loppupvm - alkupvm).Days;
+
+            string hintaString = ClickedMokkiList[0].hinta;
+            double hintaDouble = double.Parse(hintaString);
+            double mokkihinta = hintaDouble * daysDifference;
+
+            mokkihinta = Math.Round(mokkihinta, 2);
+            hintaLabel.Text = $"T‰m‰nhetkinen hinta: {mokkihinta.ToString()}Ä";
+        }
+    }
     private async void VarausBtnClicked(object sender, EventArgs e)
     {
         //ALKU
         bool asiakasSuccess = false;
         bool varausSuccess = false;
         bool laskuSuccess = false;
+        bool varPalvelutSuccess = false;
 
         try
         {
@@ -41,7 +60,8 @@ public partial class MokkiPage : ContentPage
             string puhelinnro = puhelinnro_Ent.Text;
 
             // Check if any of the input fields are empty
-            if (string.IsNullOrEmpty(etunimi) || string.IsNullOrEmpty(sukunimi) || string.IsNullOrEmpty(postinro) || string.IsNullOrEmpty(lahiosoite) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(puhelinnro))
+            if (string.IsNullOrEmpty(etunimi) || string.IsNullOrEmpty(sukunimi) || string.IsNullOrEmpty(postinro) 
+                || string.IsNullOrEmpty(lahiosoite) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(puhelinnro))
             {
                 DisplayAlert("Virhe", "Tietoja puuttuu", "ok");
                 return;
@@ -101,9 +121,33 @@ public partial class MokkiPage : ContentPage
             Debug.WriteLine("Varaus onnuistui, id: " + varausId);
             varausSuccess = true;
 
-            // 3. Luodaan lasku tietokantaan
-            string lasku_sql = "INSERT INTO vn.lasku (varaus_id, summa, alv, maksettu) " +
-                                "VALUES (@varaus_id, @summa, @alv, @maksettu)";
+            // 3. Luodaan lasku 
+            // lasketaan hinta valitulle p‰iville
+            int daysDifference = (loppupvm - alkupvm).Days;
+
+            string hintaString = ClickedMokkiList[0].hinta;
+            double hintaDouble = double.Parse(hintaString);
+            double mokkihinta = hintaDouble * daysDifference;
+
+            double alvhinta = mokkihinta * 0.1935;
+
+            mokkihinta = Math.Round(mokkihinta, 2);
+            alvhinta = Math.Round(alvhinta, 2);
+
+            Debug.Write(hintaString + " " + mokkihinta + " " + alvhinta);
+            // Check which radio button is selected
+            int laskuntyyppi = 0;
+            if (paperiBox.IsChecked)
+            {
+                laskuntyyppi = 0;
+            }
+            else if (emailBox.IsChecked)
+            {
+                laskuntyyppi = 1;
+            }
+
+            string lasku_sql = "INSERT INTO vn.lasku (varaus_id, summa, alv, maksettu, laskun_tyyppi) " +
+                                "VALUES (@varaus_id, @summa, @alv, @maksettu, @laskun_tyyppi)";
 
 
             using (MySqlConnection connection = new MySqlConnection(connstring))
@@ -113,9 +157,10 @@ public partial class MokkiPage : ContentPage
                 using (MySqlCommand cmd = new MySqlCommand(lasku_sql, connection))
                 {
                     cmd.Parameters.AddWithValue("@varaus_id", varausId);
-                    cmd.Parameters.AddWithValue("@summa", 804.00);
-                    cmd.Parameters.AddWithValue("@alv", 155.61);
-                    cmd.Parameters.AddWithValue("@maksettu", 1);
+                    cmd.Parameters.AddWithValue("@summa", mokkihinta);
+                    cmd.Parameters.AddWithValue("@alv", alvhinta);
+                    cmd.Parameters.AddWithValue("@maksettu", 0);
+                    cmd.Parameters.AddWithValue("@laskun_tyyppi", laskuntyyppi);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -123,6 +168,41 @@ public partial class MokkiPage : ContentPage
             Debug.WriteLine($"Lasku onnuistui");
 
             laskuSuccess = true;
+            //4. Luodaan varauksen_palvelut tietokantaan KESKEN!!
+            List<string> selectedServices = new List<string>();
+
+            if (porosafariBox.IsChecked)
+            {
+                selectedServices.Add("Porosafari");
+            }
+
+            if (koiravaljakkoBox.IsChecked)
+            {
+                selectedServices.Add("Koiravaljakkoajelu");
+            }
+
+            if (vesiskootteriBox.IsChecked)
+            {
+                selectedServices.Add("Vesiskootteri");
+            }
+
+            if (airsoftBox.IsChecked)
+            {
+                selectedServices.Add("Airsoftaus");
+            }
+
+            if (hevosajeluBox.IsChecked)
+            {
+                selectedServices.Add("Hevosajelu");
+            }
+            foreach (string service in selectedServices)
+            {
+                Debug.WriteLine(service);
+            }
+
+
+
+            varPalvelutSuccess = true;
         }
         catch (Exception ex)
         {
@@ -132,7 +212,7 @@ public partial class MokkiPage : ContentPage
         }
 
         // Display "Onnistui" only if all operations were successful
-        if (asiakasSuccess && varausSuccess && laskuSuccess)
+        if (asiakasSuccess && varausSuccess && laskuSuccess && varPalvelutSuccess)
         {
             DisplayAlert("Onnistui", "Varaus tehty!", "OK");
             // Clear input fields 
