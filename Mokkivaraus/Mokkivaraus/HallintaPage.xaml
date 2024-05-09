@@ -132,6 +132,7 @@
                 Grid.Column="0"
                 Padding="15"
                 Spacing="13">
+                <Label x:Name="AlueLbl" FontSize="Large" Text="Hae/luo alue"/>
                 <Entry
                     x:Name="AlueNimiEnt"
                     HorizontalOptions="Start"
@@ -159,6 +160,30 @@
                         TextColor="Black"
                         WidthRequest="160" />
                 </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="13">
+                        <Button
+                        x:Name="AlueHyvaksyMuutosBtn"
+                        Clicked="AlueHyvaksyMuutosBtn_Clicked"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        IsVisible="false"
+                        HorizontalOptions="Start"
+                        Text="Muokkaa"
+                        TextColor="Black"
+                        WidthRequest="160" />
+                        <Button
+                        x:Name="AlueHylkaaMuutosBtn"
+                        BackgroundColor="#C61E21"
+                        Clicked="AlueHylkaaMuutosBtn_Clicked"
+                        BorderColor="Black"
+                        IsVisible="false"
+                        BorderWidth="2"
+                        HorizontalOptions="Start"
+                        Text="Hylkää"
+                        TextColor="Black"
+                        WidthRequest="160" />
+                </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
@@ -168,7 +193,8 @@
                     x:Name="AlueListaLv"
                     HorizontalOptions="Start"
                     VerticalScrollBarVisibility="Never"
-                    WidthRequest="800">
+                    WidthRequest="800"
+                    ItemSelected="AlueOnItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -191,14 +217,6 @@
                                             VerticalOptions="Center"
                                             WidthRequest="100" />
                                         <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
-                                        <Button
-                                            Padding="5"
-                                            BackgroundColor="#C61E21"
-                                            FontSize="15"
-                                            HorizontalOptions="End"
-                                            Text="Muokkaa"
-                                            TextColor="White"
-                                            VerticalOptions="Center" />
                                     </StackLayout>
                                 </Border>
                             </ViewCell>

@@ -940,6 +940,30 @@
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki1.scale-100.jpg">
+      <PackagePath>mokki1.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki2.scale-100.jpg">
+      <PackagePath>mokki2.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki3.scale-100.jpg">
+      <PackagePath>mokki3.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki4.scale-100.jpg">
+      <PackagePath>mokki4.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki5.scale-100.jpg">
+      <PackagePath>mokki5.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki6.scale-100.jpg">
+      <PackagePath>mokki6.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki7.scale-100.jpg">
+      <PackagePath>mokki7.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\mokki8.scale-100.jpg">
+      <PackagePath>mokki8.scale-100.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\koodaus\ohjelmistotuotanto_1\projektiv3\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\resizetizer\r\taustakuva_etusivu.scale-100.png">
       <PackagePath>taustakuva_etusivu.scale-100.png</PackagePath>
     </AppxPackagedFile>

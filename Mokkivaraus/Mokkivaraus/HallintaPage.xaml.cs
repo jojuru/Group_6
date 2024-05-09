@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 
@@ -354,4 +355,53 @@ public partial class HallintaPage : TabbedPage
         }
     }
 
+    //Muokaus Napit ja lista funktiot ----------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Laittaa alue sivun muokkaus tilaan
+    private void AlueOnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+        Alue alue = (Alue)e.SelectedItem;
+
+        AlueLuoBtn.IsVisible = false;
+        AlueHaeBtn.IsVisible = false;
+        AlueHyvaksyMuutosBtn.IsVisible = true;
+        AlueHylkaaMuutosBtn.IsVisible = true;
+
+        AlueNimiEnt.Text = alue.nimi;
+        AlueLbl.Text = "Muokkaa Alue";
+        AlueLbl.TextColor = Colors.Red;
+    }
+
+    private async void AlueHyvaksyMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti tallentaa muutokset", "Kyll‰", "Ei");
+        if (answer)
+        {
+            AluePageReset();
+            SqlHaeAlueet();
+        }
+        else
+        {
+
+        }
+    }
+
+    private void AlueHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        AluePageReset();
+    }
+
+    //muuttaa alue sivun perus n‰kym‰‰n
+    private void AluePageReset()
+    {
+        AlueLuoBtn.IsVisible = true;
+        AlueHaeBtn.IsVisible = true;
+        AlueHyvaksyMuutosBtn.IsVisible = false;
+        AlueHylkaaMuutosBtn.IsVisible = false;
+        AlueNimiEnt.Text = "";
+        AlueLbl.Text = "Hae/luo alue";
+        AlueLbl.TextColor = Colors.Black;
+    }
 }

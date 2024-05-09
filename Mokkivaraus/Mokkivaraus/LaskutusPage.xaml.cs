@@ -345,5 +345,66 @@ public partial class LaskutusPage : TabbedPage
                 con.Close();
             }
         }
+
+    }
+
+    //Muokaus Napit ja lista funktiot ----------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Laittaa laskutus sivun muokkaus tilaan 
+    private void LaskutusOnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+        Laskutus lasku = (Laskutus)e.SelectedItem;
+
+        LaskutusHaeBtn.IsVisible = false;
+        LaskutusHyvaksyMuutosBtn.IsVisible = true;
+        LaskutusHylkaaMuutosBtn.IsVisible = true;
+
+        varausNumeroEntry.Text = lasku.varaus_id;
+        puhelinNumeroEntry.Text = lasku.puhelinnro;
+        //sahkopostiEntry.Text (Tähän valitun laskun sähköposti Entryyn ei muuta)
+        etunimiEntry.Text = lasku.etunimi;
+        sukunimiEntry.Text = lasku.sukunimi;
+
+        LaskuLbl.Text = "Muokkaa Alue";
+        LaskuLbl.TextColor = Colors.Red;
+    }
+    //Muokkaus hyväksytty
+    private async void LaskutusHyvaksyMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti tallentaa muutokset", "Kyllä", "Ei");
+        if (answer)
+        {
+            //Tähän Sql muokkaus hommat !!!!!
+
+
+            LaskutusPageReset();
+            HaeLaskutAsiakkaalle();
+        }
+
+    }
+    //muokkaus hylätty resetoi sivun alku näkymään
+    private void LaskutusHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        LaskutusPageReset();
+    }
+
+    //muuttaa laskutus sivun perus näkymään muokkauksen jälkeen (Ei tartte muokata)
+    private void LaskutusPageReset()
+    {
+        LaskutusHaeBtn.IsVisible = true;
+        LaskutusHyvaksyMuutosBtn.IsVisible = false;
+        LaskutusHylkaaMuutosBtn.IsVisible = false;
+
+        varausNumeroEntry.Text = "";
+        puhelinNumeroEntry.Text = "";
+        sahkopostiEntry.Text = "";
+        etunimiEntry.Text = "";
+        sukunimiEntry.Text = "";
+
+
+        LaskuLbl.Text = "Hae laskuja";
+        LaskuLbl.TextColor = Colors.Black;
     }
 }

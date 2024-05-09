@@ -18,6 +18,7 @@
                 Padding="15"
                 Spacing="13">
                 <Label
+                    x:Name="LaskuLbl"
                     FontSize="Large"
                     Text="Hae laskuja"
                     TextColor="Black" />
@@ -81,6 +82,7 @@
                 </HorizontalStackLayout>
 
                 <Button
+                    x:Name="LaskutusHaeBtn"
                     BackgroundColor="#DEE1E6"
                     BorderColor="Black"
                     BorderWidth="2"
@@ -89,6 +91,31 @@
                     Clicked="LaskuHaeBtn_Clicked"
                     TextColor="Black"
                     WidthRequest="160" />
+                <!--  Muokkaus  -->
+                <HorizontalStackLayout Spacing="13">
+                    <Button
+                    x:Name="LaskutusHyvaksyMuutosBtn"
+                    Clicked="LaskutusHyvaksyMuutosBtn_Clicked"
+                    BackgroundColor="#DEE1E6"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    IsVisible="false"
+                    HorizontalOptions="Start"
+                    Text="Muokkaa"
+                    TextColor="Black"
+                    WidthRequest="160" />
+                    <Button
+                    x:Name="LaskutusHylkaaMuutosBtn"
+                    BackgroundColor="#C61E21"
+                    Clicked="LaskutusHylkaaMuutosBtn_Clicked"
+                    BorderColor="Black"
+                    IsVisible="false"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Hylkää"
+                    TextColor="Black"
+                    WidthRequest="160" />
+                </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
@@ -102,7 +129,8 @@
                     x:Name="LaskuListaLv"
                     HorizontalOptions="Start"
                     VerticalScrollBarVisibility="Never"
-                    WidthRequest="800">
+                    WidthRequest="800"
+                    ItemSelected="LaskutusOnItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
