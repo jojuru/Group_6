@@ -13,19 +13,22 @@ namespace Mokkivaraus
         public string summa { get; set; }
         public string alv { get; set; }
         public string maksettu { get; set; }
+        public string laskun_tyyppi { get; set; }
         public string etunimi { get; set; }
         public string sukunimi { get; set; }
         public string puhelinnro { get; set; }
 
+
         public Laskutus() { }
 
-        public Laskutus(string lasku_id, string varaus_id, string summa, string alv, string alue, string maksettu, string puhelinnro)
+        public Laskutus(string lasku_id, string varaus_id, string summa, string alv, string alue, string maksettu, string laskun_tyyppi, string puhelinnro)
         {
             this.lasku_id = lasku_id;
             this.varaus_id = varaus_id;
             this.summa = summa;
             this.alv = alv;
             this.maksettu = maksettu;
+            this.laskun_tyyppi = laskun_tyyppi;
             this.etunimi = etunimi;
             this.sukunimi = sukunimi;
             this.puhelinnro = puhelinnro;

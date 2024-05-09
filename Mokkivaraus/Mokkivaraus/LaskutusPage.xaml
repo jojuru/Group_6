@@ -33,17 +33,9 @@
                                WidthRequest="200" 
                                TextColor="Black"/>
                     </Border>
-                    <Border
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="2">
-                        <Entry x:Name="puhelinNumeroEntry"
-                               Placeholder="Puhelinnumero" 
-                               WidthRequest="200" 
-                               TextColor="Black"/>
-                    </Border>
+
                 </HorizontalStackLayout>
-                <HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="13">
                     <Border
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
@@ -54,6 +46,15 @@
                             Placeholder="Sähköposti"
                             WidthRequest="200" 
                             TextColor="Black"/>
+                    </Border>
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="2">
+                        <Entry x:Name="puhelinNumeroEntry"
+                               Placeholder="Puhelinnumero" 
+                               WidthRequest="200" 
+                               TextColor="Black"/>
                     </Border>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="13">
@@ -80,6 +81,50 @@
                             TextColor="Black"/>
                     </Border>
                 </HorizontalStackLayout>
+                <HorizontalStackLayout x:Name="summaJaAlvHorizontal"  Spacing="13">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Summa (€)" TextColor="Black"></Label>
+                        <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="2">
+                            <Entry
+                                x:Name="summaEntry"
+                                HorizontalOptions="Start"
+                                Placeholder="Summa"
+                                WidthRequest="200" 
+                                TextColor="Black"/>
+                        </Border>
+                        <Label Text="ALV (24%)" TextColor="Black"></Label>
+                        <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="2">
+                            <Entry
+                                x:Name="alvEntry"
+                                HorizontalOptions="Start"
+                                Placeholder="ALV"
+                                WidthRequest="200" 
+                                TextColor="Black"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout x:Name="laskuMaksettuHorizontal" Spacing="13">
+                    <Label Text="Maksettu:" 
+                           TextColor="Black"/>
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton x:Name="maksettuKyllaRadioButton" Content="Kyllä" GroupName="MaksettuGroup" TextColor="Black"/>
+                        <RadioButton x:Name="maksettuEiRadioButton" Content="Ei" GroupName="MaksettuGroup" TextColor="Black"/>
+                    </StackLayout>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout x:Name="laskuTyyppiHorizontal">
+                    <Label Text="Laskun tyyppi:" 
+                           TextColor="Black"/>
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton x:Name="tyyppiSahkoRadioButton" Content="Sähkö" GroupName="TyyppiGroup" TextColor="Black"/>
+                        <RadioButton x:Name="tyyppiPaperiRadioButton" Content="Paperi" GroupName="TyyppiGroup" TextColor="Black"/>
+                    </StackLayout>
+                </HorizontalStackLayout>
 
                 <Button
                     x:Name="LaskutusHaeBtn"
@@ -101,7 +146,7 @@
                     BorderWidth="2"
                     IsVisible="false"
                     HorizontalOptions="Start"
-                    Text="Muokkaa"
+                    Text="Tallenna muutos"
                     TextColor="Black"
                     WidthRequest="160" />
                     <Button
@@ -176,6 +221,12 @@
                                             Text="{Binding maksettu, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding laskun_tyyppi, StringFormat='{0} |'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
                                         <!--
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding asiakas_id}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding etunimi}" />
@@ -244,7 +295,7 @@
                             <!--
 
                             -->
-                                
+
                         </Picker>
                     </Border>
                 </HorizontalStackLayout>

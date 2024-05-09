@@ -4,8 +4,8 @@ using System.Text;
 namespace Mokkivaraus;
 
 public partial class LaskutusPage : TabbedPage
-{	
-	public ObservableCollection<Laskutus> LaskutusCollection { get; set; }
+{
+    public ObservableCollection<Laskutus> LaskutusCollection { get; set; }
     public ObservableCollection<Alue> Alueet { get; set; }
     public ObservableCollection<Mokki> Mokit { get; set; }
     public ObservableCollection<PalveluRaportti> Palvelut { get; set; }
@@ -13,8 +13,8 @@ public partial class LaskutusPage : TabbedPage
 
     static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
     public LaskutusPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         LaskutusCollection = new ObservableCollection<Laskutus>();
         LaskuListaLv.BindingContext = LaskutusCollection;
@@ -25,10 +25,15 @@ public partial class LaskutusPage : TabbedPage
 
         HaeLaskutAsiakkaalle();
         LataaAlueet();
-	}
+        summaJaAlvHorizontal.IsVisible = false;
+        laskuMaksettuHorizontal.IsVisible = false;
+        laskuTyyppiHorizontal.IsVisible = false;
 
-	private void SqlHaeLaskut()
-	{
+        summaEntry.TextChanged += SummaEntry_TextChanged;
+    }
+
+    private void SqlHaeLaskut()
+    {
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
         con.Open();
@@ -57,7 +62,7 @@ public partial class LaskutusPage : TabbedPage
         var sahkoposti = sahkopostiEntry.Text;
         var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id");
+        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu, l.laskun_tyyppi FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -70,7 +75,6 @@ public partial class LaskutusPage : TabbedPage
             conditions.Add("a.email LIKE @email");
         if (!string.IsNullOrEmpty(puhelinnro))
             conditions.Add("a.puhelinnro LIKE @puhelinnro");
-
 
         if (conditions.Count > 0)
         {
@@ -92,7 +96,6 @@ public partial class LaskutusPage : TabbedPage
         if (!string.IsNullOrEmpty(puhelinnro))
             cmd.Parameters.AddWithValue("@puhelinnro", $"%{puhelinnro}%");
 
-
         var reader = cmd.ExecuteReader();
         LaskutusCollection.Clear();
 
@@ -107,13 +110,16 @@ public partial class LaskutusPage : TabbedPage
                 summa = reader["summa"].ToString(),
                 alv = reader["alv"].ToString(),
                 maksettu = reader["maksettu"].ToString(),
+                laskun_tyyppi = reader["laskun_tyyppi"].ToString(),
                 puhelinnro = reader["puhelinnro"].ToString()
             };
             LaskutusCollection.Add(laskutus);
         }
+
         LaskuListaLv.ItemsSource = LaskutusCollection;
         con.Close();
     }
+
 
     // Haetaan laskut, jotka t‰ytt‰‰ hakuehdot, tyhj‰t kent‰t hakee kaikki laskut
     private void LaskuHaeBtn_Clicked(object sender, EventArgs e)
@@ -124,7 +130,7 @@ public partial class LaskutusPage : TabbedPage
         var sahkoposti = sahkopostiEntry.Text;
         var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id ");
+        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu, l.laskun_tyyppi FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id ");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -180,7 +186,7 @@ public partial class LaskutusPage : TabbedPage
         con.Close();
     }
 
-    // T‰st‰ alkaa raportointipuolen toiminnat
+    // -------------------------- T‰st‰ alkaa raportointipuolen toiminnat -----------------------------------
 
     // ladataan alueiden nimet raportoinnin aluevalintalistaan
     private void LataaAlueet()
@@ -360,16 +366,42 @@ public partial class LaskutusPage : TabbedPage
         LaskutusHaeBtn.IsVisible = false;
         LaskutusHyvaksyMuutosBtn.IsVisible = true;
         LaskutusHylkaaMuutosBtn.IsVisible = true;
+        summaJaAlvHorizontal.IsVisible = true;
+        laskuMaksettuHorizontal.IsVisible = true;
+        laskuTyyppiHorizontal.IsVisible = true;
 
         varausNumeroEntry.Text = lasku.varaus_id;
         puhelinNumeroEntry.Text = lasku.puhelinnro;
         //sahkopostiEntry.Text (T‰h‰n valitun laskun s‰hkˆposti Entryyn ei muuta)
         etunimiEntry.Text = lasku.etunimi;
         sukunimiEntry.Text = lasku.sukunimi;
+        summaEntry.Text = lasku.summa;
+        alvEntry.Text = lasku.alv;
+        maksettuKyllaRadioButton.IsChecked = lasku.maksettu == "1";
+        maksettuEiRadioButton.IsChecked = lasku.maksettu == "0";
+        tyyppiSahkoRadioButton.IsChecked = lasku.laskun_tyyppi == "True";
+        tyyppiPaperiRadioButton.IsChecked = lasku.laskun_tyyppi == "False";
 
-        LaskuLbl.Text = "Muokkaa Alue";
+
+        LaskuLbl.Text = "Muokkaa laskua";
         LaskuLbl.TextColor = Colors.Red;
     }
+    // ALV kent‰n automaattinen muutos
+    private void SummaEntry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var summaStr = e.NewTextValue?.Trim();
+        if (decimal.TryParse(summaStr, out decimal summa))
+        {
+            // ALV 24%
+            decimal alv = summa * 0.24m;
+            alvEntry.Text = alv.ToString("0.00");
+        }
+        else
+        {
+            alvEntry.Text = "0.00";
+        }
+    }
+
     //Muokkaus hyv‰ksytty
     private async void LaskutusHyvaksyMuutosBtn_Clicked(object sender, EventArgs e)
     {
@@ -377,8 +409,10 @@ public partial class LaskutusPage : TabbedPage
         if (answer)
         {
             //T‰h‰n Sql muokkaus hommat !!!!!
-
-
+            summaJaAlvHorizontal.IsVisible = false;
+            laskuMaksettuHorizontal.IsVisible = false;
+            laskuTyyppiHorizontal.IsVisible = false;
+            PaivitaLasku();
             LaskutusPageReset();
             HaeLaskutAsiakkaalle();
         }
@@ -387,6 +421,9 @@ public partial class LaskutusPage : TabbedPage
     //muokkaus hyl‰tty resetoi sivun alku n‰kym‰‰n
     private void LaskutusHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
     {
+        summaJaAlvHorizontal.IsVisible = false;
+        laskuMaksettuHorizontal.IsVisible = false;
+        laskuTyyppiHorizontal.IsVisible = false;
         LaskutusPageReset();
     }
 
@@ -407,4 +444,51 @@ public partial class LaskutusPage : TabbedPage
         LaskuLbl.Text = "Hae laskuja";
         LaskuLbl.TextColor = Colors.Black;
     }
+    // Metodi p‰ivitt‰‰ laskun tiedot tietokantaan kun kutsutaan Hyv‰ksynt‰‰ klikkaamalla
+    private void PaivitaLasku()
+    {
+        var laskuId = varausNumeroEntry.Text;
+        var varausId = varausNumeroEntry.Text;
+        var summaStr = summaEntry.Text.Trim();
+
+        if (decimal.TryParse(summaStr, out decimal summa))
+        {
+            // Oletetaan, ett‰ ALV on 24 %
+            decimal alv = summa * 0.24m;
+
+            var maksettu = maksettuKyllaRadioButton.IsChecked ? "1" : "0";
+            var laskunTyyppi = tyyppiSahkoRadioButton.IsChecked ? "1" : "0";
+
+            using (MySqlConnection con = new MySqlConnection(connstring))
+            {
+                con.Open();
+                string query = @"
+                UPDATE lasku
+                SET
+                    varaus_id = @varausId,
+                    summa = @summa,
+                    alv = @alv,
+                    maksettu = @maksettu,
+                    laskun_tyyppi = @laskunTyyppi
+                WHERE
+                    lasku_id = @laskuId";
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@laskuId", laskuId);
+                cmd.Parameters.AddWithValue("@varausId", varausId);
+                cmd.Parameters.AddWithValue("@summa", summa);
+                cmd.Parameters.AddWithValue("@alv", alv);
+                cmd.Parameters.AddWithValue("@maksettu", maksettu);
+                cmd.Parameters.AddWithValue("@laskunTyyppi", laskunTyyppi);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+        else
+        {
+            DisplayAlert("Virhe", "Summa-kentt‰ sis‰lt‰‰ virheellist‰ tietoa.", "OK");
+        }
+    }
+
 }
