@@ -194,6 +194,7 @@
                     HorizontalOptions="Start"
                     VerticalScrollBarVisibility="Never"
                     WidthRequest="800"
+                    ItemsSource="{Binding AlueCollection}"
                     ItemSelected="AlueOnItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -235,7 +236,7 @@
                 Grid.Column="0"
                 Padding="15"
                 Spacing="13">
-                <Label FontSize="Large" Text="Hae/luo Mökki" />
+                <Label x:Name="MokkiLbl" FontSize="Large" Text="Hae/luo Mökki" />
 
                 <HorizontalStackLayout Spacing="13">
                     <Entry
@@ -279,11 +280,29 @@
                     HorizontalOptions="Start"
                     Placeholder="Kuvaus"
                     WidthRequest="413" />
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Varustelu" />
+                <HorizontalStackLayout Spacing="13">
+                    <Picker
+                        x:Name="MokkiImagePicker"
+                        Title="Valitse Kuva"
+                        Background="Transparent"
+                        SelectedIndexChanged="MokkiImagePicker_SelectedIndexChanged"
+                        SelectedItem="mokki1.jpg"
+                        BackgroundColor="Transparent"
+                        FontSize="18"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="StartAndExpand"
+                        HeightRequest="70"
+                        TextColor="Black"
+                        TitleColor="Black"
+                        WidthRequest="180">
+                    </Picker>
+                    <Image x:Name="MokkiImg" Source="mokki1.jpg" WidthRequest="200"></Image>
+                </HorizontalStackLayout>
 
+                <Label
+                FontAttributes="Bold"
+                FontSize="17"
+                Text="Varustelu" />
                 <HorizontalStackLayout>
                     <Label
                         FontAttributes="Bold"
@@ -339,7 +358,31 @@
                         TextColor="Black"
                         WidthRequest="160" />
                 </HorizontalStackLayout>
-
+                <!--  mökki muokkaus  -->
+                <HorizontalStackLayout Spacing="13">
+                    <Button
+                        x:Name="MokkiHyvaksyMuutosBtn"
+                        Clicked="MokkiHyvaksyMuutosBtn_Clicked"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        IsVisible="false"
+                        HorizontalOptions="Start"
+                        Text="Muokkaa"
+                        TextColor="Black"
+                        WidthRequest="160" />
+                                    <Button
+                        x:Name="MokkiHylkaaMuutosBtn"
+                        BackgroundColor="#C61E21"
+                        Clicked="MokkiHylkaaMuutosBtn_Clicked"
+                        BorderColor="Black"
+                        IsVisible="false"
+                        BorderWidth="2"
+                        HorizontalOptions="Start"
+                        Text="Hylkää"
+                        TextColor="Black"
+                        WidthRequest="160" />
+                </HorizontalStackLayout>
 
             </VerticalStackLayout>
 
@@ -349,7 +392,10 @@
                     x:Name="MokkiListaLv"
                     HorizontalOptions="Start"
                     VerticalScrollBarVisibility="Never"
-                    WidthRequest="800">
+                    WidthRequest="800"
+                    HeightRequest="600"
+                    ItemsSource="{Binding MokkiCollection}"
+                    ItemSelected="MokkiOnItemSelected" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -390,14 +436,6 @@
                                             Text="{Binding hinta}"
                                             VerticalOptions="Center" />
                                         <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
-                                        <Button
-                                            Padding="5"
-                                            BackgroundColor="#C61E21"
-                                            FontSize="15"
-                                            HorizontalOptions="End"
-                                            Text="Muokkaa"
-                                            TextColor="White"
-                                            VerticalOptions="Center" />
                                     </StackLayout>
 
                                 </Border>

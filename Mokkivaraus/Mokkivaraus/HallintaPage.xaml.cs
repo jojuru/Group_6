@@ -1,6 +1,9 @@
 using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace Mokkivaraus;
 
@@ -10,6 +13,9 @@ public partial class HallintaPage : TabbedPage
     public ObservableCollection<Asiakas> AsiakasCollection { get; set; }
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
+
+    static public int MOKKI_KUVA_LUKU = 8;
+    
 
     static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
     public HallintaPage()
@@ -26,6 +32,7 @@ public partial class HallintaPage : TabbedPage
         MokkiListaLv.BindingContext = MokkiCollection;
         PalveluListaLv.BindingContext = PalveluCollection;
 
+        MokkiImagePicker.ItemsSource = MokkiKuvat(MOKKI_KUVA_LUKU);
 
 
         SqlHaeKaikki();
@@ -110,8 +117,9 @@ public partial class HallintaPage : TabbedPage
             MOKKI.katuosoite = reader["katuosoite"].ToString();
             MOKKI.hinta = reader["hinta"].ToString() + "€";
             MOKKI.kuvaus = reader["kuvaus"].ToString();
-            MOKKI.hinta = reader["henkilomaara"].ToString();
-            MOKKI.kuvaus = reader["varustelu"].ToString();
+            MOKKI.kuva = reader["kuva"].ToString();
+            MOKKI.henkilomaara = reader["henkilomaara"].ToString();
+            MOKKI.varustelu = reader["varustelu"].ToString();
             //etsii alue collectionista oikean alueen id perusteella
             var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
             MOKKI.alue = mok.nimi;
@@ -156,7 +164,7 @@ public partial class HallintaPage : TabbedPage
     private void AlueHaeBtn_Clicked(object sender, EventArgs e)
     {
         AlueCollection.Clear();
-        AlueListaLv.ItemsSource = AlueCollection;
+        
 
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
@@ -206,8 +214,9 @@ public partial class HallintaPage : TabbedPage
             MOKKI.katuosoite = reader["katuosoite"].ToString();
             MOKKI.hinta = reader["hinta"].ToString() + "€";
             MOKKI.kuvaus = reader["kuvaus"].ToString();
-            MOKKI.hinta = reader["henkilomaara"].ToString();
-            MOKKI.kuvaus = reader["varustelu"].ToString();
+            MOKKI.kuva = reader["kuva"].ToString();
+            MOKKI.henkilomaara = reader["henkilomaara"].ToString();
+            MOKKI.varustelu = reader["varustelu"].ToString();
             //etsii alue collectionista oikean alueen id perusteella
             var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
             MOKKI.alue = mok.nimi;
@@ -280,14 +289,7 @@ public partial class HallintaPage : TabbedPage
         string VARUSTELU = string.Join(",", selectedItems);
 
         //muuttaa alueen nimen Idksi tietokantaan.
-        String ALUE_ID = null;
-        foreach (var item in AlueCollection)
-        {
-            if (item.nimi == MokkiAlueEnt.Text)
-            {
-                ALUE_ID = item.alue_id;
-            }
-        }
+        String ALUE_ID = AlueNimiToId(MokkiAlueEnt.Text);
 
         if (ALUE_ID == null)
         {
@@ -299,10 +301,10 @@ public partial class HallintaPage : TabbedPage
             con.ConnectionString = connstring;
             con.Open();
             string sql = $"INSERT INTO mokki (mokkinimi, alue_id, " +
-                $"katuosoite, postinro, hinta, henkilomaara, kuvaus, varustelu) " +
+                $"katuosoite, postinro, hinta, henkilomaara, kuvaus, varustelu, kuva) " +
                 $"VALUES ('{MokkiMokkinimiEnt.Text}',{ALUE_ID}, '{MokkiKatuosoiteEnt.Text}', " +
                 $"'{MokkiPostinroEnt.Text}', {MokkiHintaEnt.Text}, {MokkiHenkilomaaraEnt.Text}, " +
-                $"'{MokkiKuvausEnt.Text}', '{VARUSTELU}')";
+                $"'{MokkiKuvausEnt.Text}', '{VARUSTELU}', '{MokkiImagePicker.SelectedItem}')";
             MySqlCommand insertCmd = new MySqlCommand(sql, con);
             try
             {
@@ -320,14 +322,7 @@ public partial class HallintaPage : TabbedPage
     private void PalveluLuoBtn_Clicked(object sender, EventArgs e)
     {
         //muuttaa alueen nimen Idksi tietokantaan.
-        String ALUE_ID = null;
-        foreach (var item in AlueCollection)
-        {
-            if(item.nimi == PalveluAlueEnt.Text)
-            {
-                ALUE_ID = item.alue_id;
-            }
-        }
+        String ALUE_ID = AlueNimiToId(PalveluAlueEnt.Text);
 
         if ( ALUE_ID == null)
         {
@@ -356,7 +351,8 @@ public partial class HallintaPage : TabbedPage
     }
 
     //Muokaus Napit ja lista funktiot ----------------------------------------------------------------------------------------------------------------------------------------------
-
+    
+    //Alue muokkaus **********************
     //Laittaa alue sivun muokkaus tilaan
     private void AlueOnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
@@ -382,16 +378,13 @@ public partial class HallintaPage : TabbedPage
             AluePageReset();
             SqlHaeAlueet();
         }
-        else
-        {
-
-        }
     }
 
     private void AlueHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
     {
         AluePageReset();
     }
+
 
     //muuttaa alue sivun perus näkymään
     private void AluePageReset()
@@ -403,5 +396,153 @@ public partial class HallintaPage : TabbedPage
         AlueNimiEnt.Text = "";
         AlueLbl.Text = "Hae/luo alue";
         AlueLbl.TextColor = Colors.Black;
+    }
+
+    //Mökki muokkaus **********************
+    //Laittaa Mökki sivun muokkaus tilaan 
+    private void MokkiOnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+        Mokki mokki = (Mokki)e.SelectedItem;
+
+        MokkiLuoBtn.IsVisible = false;
+        MokkiHaeBtn.IsVisible = false;
+        MokkiHyvaksyMuutosBtn.IsVisible = true;
+        MokkiHylkaaMuutosBtn.IsVisible = true;
+
+        MokkiMokkinimiEnt.Text = mokki.mokkinimi;
+        MokkiAlueEnt.Text = mokki.alue;
+        MokkiKatuosoiteEnt.Text = mokki.katuosoite;
+        MokkiPostinroEnt.Text = mokki.postinro;
+        MokkiHintaEnt.Text = mokki.hinta;
+        MokkiHenkilomaaraEnt.Text = mokki.henkilomaara;
+        MokkiKuvausEnt.Text = mokki.kuvaus;
+        MokkiImg.Source = mokki.kuva;
+        MokkiImagePicker.SelectedItem = mokki.kuva;
+
+
+        string Varustelu = mokki.varustelu;
+        Varustelu = Varustelu.Replace(" ", "");
+        string[] VarusteluSplit = Varustelu.Split(',');
+
+        MokkiCheckboxReset();
+
+        foreach (var item in VarusteluSplit)
+        {
+            if (item == "tv")
+                VarusteluTvCb.IsChecked = true;
+            if (item == "astianpesukone")
+                VarusteluAstianpesukoneCb.IsChecked = true;
+            if (item == "pyykinpesukone")
+                VarusteluPyykinpesukoneCb.IsChecked = true;
+            if (item == "sauna")
+                VarusteluSaunaCb.IsChecked = true;
+            if (item == "takka")
+                VarusteluTakkaCb.IsChecked = true;
+        }
+
+        
+        MokkiLbl.Text = "Muokkaa Mökki";
+        MokkiLbl.TextColor = Colors.Red;
+    }
+
+    private async void MokkiHyvaksyMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti tallentaa muutokset", "Kyllä", "Ei");
+        if (answer)
+        {
+            MokkiPageReset();
+            SqlHaeMokit();
+        }
+
+    }
+
+    private void MokkiHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        MokkiPageReset();
+    }
+
+
+    //muuttaa alue sivun perus näkymään
+    private void MokkiPageReset()
+    {
+        MokkiLuoBtn.IsVisible = true;
+        MokkiHaeBtn.IsVisible = true;
+        MokkiHyvaksyMuutosBtn.IsVisible = false;
+        MokkiHylkaaMuutosBtn.IsVisible = false;
+
+        MokkiMokkinimiEnt.Text = string.Empty;
+        MokkiAlueEnt.Text = string.Empty;
+        MokkiKatuosoiteEnt.Text = string.Empty;
+        MokkiPostinroEnt.Text = string.Empty;
+        MokkiHintaEnt.Text = string.Empty;
+        MokkiHenkilomaaraEnt.Text = string.Empty;
+        MokkiKuvausEnt.Text = string.Empty;
+        MokkiImg.Source = string.Empty;
+        MokkiImagePicker.SelectedItem = string.Empty;
+
+        MokkiCheckboxReset();
+
+        MokkiLbl.Text = "Hae/luo Mökki";
+        MokkiLbl.TextColor = Colors.Black;
+    }
+
+
+
+    //Muut funktiot -------------------------------------------------
+    private string AlueNimiToId(string s)
+    {
+        String ALUE_ID = null;
+        foreach (var item in AlueCollection)
+        {
+            if (item.nimi == s)
+            {
+                ALUE_ID = item.alue_id;
+            }
+        }
+        return ALUE_ID;
+    }
+
+
+    //turha funktio
+    private string AlueIdToNimi(string s)
+    {
+        String ALUE_NIMI = null;
+        foreach (var item in AlueCollection)
+        {
+            if (item.alue_id == s)
+            {
+                ALUE_NIMI = item.nimi;
+            }
+        }
+        return ALUE_NIMI;
+    }
+
+    private void MokkiCheckboxReset()
+    {
+        VarusteluTvCb.IsChecked = false;
+        VarusteluAstianpesukoneCb.IsChecked = false;
+        VarusteluPyykinpesukoneCb.IsChecked = false;
+        VarusteluSaunaCb.IsChecked = false;
+        VarusteluTakkaCb.IsChecked = false;
+    }
+
+    //iMokki kuvat
+    private List<string> MokkiKuvat(int maara)
+    {
+        List<string> list = new List<string>();
+        for (int i = 0; i < maara; i++)
+        {
+            list.Add("mokki" + (i + 1) + ".jpg");
+        }
+        return list;
+    }
+
+    private void MokkiImagePicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        String kuva = MokkiImagePicker.SelectedItem.ToString();
+        MokkiImg.Source = kuva;
+
     }
 }
