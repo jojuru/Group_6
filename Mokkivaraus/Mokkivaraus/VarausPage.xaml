@@ -253,7 +253,7 @@
                                         <StackLayout Padding="5" BackgroundColor="White">
 
                                             <Border Stroke="Transparent" StrokeShape="RoundRectangle 8,8,8,8">
-                                                <Image Source="vuori.jpg" />
+                                                <Image Source="{Binding kuva}" />
                                             </Border>
 
                                             <!--  mokkiid,mokkinimi,alue  -->

@@ -60,7 +60,7 @@ public partial class VarausPage : TabbedPage
                 varusteluItems[i] = char.ToUpper(varusteluItems[i][0]) + varusteluItems[i].Substring(1);
             }
             MOKKI.varustelu = string.Join(", ", varusteluItems);
-
+            MOKKI.kuva = reader["kuva"].ToString();
             //etsii alue collectionista oikean alueen id perusteella
             var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
             MOKKI.alue = mok.nimi;
