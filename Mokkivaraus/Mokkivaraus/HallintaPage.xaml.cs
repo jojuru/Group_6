@@ -15,19 +15,19 @@ public partial class HallintaPage : TabbedPage
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
 
     static public int MOKKI_KUVA_LUKU = 8;
-    
+
 
     static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
     public HallintaPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         AlueCollection = new ObservableCollection<Alue>();
         AsiakasCollection = new ObservableCollection<Asiakas>();
         MokkiCollection = new ObservableCollection<Mokki>();
         PalveluCollection = new ObservableCollection<Palvelu>();
         BindingContext = this;
-		AlueListaLv.BindingContext = AlueCollection;
+        AlueListaLv.BindingContext = AlueCollection;
         AsiakasListaLv.BindingContext = AsiakasCollection;
         MokkiListaLv.BindingContext = MokkiCollection;
         PalveluListaLv.BindingContext = PalveluCollection;
@@ -42,18 +42,18 @@ public partial class HallintaPage : TabbedPage
 
     //hakee tietokannasta kaikki
     private void SqlHaeKaikki()
-	{
+    {
         SqlHaeAsiakkaat();
         SqlHaeAlueet(); //Mokkit ja Palvelut käyttää alueita.
         SqlHaeMokit();
         SqlHaePalvelut();
     }
-	
-	//hakee tietokannastta Alueet
-	private void SqlHaeAlueet()
-	{
+
+    //hakee tietokannastta Alueet
+    private void SqlHaeAlueet()
+    {
         AlueCollection.Clear();
-		string sql = "SELECT * FROM alue";
+        string sql = "SELECT * FROM alue";
 
         SqlGet(sql, reader =>
         {
@@ -63,14 +63,14 @@ public partial class HallintaPage : TabbedPage
             AlueCollection.Add(ALUE);
         });
 
-		AlueListaLv.ItemsSource = AlueCollection;
+        AlueListaLv.ItemsSource = AlueCollection;
     }
 
     //hakee tietokannastta Asiakkaat
     private void SqlHaeAsiakkaat()
-	{
+    {
         AsiakasCollection.Clear();
-        
+
         string sql = "SELECT * FROM asiakas";
         SqlGet(sql, reader =>
         {
@@ -147,8 +147,8 @@ public partial class HallintaPage : TabbedPage
     private void AlueHaeBtn_Clicked(object sender, EventArgs e)
     {
         AlueCollection.Clear();
-        
-        string sql = "SELECT * FROM alue WHERE nimi LIKE '" 
+
+        string sql = "SELECT * FROM alue WHERE nimi LIKE '"
             + AlueNimiEnt.Text + "%'";
 
         SqlGet(sql, reader =>
@@ -250,13 +250,14 @@ public partial class HallintaPage : TabbedPage
         //muuttaa alueen nimen Idksi tietokantaan.
         String ALUE_ID = AlueNimiToId(PalveluAlueEnt.Text);
 
-        if ( ALUE_ID == null)
+        if (ALUE_ID == null)
         {
             DisplayAlert("Alert", "Aluetta ei löydetty tietokannasta", "OK");
         }
-        else { 
-            string sql = $"INSERT INTO palvelu (palvelu_id, nimi, alue_id, hinta, alv, kuvaus) " +
-                $"VALUES ({PalveluIdEnt.Text},'{PalveluNimiEnt.Text}', {ALUE_ID}, " +
+        else
+        {
+            string sql = $"INSERT INTO palvelu ( nimi, alue_id, hinta, alv, kuvaus) " +
+                $"VALUES ('{PalveluNimiEnt.Text}', {ALUE_ID}, " +
                 $"{PalveluHintaEnt.Text}, {PalveluAlvEnt.Text}, " +
                 $"'{PalveluKuvausEnt.Text}')";
             SqlInsert(sql);
@@ -265,7 +266,7 @@ public partial class HallintaPage : TabbedPage
     }
 
     //Muokaus Napit ja lista funktiot ----------------------------------------------------------------------------------------------------------------------------------------------
-    
+
     //Alue muokkaus **********************
     //Laittaa alue sivun muokkaus tilaan
     private void AlueOnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -278,6 +279,7 @@ public partial class HallintaPage : TabbedPage
         AlueHaeBtn.IsVisible = false;
         AlueHyvaksyMuutosBtn.IsVisible = true;
         AlueHylkaaMuutosBtn.IsVisible = true;
+        AluePoistaBtn.IsVisible = true;
 
         AlueIdEnt.IsReadOnly = true;
         AlueNimiEnt.Text = alue.nimi;
@@ -315,6 +317,7 @@ public partial class HallintaPage : TabbedPage
         AlueHaeBtn.IsVisible = true;
         AlueHyvaksyMuutosBtn.IsVisible = false;
         AlueHylkaaMuutosBtn.IsVisible = false;
+        AluePoistaBtn.IsVisible = false;
         AlueNimiEnt.Text = string.Empty;
         AlueIdEnt.Text = string.Empty;
         AlueLbl.Text = "Hae/luo alue";
@@ -334,6 +337,7 @@ public partial class HallintaPage : TabbedPage
         MokkiHyvaksyMuutosBtn.IsVisible = true;
         MokkiHylkaaMuutosBtn.IsVisible = true;
         MokkiMokkiidEnt.IsReadOnly = true;
+        MokkiPoistaBtn.IsVisible = true;
 
         MokkiMokkinimiEnt.Text = mokki.mokkinimi;
         MokkiAlueEnt.Text = mokki.alue;
@@ -366,7 +370,7 @@ public partial class HallintaPage : TabbedPage
                 VarusteluTakkaCb.IsChecked = true;
         }
 
-        
+
         MokkiLbl.Text = "Muokkaa Mökki";
         MokkiLbl.TextColor = Colors.Red;
 
@@ -412,6 +416,7 @@ public partial class HallintaPage : TabbedPage
         MokkiHyvaksyMuutosBtn.IsVisible = false;
         MokkiHylkaaMuutosBtn.IsVisible = false;
         MokkiMokkiidEnt.IsReadOnly = false;
+        MokkiPoistaBtn.IsVisible = false;
 
         MokkiMokkinimiEnt.Text = string.Empty;
         MokkiAlueEnt.Text = string.Empty;
@@ -442,6 +447,7 @@ public partial class HallintaPage : TabbedPage
         AsiakkuusHaeBtn.IsVisible = false;
         AsiakkuusHyvaksyMuutosBtn.IsVisible = true;
         AsiakkuusHylkaaMuutosBtn.IsVisible = true;
+        AsiakkuusPoistaBtn.IsVisible = true;
 
         AsiakkuusIdEnt.IsReadOnly = true;
         AsiakkuusIdEnt.Text = asiakas.asiakas_id;
@@ -493,6 +499,7 @@ public partial class HallintaPage : TabbedPage
         AsiakkuusHaeBtn.IsVisible = true;
         AsiakkuusHyvaksyMuutosBtn.IsVisible = false;
         AsiakkuusHylkaaMuutosBtn.IsVisible = false;
+        AsiakkuusPoistaBtn.IsVisible = false;
 
         AsiakkuusIdEnt.IsReadOnly = false;
         AsiakkuusIdEnt.Text = string.Empty;
@@ -520,6 +527,7 @@ public partial class HallintaPage : TabbedPage
         PalveluHaeBtn.IsVisible = false;
         PalveluHyvaksyMuutosBtn.IsVisible = true;
         PalveluHylkaaMuutosBtn.IsVisible = true;
+        PalveluPoistaBtn.IsVisible = true;
 
         PalveluIdEnt.IsReadOnly = true;
         PalveluIdEnt.Text = palvelu.palvelu_id;
@@ -568,6 +576,7 @@ public partial class HallintaPage : TabbedPage
         PalveluHaeBtn.IsVisible = true;
         PalveluHyvaksyMuutosBtn.IsVisible = false;
         PalveluHylkaaMuutosBtn.IsVisible = false;
+        PalveluPoistaBtn.IsVisible = false;
 
         PalveluIdEnt.IsReadOnly = false;
         PalveluIdEnt.Text = string.Empty;
@@ -582,7 +591,58 @@ public partial class HallintaPage : TabbedPage
         PalveluLbl.TextColor = Colors.Black;
     }
 
-    //Muut funktiot -------------------------------------------------
+
+    //Poisto napit -------------------------------------------------------
+    private async void AsiakkuusPoistaBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        if (answer)
+        {
+            string sql = $"DELETE FROM asiakas WHERE asiakas_id = {AsiakkuusIdEnt.Text}";
+            SqlInsert(sql);
+            AsiakkuusPageReset();
+            SqlHaeAsiakkaat();
+        }
+    }
+
+    private async void AluePoistaBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        if (answer)
+        {
+            string sql = $"DELETE FROM alue WHERE alue_id = {AlueIdEnt.Text}";
+            SqlInsert(sql);
+            AluePageReset();
+            SqlHaeAlueet();
+        }
+    }
+
+    private async void MokkiPoistaBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        if (answer)
+        {
+            string sql = $"DELETE FROM mokki WHERE mokki_id = {MokkiMokkiidEnt.Text}";
+            SqlInsert(sql);
+            MokkiPageReset();
+            SqlHaeMokit();
+        }
+    }
+
+    private async void PalveluPoistaBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        if (answer)
+        {
+            string sql = $"DELETE FROM palvelu WHERE palvelu_id = {PalveluIdEnt.Text}";
+            SqlInsert(sql);
+            PalveluPageReset();
+            SqlHaePalvelut();
+        }
+    }
+
+
+    //Muut funktiot --------------------------------------------------------------------
     private string AlueNimiToId(string s)
     {
         String ALUE_ID = null;
@@ -698,4 +758,6 @@ public partial class HallintaPage : TabbedPage
             con.Close();
         }
     }
+
+    
 }

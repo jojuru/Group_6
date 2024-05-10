@@ -75,7 +75,7 @@
                     <Button
                         x:Name="AsiakkuusHyvaksyMuutosBtn"
                         Clicked="AsiakkuusHyvaksyMuutosBtn_Clicked"
-                        BackgroundColor="#DEE1E6"
+                        BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
                         IsVisible="false"
@@ -83,18 +83,30 @@
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
-                                    <Button
-                        x:Name="AsiakkuusHylkaaMuutosBtn"
-                        BackgroundColor="#C61E21"
-                        Clicked="AsiakkuusHylkaaMuutosBtn_Clicked"
+                    <Button
+                        x:Name="AsiakkuusPoistaBtn"
+                        BackgroundColor="#FF6961"
+                        Clicked="AsiakkuusPoistaBtn_Clicked"
                         BorderColor="Black"
                         IsVisible="false"
                         BorderWidth="2"
                         HorizontalOptions="Start"
-                        Text="Hylkää"
+                        Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
+                        
                 </HorizontalStackLayout>
+                <Button
+                    x:Name="AsiakkuusHylkaaMuutosBtn"
+                    BackgroundColor="#DEE1E6"
+                    Clicked="AsiakkuusHylkaaMuutosBtn_Clicked"
+                    BorderColor="Black"
+                    IsVisible="false"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Hylkää"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
@@ -207,7 +219,7 @@
                         <Button
                         x:Name="AlueHyvaksyMuutosBtn"
                         Clicked="AlueHyvaksyMuutosBtn_Clicked"
-                        BackgroundColor="#DEE1E6"
+                        BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
                         IsVisible="false"
@@ -215,9 +227,22 @@
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
-                        <Button
+                    <Button
+                        x:Name="AluePoistaBtn"
+                        BackgroundColor="#FF6961"
+                        Clicked="AluePoistaBtn_Clicked"
+                        BorderColor="Black"
+                        IsVisible="false"
+                        BorderWidth="2"
+                        HorizontalOptions="Start"
+                        Text="Poista"
+                        TextColor="Black"
+                        WidthRequest="160" />
+    
+                </HorizontalStackLayout>
+                <Button
                         x:Name="AlueHylkaaMuutosBtn"
-                        BackgroundColor="#C61E21"
+                        BackgroundColor="#DEE1E6"
                         Clicked="AlueHylkaaMuutosBtn_Clicked"
                         BorderColor="Black"
                         IsVisible="false"
@@ -226,7 +251,6 @@
                         Text="Hylkää"
                         TextColor="Black"
                         WidthRequest="160" />
-                </HorizontalStackLayout>
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
@@ -245,7 +269,7 @@
                             <ViewCell>
                                 <Border
                                     HeightRequest="55"
-                                    Stroke="#7ED957"
+                                    Stroke="#77DD77"
                                     StrokeShape="RoundRectangle 6,6,6,6"
                                     StrokeThickness="1">
                                     <StackLayout Orientation="Horizontal">
@@ -407,7 +431,7 @@
                     <Button
                         x:Name="MokkiHyvaksyMuutosBtn"
                         Clicked="MokkiHyvaksyMuutosBtn_Clicked"
-                        BackgroundColor="#DEE1E6"
+                        BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
                         IsVisible="false"
@@ -415,19 +439,30 @@
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
-                                    <Button
-                        x:Name="MokkiHylkaaMuutosBtn"
-                        BackgroundColor="#C61E21"
-                        Clicked="MokkiHylkaaMuutosBtn_Clicked"
+                    <Button
+                        x:Name="MokkiPoistaBtn"
+                        BackgroundColor="#FF6961"
+                        Clicked="MokkiPoistaBtn_Clicked"
                         BorderColor="Black"
                         IsVisible="false"
                         BorderWidth="2"
                         HorizontalOptions="Start"
-                        Text="Hylkää"
+                        Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
+                    
                 </HorizontalStackLayout>
-
+                <Button
+                    x:Name="MokkiHylkaaMuutosBtn"
+                    BackgroundColor="#DEE1E6"
+                    Clicked="MokkiHylkaaMuutosBtn_Clicked"
+                    BorderColor="Black"
+                    IsVisible="false"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Hylkää"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
@@ -554,7 +589,7 @@
                     <Button
                         x:Name="PalveluHyvaksyMuutosBtn"
                         Clicked="PalveluHyvaksyMuutosBtn_Clicked"
-                        BackgroundColor="#DEE1E6"
+                        BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
                         IsVisible="false"
@@ -562,18 +597,31 @@
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
-                                    <Button
-                        x:Name="PalveluHylkaaMuutosBtn"
-                        BackgroundColor="#C61E21"
-                        Clicked="PalveluHylkaaMuutosBtn_Clicked"
+                    <Button
+                        x:Name="PalveluPoistaBtn"
+                        BackgroundColor="#FF6961"
+                        Clicked="PalveluPoistaBtn_Clicked"
                         BorderColor="Black"
                         IsVisible="false"
                         BorderWidth="2"
                         HorizontalOptions="Start"
-                        Text="Hylkää"
+                        Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
+                    
                 </HorizontalStackLayout>
+
+                <Button
+                    x:Name="PalveluHylkaaMuutosBtn"
+                    BackgroundColor="#DEE1E6"
+                    Clicked="PalveluHylkaaMuutosBtn_Clicked"
+                    BorderColor="Black"
+                    IsVisible="false"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Hylkää"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
