@@ -366,9 +366,11 @@ public partial class LaskutusPage : TabbedPage
         LaskutusHaeBtn.IsVisible = false;
         LaskutusHyvaksyMuutosBtn.IsVisible = true;
         LaskutusHylkaaMuutosBtn.IsVisible = true;
+        LaskutusPoistaLaskuBtn.IsVisible = true;
         summaJaAlvHorizontal.IsVisible = true;
         laskuMaksettuHorizontal.IsVisible = true;
         laskuTyyppiHorizontal.IsVisible = true;
+        varausNumeroBorder.IsVisible = false;
 
         varausNumeroEntry.Text = lasku.varaus_id;
         puhelinNumeroEntry.Text = lasku.puhelinnro;
@@ -383,7 +385,7 @@ public partial class LaskutusPage : TabbedPage
         tyyppiPaperiRadioButton.IsChecked = lasku.laskun_tyyppi == "False";
 
 
-        LaskuLbl.Text = "Muokkaa laskua";
+        LaskuLbl.Text = $"Muokkaat laskua nro: {lasku.lasku_id}";
         LaskuLbl.TextColor = Colors.Red;
     }
     // ALV kent‰n automaattinen muutos
@@ -408,10 +410,7 @@ public partial class LaskutusPage : TabbedPage
         bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti tallentaa muutokset", "Kyll‰", "Ei");
         if (answer)
         {
-            //T‰h‰n Sql muokkaus hommat !!!!!
-            summaJaAlvHorizontal.IsVisible = false;
-            laskuMaksettuHorizontal.IsVisible = false;
-            laskuTyyppiHorizontal.IsVisible = false;
+            //PaivitaLasku() kutsu vie laskun tiedot tietokantaan
             PaivitaLasku();
             LaskutusPageReset();
             HaeLaskutAsiakkaalle();
@@ -421,18 +420,47 @@ public partial class LaskutusPage : TabbedPage
     //muokkaus hyl‰tty resetoi sivun alku n‰kym‰‰n
     private void LaskutusHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
     {
-        summaJaAlvHorizontal.IsVisible = false;
-        laskuMaksettuHorizontal.IsVisible = false;
-        laskuTyyppiHorizontal.IsVisible = false;
+
+        LaskutusPageReset();
+    }
+
+    //poistetaan muokkauksessa k‰sitelty lasku tietokannasta
+    private async void LaskutusPoistaLaskuBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa valitun laskun?", "Kyll‰", "Ei");
+        if (answer)
+        {
+            var laskuId = varausNumeroEntry.Text;
+
+            using (MySqlConnection con = new MySqlConnection(connstring))
+            {
+                con.Open();
+                string query = "DELETE FROM lasku WHERE lasku_id = @lasku_id";
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@lasku_id", laskuId);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+
+            DisplayAlert("Lasku poistettu", "Lasku on poistettu tietokannasta.", "OK");
+            LaskutusPageReset();
+            HaeLaskutAsiakkaalle();
+        }
         LaskutusPageReset();
     }
 
     //muuttaa laskutus sivun perus n‰kym‰‰n muokkauksen j‰lkeen (Ei tartte muokata)
     private void LaskutusPageReset()
     {
+        summaJaAlvHorizontal.IsVisible = false;
+        laskuMaksettuHorizontal.IsVisible = false;
+        laskuTyyppiHorizontal.IsVisible = false;
         LaskutusHaeBtn.IsVisible = true;
         LaskutusHyvaksyMuutosBtn.IsVisible = false;
         LaskutusHylkaaMuutosBtn.IsVisible = false;
+        LaskutusPoistaLaskuBtn.IsVisible = false;
+        varausNumeroBorder.IsVisible = true;
+
 
         varausNumeroEntry.Text = "";
         puhelinNumeroEntry.Text = "";

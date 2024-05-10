@@ -25,6 +25,8 @@
 
                 <HorizontalStackLayout Spacing="13">
                     <Border
+                        x:Name="varausNumeroBorder"
+                        IsVisible="true"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="2">
@@ -33,6 +35,7 @@
                                WidthRequest="200" 
                                TextColor="Black"/>
                     </Border>
+
 
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="13">
@@ -161,6 +164,19 @@
                     TextColor="Black"
                     WidthRequest="160" />
                 </HorizontalStackLayout>
+
+                <Button
+                    x:Name="LaskutusPoistaLaskuBtn"
+                    BackgroundColor="#C61E21"
+                    Clicked="LaskutusPoistaLaskuBtn_Clicked"
+                    BorderColor="Black"
+                    IsVisible="false"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Poista lasku"
+                    TextColor="Black"
+                    WidthRequest="160" />
+
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
