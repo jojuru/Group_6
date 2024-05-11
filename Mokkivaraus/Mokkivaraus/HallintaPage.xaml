@@ -57,6 +57,7 @@
                 <HorizontalStackLayout Spacing="13">
                     <Button
                     x:Name="AsiakkuusHaeBtn"
+                    Clicked="AsiakkuusHaeBtn_Clicked"
                     BackgroundColor="#DEE1E6"
                     BorderColor="Black"
                     BorderWidth="2"
@@ -575,6 +576,7 @@
                     <Button
                     x:Name="PalveluHaeBtn"
                     BackgroundColor="#DEE1E6"
+                    Clicked="PalveluHaeBtn_Clicked"
                     BorderColor="Black"
                     BorderWidth="2"
                     HorizontalOptions="Start"

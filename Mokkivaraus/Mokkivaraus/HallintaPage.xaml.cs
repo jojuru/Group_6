@@ -14,7 +14,6 @@ public partial class HallintaPage : TabbedPage
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
 
-    static public int MOKKI_KUVA_LUKU = 8;
 
 
     static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
@@ -32,8 +31,7 @@ public partial class HallintaPage : TabbedPage
         MokkiListaLv.BindingContext = MokkiCollection;
         PalveluListaLv.BindingContext = PalveluCollection;
 
-        MokkiImagePicker.ItemsSource = MokkiKuvat(MOKKI_KUVA_LUKU);
-
+        MokkiImagePicker.ItemsSource = MokkiKuvat(8);
 
         SqlHaeKaikki();
     }
@@ -170,6 +168,7 @@ public partial class HallintaPage : TabbedPage
         string sql = "SELECT * FROM mokki WHERE ";
         sql = sql + "(mokki_id LIKE '" + MokkiMokkiidEnt.Text + "%') AND ";
         sql = sql + "(mokkinimi LIKE '" + MokkiMokkinimiEnt.Text + "%') AND ";
+        sql = sql + "(alue_id LIKE '" + AlueNimiToId(MokkiAlueEnt.Text) + "%') AND ";
         sql = sql + "(katuosoite LIKE '" + MokkiKatuosoiteEnt.Text + "%') AND ";
         sql = sql + "(postinro LIKE '" + MokkiPostinroEnt.Text + "%') AND ";
         sql = sql + "(hinta LIKE '" + MokkiHintaEnt.Text + "%') AND ";
@@ -197,6 +196,69 @@ public partial class HallintaPage : TabbedPage
         });
 
         MokkiListaLv.ItemsSource = MokkiCollection;
+    }
+
+    private void AsiakkuusHaeBtn_Clicked(object sender, EventArgs e)
+    {
+        AsiakasCollection.Clear();
+
+        string sql = "SELECT * FROM asiakas WHERE ";
+        sql += "(asiakas_id LIKE '" + AsiakkuusIdEnt.Text + "%') AND ";
+        sql += "(etunimi LIKE '" + AsiakkuusEtunimiEnt.Text + "%') AND ";
+        sql += "(sukunimi LIKE '" + AsiakkuusSukunimiEnt.Text + "%') AND ";
+        sql += "(lahiosoite LIKE '" + AsiakkuusLahiosoiteEnt.Text + "%') AND ";
+        sql += "(postinro LIKE '" + AsiakkuusPostinroEnt.Text + "%') AND ";
+        sql += "(puhelinnro LIKE '" + AsiakkuusPuhelinnroEnt.Text + "%') AND ";
+        sql += "(email LIKE '" + AsiakkuusEmailEnt.Text + "%')";
+
+
+        SqlGet(sql, reader =>
+        {
+            Asiakas ASIAKAS = new Asiakas();
+            ASIAKAS.asiakas_id = reader["asiakas_id"].ToString();
+            ASIAKAS.etunimi = reader["etunimi"].ToString();
+            ASIAKAS.sukunimi = reader["sukunimi"].ToString();
+            ASIAKAS.postinro = reader["postinro"].ToString();
+            ASIAKAS.lahiosoite = reader["lahiosoite"].ToString();
+            ASIAKAS.email = reader["email"].ToString();
+            ASIAKAS.puhelinnro = reader["puhelinnro"].ToString();
+            AsiakasCollection.Add(ASIAKAS);
+        });
+
+        AsiakasListaLv.ItemsSource = AsiakasCollection;
+    }
+
+    private void PalveluHaeBtn_Clicked(object sender, EventArgs e)
+    {
+        PalveluCollection.Clear();
+
+        string sql = "SELECT * FROM palvelu WHERE ";
+        sql += "(palvelu_id LIKE '" + PalveluIdEnt.Text + "%') AND ";
+        sql += "(alue_id LIKE '" + AlueNimiToId(AlueIdEnt.Text) + "%') AND ";
+        sql += "(nimi LIKE '" + PalveluNimiEnt.Text + "%') AND ";
+        sql += "(kuvaus LIKE '" + PalveluKuvausEnt.Text + "%') AND ";
+        sql += "(hinta LIKE '" + PalveluHintaEnt.Text + "%') AND ";
+        sql += "(alv LIKE '" + PalveluAlvEnt.Text + "%')";
+
+
+
+        SqlGet(sql, reader =>
+        {
+            Palvelu PALVELU = new Palvelu();
+            PALVELU.palvelu_id = reader["palvelu_id"].ToString();
+            PALVELU.alue_id = reader["alue_id"].ToString();
+            PALVELU.nimi = reader["nimi"].ToString();
+            PALVELU.kuvaus = reader["kuvaus"].ToString();
+            PALVELU.hinta = reader["hinta"].ToString();
+            PALVELU.alv = reader["alv"].ToString();
+            //etsii alue collectionista oikean alueen id perusteella
+            var pal = AlueCollection.FirstOrDefault(p => p.alue_id == reader["alue_id"].ToString());
+            PALVELU.alue = pal.nimi;
+
+            PalveluCollection.Add(PALVELU);
+        });
+
+        PalveluListaLv.ItemsSource = PalveluCollection;
     }
 
     //luonti napit***************
@@ -657,7 +719,6 @@ public partial class HallintaPage : TabbedPage
     }
 
 
-    //turha funktio
     private string AlueIdToNimi(string s)
     {
         String ALUE_NIMI = null;
