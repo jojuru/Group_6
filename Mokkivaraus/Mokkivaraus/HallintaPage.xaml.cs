@@ -13,6 +13,7 @@ public partial class HallintaPage : TabbedPage
     public ObservableCollection<Asiakas> AsiakasCollection { get; set; }
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
+    public ObservableCollection<Varaus> VarausCollection { get; set; }
 
 
 
@@ -25,11 +26,13 @@ public partial class HallintaPage : TabbedPage
         AsiakasCollection = new ObservableCollection<Asiakas>();
         MokkiCollection = new ObservableCollection<Mokki>();
         PalveluCollection = new ObservableCollection<Palvelu>();
+        VarausCollection = new ObservableCollection<Varaus>();
         BindingContext = this;
         AlueListaLv.BindingContext = AlueCollection;
         AsiakasListaLv.BindingContext = AsiakasCollection;
         MokkiListaLv.BindingContext = MokkiCollection;
         PalveluListaLv.BindingContext = PalveluCollection;
+        VarausListaLv.BindingContext = VarausCollection;
 
         MokkiImagePicker.ItemsSource = MokkiKuvat(8);
 
@@ -45,6 +48,37 @@ public partial class HallintaPage : TabbedPage
         SqlHaeAlueet(); //Mokkit ja Palvelut käyttää alueita.
         SqlHaeMokit();
         SqlHaePalvelut();
+        SqlHaeVaraus();
+    }
+    //hakee tietokannastta Varaukset
+    private void SqlHaeVaraus()
+    {
+        VarausCollection.Clear();
+        string sql = "SELECT * FROM varaus";
+
+        SqlGet(sql, reader =>
+        {
+            Varaus VARAUS = new Varaus();
+            VARAUS.varaus_id = reader["varaus_id"].ToString();
+            VARAUS.asiakas_id = reader["asiakas_id"].ToString();
+            VARAUS.mokki_id = reader["mokki_id"].ToString();
+            VARAUS.varattupvm = Convert.ToDateTime(reader["varattu_pvm"]).ToString("yyyy-MM-dd");
+            VARAUS.vahvistuspvm = Convert.ToDateTime(reader["vahvistus_pvm"]).ToString("yyyy-MM-dd");
+            VARAUS.varattualkupvm = Convert.ToDateTime(reader["varattu_alkupvm"]).ToString("yyyy-MM-dd");
+            VARAUS.varattuloppupvm = Convert.ToDateTime(reader["varattu_loppupvm"]).ToString("yyyy-MM-dd"); ;
+
+            var asiakas = AsiakasCollection.FirstOrDefault(a => a.asiakas_id == VARAUS.asiakas_id);
+            if (asiakas != null)
+                VARAUS.asiakas_id = asiakas.etunimi + " " + asiakas.sukunimi;
+
+            var mokki = MokkiCollection.FirstOrDefault(a => a.mokki_id == VARAUS.mokki_id);
+            if (mokki != null)
+                VARAUS.mokki_id = mokki.mokkinimi;
+
+            VarausCollection.Add(VARAUS);
+        });
+
+        VarausListaLv.ItemsSource = VarausCollection;
     }
 
     //hakee tietokannastta Alueet
@@ -173,6 +207,7 @@ public partial class HallintaPage : TabbedPage
         sql = sql + "(postinro LIKE '" + MokkiPostinroEnt.Text + "%') AND ";
         sql = sql + "(hinta LIKE '" + MokkiHintaEnt.Text + "%') AND ";
         sql = sql + "(henkilomaara LIKE '" + MokkiHenkilomaaraEnt.Text + "%') AND ";
+
         sql = sql + "(kuvaus LIKE '" + MokkiKuvausEnt.Text + "%')";
 
         SqlGet(sql, reader =>
@@ -328,6 +363,77 @@ public partial class HallintaPage : TabbedPage
     }
 
     //Muokaus Napit ja lista funktiot ----------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Varaus muokkaus **********************
+    //Laittaa Varaus sivun muokkaus tilaan
+    private void VarausOnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem == null)
+            return;
+        Varaus varaus = (Varaus)e.SelectedItem;
+
+        VarausLuoBtn.IsVisible = false;
+        VarausHaeBtn.IsVisible = false;
+        VarausHyvaksyMuutosBtn.IsVisible = true;
+        VarausHylkaaMuutosBtn.IsVisible = true;
+        VarausPoistaBtn.IsVisible = true;
+        VarausAsiakasIdEnt.IsReadOnly = true;
+        VarausIdEnt.IsReadOnly = true;
+
+        VarausIdEnt.Text = varaus.varaus_id;
+        VarausMökkiIdEnt.Text = varaus.mokki_id;
+        VarausAsiakasIdEnt.Text = varaus.asiakas_id;
+        vahvistuDp.Date = DateTime.Parse(varaus.vahvistuspvm);
+        varattuDp.Date = DateTime.Parse(varaus.varattupvm);
+        varattualkuDp.Date = DateTime.Parse(varaus.varattualkupvm);
+        vahvistuloppDp.Date = DateTime.Parse(varaus.varattuloppupvm);
+
+        VarausLbl.Text = "Muokkaa Varaus";
+        VarausLbl.TextColor = Colors.Red;
+
+        VarausListaLv.SelectedItem = null;
+    }
+
+    private async void VarausHyvaksyMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti tallentaa muutokset", "Kyllä", "Ei");
+        if (answer)
+        {
+           
+
+            VarausPageReset();
+            SqlHaeVaraus();
+        }
+    }
+
+    private void VarausHylkaaMuutosBtn_Clicked(object sender, EventArgs e)
+    {
+        VarausPageReset();
+    }
+
+
+    //muuttaa alue sivun perus näkymään
+    private void VarausPageReset()
+    {
+        VarausAsiakasIdEnt.IsReadOnly = false;
+        VarausIdEnt.IsReadOnly = false;
+        VarausLuoBtn.IsVisible = true;
+        VarausHaeBtn.IsVisible = true;
+        VarausHyvaksyMuutosBtn.IsVisible = false;
+        VarausHylkaaMuutosBtn.IsVisible = false;
+        VarausPoistaBtn.IsVisible = false;
+
+        VarausIdEnt.Text = string.Empty;
+        VarausMökkiIdEnt.Text = string.Empty;
+        VarausAsiakasIdEnt.Text = string.Empty;
+        vahvistuDp.Date = DateTime.Now;
+        varattuDp.Date = DateTime.Now;
+        varattualkuDp.Date = DateTime.Now;
+        vahvistuloppDp.Date = DateTime.Now;
+
+        VarausLbl.Text = "Hae/luo Varaus";
+        VarausLbl.TextColor = Colors.Black;
+    }
 
     //Alue muokkaus **********************
     //Laittaa alue sivun muokkaus tilaan
@@ -702,6 +808,19 @@ public partial class HallintaPage : TabbedPage
             SqlHaePalvelut();
         }
     }
+
+    private async void VarausPoistaBtn_Clicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        if (answer)
+        {
+            string sql = $"DELETE FROM varaus WHERE varaus_id = {VarausIdEnt.Text}";
+            SqlInsert(sql);
+            VarausPageReset();
+            SqlHaeVaraus();
+        }
+    }
+
 
 
     //Muut funktiot --------------------------------------------------------------------

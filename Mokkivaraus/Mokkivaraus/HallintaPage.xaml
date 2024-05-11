@@ -634,7 +634,7 @@
                     TextColor="Black"
                     WidthRequest="160" />
             </VerticalStackLayout>
-
+            
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
                 <ListView
@@ -687,6 +687,229 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </VerticalStackLayout>
+        </Grid>
+    </ContentPage>
+
+    <ContentPage Title="Varaukset" 
+             NavigationPage.HasNavigationBar="False" 
+             BackgroundColor="GhostWhite">
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
+            <!--  vasen puoli  -->
+            <VerticalStackLayout
+            Grid.Column="0"
+            Padding="15"
+            Spacing="13">
+                <Label x:Name="VarausLbl" FontSize="Large" Text="Hae/luo varaus" />
+
+                <HorizontalStackLayout Spacing="13">
+                    <Entry
+                        x:Name="VarausIdEnt"
+                        HorizontalOptions="Start"
+                        Placeholder="Varaus ID"
+                        WidthRequest="200" />
+                    <Entry
+                        x:Name="VarausMökkiIdEnt"
+                        HorizontalOptions="Start"
+                        Placeholder="Mökin nimi"
+                        WidthRequest="200" />
+                </HorizontalStackLayout>
+                
+                
+                <HorizontalStackLayout Spacing="13">
+                    <Entry
+                        x:Name="VarausAsiakasIdEnt"
+                        HorizontalOptions="Start"
+                        VerticalOptions="EndAndExpand"
+                        Placeholder="Asiakas"
+                        WidthRequest="200" />
+                    <VerticalStackLayout>
+                        <Label
+                            Padding="2"
+                            FontSize="16"
+                            Text="Vahvistu Pvm"
+                            VerticalOptions="Center" />
+                        <DatePicker 
+                            x:Name="vahvistuDp"
+                            WidthRequest="200"
+                            HorizontalOptions="StartAndExpand"
+                            BackgroundColor="Transparent" 
+                            TextColor="Black" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label
+                    Padding="2"
+                    FontSize="16"
+                    Text="Varattu Pvm"
+                    VerticalOptions="Center" />
+                                <DatePicker 
+                    x:Name="varattuDp"
+                    WidthRequest="200"
+                    HorizontalOptions="StartAndExpand"
+                    BackgroundColor="Transparent" 
+                    TextColor="Black" />
+                            </VerticalStackLayout>
+                <HorizontalStackLayout Spacing="13">
+                    <VerticalStackLayout>
+                        <Label
+                        Padding="2"
+                        FontSize="16"
+                        Text="Varattu Alku Pvm"
+                        VerticalOptions="Center" />
+                                    <DatePicker 
+                        x:Name="varattualkuDp"
+                        WidthRequest="200"
+                        HorizontalOptions="StartAndExpand"
+                        BackgroundColor="Transparent" 
+                        TextColor="Black" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label
+                        Padding="2"
+                        FontSize="16"
+                        Text="Varattu Loppu Pvm"
+                        VerticalOptions="Center" />
+                        <DatePicker 
+                        x:Name="vahvistuloppDp"
+                        WidthRequest="200"
+                        HorizontalOptions="StartAndExpand"
+                        BackgroundColor="Transparent" 
+                        TextColor="Black" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+
+                <HorizontalStackLayout Spacing="13">
+                    <Button
+                x:Name="VarausHaeBtn"
+                BackgroundColor="#DEE1E6"
+                BorderColor="Black"
+                BorderWidth="2"
+                HorizontalOptions="Start"
+                Text="Hae Varaus"
+                TextColor="Black"
+                WidthRequest="160" />
+                    <Button
+                x:Name="VarausLuoBtn"
+                BackgroundColor="#DEE1E6"
+                BorderColor="Black"
+                BorderWidth="2"
+                HorizontalOptions="Start"
+                Text="Luo uusi varaus"
+                TextColor="Black"
+                WidthRequest="160" />
+                </HorizontalStackLayout>
+                <!--  Asiakas muokkaus  -->
+                <HorizontalStackLayout Spacing="13">
+                    <Button
+                    x:Name="VarausHyvaksyMuutosBtn"
+                    Clicked="VarausHyvaksyMuutosBtn_Clicked"
+                    BackgroundColor="#77DD77"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    IsVisible="false"
+                    HorizontalOptions="Start"
+                    Text="Muokkaa"
+                    TextColor="Black"
+                    WidthRequest="160" />
+                    <Button
+                    x:Name="VarausPoistaBtn"
+                    BackgroundColor="#FF6961"
+                    Clicked="VarausPoistaBtn_Clicked"
+                    BorderColor="Black"
+                    IsVisible="false"
+                    BorderWidth="2"
+                    HorizontalOptions="Start"
+                    Text="Poista"
+                    TextColor="Black"
+                    WidthRequest="160" />
+
+                </HorizontalStackLayout>
+                <Button
+                x:Name="VarausHylkaaMuutosBtn"
+                Clicked="VarausHylkaaMuutosBtn_Clicked"
+                BackgroundColor="#DEE1E6"
+                BorderColor="Black"
+                IsVisible="false"
+                BorderWidth="2"
+                HorizontalOptions="Start"
+                Text="Hylkää"
+                TextColor="Black"
+                WidthRequest="160" />
+            </VerticalStackLayout>
+
+            <!--  oikea puoli  -->
+            <VerticalStackLayout Grid.Column="1">
+                <!--  varaus lista  -->
+                <Label
+                    Padding="2"
+                    FontSize="19"
+                    Text="ID | Asiakas | Mökki | Varattu | Vahvistettu | Varattu Alku | Varattu Loppu"
+                    VerticalOptions="Center" /> 
+                <ListView
+                x:Name="VarausListaLv"
+                HorizontalOptions="Start"
+                VerticalScrollBarVisibility="Never"
+                ItemSelected="VarausOnItemSelected"
+                WidthRequest="800"
+                HeightRequest="600">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                HeightRequest="55"
+                                Stroke="#7ED957"
+                                StrokeShape="RoundRectangle 6,6,6,6"
+                                StrokeThickness="1">
+                                    
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding varaus_id}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding asiakas_id}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding mokki_id}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding varattupvm}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding vahvistuspvm}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding varattualkupvm}"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="15"
+                                            Text="{Binding varattuloppupvm}"
+                                            VerticalOptions="Center" />
+                                        <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
+                                    </StackLayout>
+
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!--  More content can be added here  -->
             </VerticalStackLayout>
         </Grid>
     </ContentPage>
