@@ -62,7 +62,7 @@ public partial class LaskutusPage : TabbedPage
         var sahkoposti = sahkopostiEntry.Text;
         var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu, l.laskun_tyyppi FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id");
+        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu, l.laskun_tyyppi, v.varattu_pvm FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -98,9 +98,14 @@ public partial class LaskutusPage : TabbedPage
 
         var reader = cmd.ExecuteReader();
         LaskutusCollection.Clear();
+        var tanaanDate = DateTime.Today;
 
         while (reader.Read())
         {
+            var varattuPvm = reader.GetDateTime(reader.GetOrdinal("varattu_pvm"));
+            var paiviaMennyt = (tanaanDate - varattuPvm).Days;
+            var maksettu = reader["maksettu"].ToString() == "0";
+            
             var laskutus = new Laskutus
             {
                 lasku_id = reader["lasku_id"].ToString(),
@@ -111,7 +116,9 @@ public partial class LaskutusPage : TabbedPage
                 alv = reader["alv"].ToString(),
                 maksettu = reader["maksettu"].ToString(),
                 laskun_tyyppi = reader["laskun_tyyppi"].ToString(),
-                puhelinnro = reader["puhelinnro"].ToString()
+                puhelinnro = reader["puhelinnro"].ToString(),
+                varattu_pvm = reader.IsDBNull(reader.GetOrdinal("varattu_pvm")) ? "" : reader.GetDateTime(reader.GetOrdinal("varattu_pvm")).ToString("dd.MM.yyyy"),
+                isOverdue = paiviaMennyt > 14 && maksettu
             };
             LaskutusCollection.Add(laskutus);
         }
@@ -315,7 +322,7 @@ public partial class LaskutusPage : TabbedPage
             {
                 con.Open();
                 string query = @"
-                    SELECT p.nimi AS palvelun_nimi, COUNT(vp.varaus_id) AS varaus_maara
+                    SELECT p.nimi AS palvelun_nimi, COUNT(vp.varaus_id) AS varaus_maara, a.nimi AS alue
                     FROM varauksen_palvelut vp
                     JOIN varaus v ON vp.varaus_id = v.varaus_id
                     JOIN palvelu p ON vp.palvelu_id = p.palvelu_id
@@ -324,6 +331,7 @@ public partial class LaskutusPage : TabbedPage
                           v.varattu_alkupvm <= @LoppuPvm AND 
                           v.varattu_loppupvm >= @AlkuPvm
                     GROUP BY p.nimi";
+
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@ValittuAlue", valittuAlue.nimi);
                 cmd.Parameters.AddWithValue("@AlkuPvm", alkuPvm.ToString("yyyy-MM-dd"));
@@ -336,8 +344,10 @@ public partial class LaskutusPage : TabbedPage
                 {
                     Palvelut.Add(new PalveluRaportti
                     {
+                        alue = reader["alue"].ToString(),
                         palvelun_nimi = reader["palvelun_nimi"].ToString(),
                         varaus_maara = Convert.ToInt32(reader["varaus_maara"])
+                        
                     });
                 }
                 PalvelutListaLv.ItemsSource = Palvelut;
@@ -449,7 +459,7 @@ public partial class LaskutusPage : TabbedPage
         LaskutusPageReset();
     }
 
-    //muuttaa laskutus sivun perus n‰kym‰‰n muokkauksen j‰lkeen (Ei tartte muokata)
+    //muuttaa laskutus sivun perus n‰kym‰‰n muokkauksen j‰lkeen
     private void LaskutusPageReset()
     {
         summaJaAlvHorizontal.IsVisible = false;

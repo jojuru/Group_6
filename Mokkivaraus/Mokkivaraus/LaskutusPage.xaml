@@ -184,7 +184,7 @@
                 <!--  Laskulista  -->
                 <Label
                     FontSize="18"
-                    Text="Lasku nro | Etu- ja sukunimi | Summa | Maksettu?"
+                    Text="Lasku nro | Etu- ja sukunimi | Summa | Varaus pvm | Maksettu?"
                     TextColor="Black"></Label>
                 <ListView
                     x:Name="LaskuListaLv"
@@ -234,15 +234,23 @@
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="{Binding maksettu, StringFormat='{0} |'}"
+                                            Text="{Binding varattu_pvm, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
                                             Padding="2"
                                             FontSize="15"
-                                            Text="{Binding laskun_tyyppi, StringFormat='{0} |'}"
+                                            Text="{Binding maksettu, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
+                                        <Label 
+                                            Text="Lasku myöhässä"
+                                            IsVisible="{Binding isOverdue}"
+                                            Padding="2"
+                                            FontSize="15"
+                                            TextColor="Red"
+                                            VerticalOptions="Center"/>
+
                                         <!--
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding asiakas_id}" />
                                         <Label VerticalOptions="Center" Padding="2" FontSize="15" Text="{Binding etunimi}" />
@@ -426,11 +434,11 @@
 
                 <Label
                 x:Name="varatutPalvelutLabel"
-                Text="Varatut palvelut aikavälillä"
+                Text="Varatut palvelut aikavälillä | "
                 TextColor="Black"
                 FontSize="Large" />
                 <Label
-                Text="Palvelun nimi | Varausmäärä"
+                Text="Alue | Palvelun nimi | Varausmäärä"
                 TextColor="Black"
                 FontSize="18" />
                 <ListView
@@ -450,10 +458,22 @@
                                         <Label
                                         Padding="5"
                                         FontSize="15"
+                                        Text="{Binding alue}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        WidthRequest="100" />
+                                        <BoxView
+                                        WidthRequest="1"
+                                        HeightRequest="20"
+                                        BackgroundColor="Black"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Padding="5"
+                                        FontSize="15"
                                         Text="{Binding palvelun_nimi}"
                                         TextColor="Black"
                                         VerticalOptions="Center"
-                                        WidthRequest="200" />
+                                        WidthRequest="100" />
                                         <BoxView
                                         WidthRequest="1"
                                         HeightRequest="20"

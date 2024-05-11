@@ -17,11 +17,12 @@ namespace Mokkivaraus
         public string etunimi { get; set; }
         public string sukunimi { get; set; }
         public string puhelinnro { get; set; }
-
+        public string varattu_pvm { get; set; }
+        public bool isOverdue { get; set; }
 
         public Laskutus() { }
 
-        public Laskutus(string lasku_id, string varaus_id, string summa, string alv, string alue, string maksettu, string laskun_tyyppi, string puhelinnro)
+        public Laskutus(string lasku_id, string varaus_id, string summa, string alv, string alue, string maksettu, string laskun_tyyppi, string puhelinnro, string varattu_pvm)
         {
             this.lasku_id = lasku_id;
             this.varaus_id = varaus_id;
@@ -32,6 +33,7 @@ namespace Mokkivaraus
             this.etunimi = etunimi;
             this.sukunimi = sukunimi;
             this.puhelinnro = puhelinnro;
+            this.varattu_pvm = varattu_pvm;
         }
     }
 }
