@@ -3,7 +3,9 @@
     x:Class="Mokkivaraus.LaskutusPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Laskutus ja raportointi">
+    Title="Laskutus ja raportointi"
+    SelectedTabColor="GhostWhite" 
+    BarBackgroundColor="#E8E8F0">
 
 
     <!--  Laskutus  -->

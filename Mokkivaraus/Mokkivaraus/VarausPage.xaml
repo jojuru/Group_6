@@ -3,13 +3,13 @@
     x:Class="Mokkivaraus.VarausPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BarBackground="#f2f2f2"
+    BarBackground="#E8E8F0"
     BarTextColor="Black"
-    SelectedTabColor="#464b50"
-    UnselectedTabColor="#f2f2f2">
+    SelectedTabColor="GhostWhite"
+    >
 
 
-    <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False" BackgroundColor="GhostWhite">
 
         <!--  jakaa sivun kahtia  -->
         <Grid BackgroundColor="#f7f7f8">
@@ -38,6 +38,7 @@
                             StrokeShape="RoundRectangle 3,3,3,3"
                             StrokeThickness="3">
                             <Entry
+                                x:Name="MokinNimiEntry"
                                 BackgroundColor="#e5e9f0"
                                 FontFamily="PoppinsRegular"
                                 FontSize="20"
@@ -86,6 +87,7 @@
                             StrokeShape="RoundRectangle 3,3,3,3"
                             StrokeThickness="3">
                             <Entry
+                                x:Name="MinHintaEntry"
                                 BackgroundColor="#e5e9f0"
                                 FontFamily="PoppinsRegular"
                                 FontSize="20"
@@ -99,6 +101,7 @@
                             StrokeShape="RoundRectangle 3,3,3,3"
                             StrokeThickness="3">
                             <Entry
+                                x:Name="MaxHintaEntry"
                                 BackgroundColor="#e5e9f0"
                                 FontFamily="PoppinsRegular"
                                 FontSize="20"
@@ -117,7 +120,9 @@
                         TextColor="Black" />
 
                     <HorizontalStackLayout Spacing="20">
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="PorosafariCheckBox"
+                            Scale="1.5" />
                         <Label
                             Padding="0,0,25,0"
                             FontFamily="PoppinsRegular"
@@ -125,7 +130,9 @@
                             Text="Porosafari"
                             TextColor="Black"
                             VerticalOptions="Center" />
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="AirsoftausCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
@@ -135,14 +142,18 @@
 
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Margin="0,10" Spacing="20">
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="VesiskootteriCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
                             Text="Vesiskootteri"
                             TextColor="Black"
                             VerticalOptions="Center" />
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="HevosajeluCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
@@ -151,7 +162,9 @@
                             VerticalOptions="Center" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="20">
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="KoiravaljakkoajeluCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
@@ -169,7 +182,9 @@
                         TextColor="Black" />
 
                     <HorizontalStackLayout Spacing="20">
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="TVCheckBox"
+                            Scale="1.5" />
                         <Label
                             Margin="20,0"
                             FontFamily="PoppinsRegular"
@@ -177,7 +192,9 @@
                             Text="TV"
                             TextColor="Black"
                             VerticalOptions="Center" />
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="AstianpesukoneCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
@@ -186,7 +203,9 @@
                             VerticalOptions="Center" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Margin="0,10" Spacing="20">
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="SaunaCheckBox"
+                            Scale="1.5" />
                         <Label
                             Padding="2,0"
                             FontFamily="PoppinsRegular"
@@ -194,7 +213,9 @@
                             Text="Sauna"
                             TextColor="Black"
                             VerticalOptions="Center" />
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="TakkaCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
@@ -203,7 +224,9 @@
                             VerticalOptions="Center" />
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Spacing="20">
-                        <CheckBox Scale="1.5" />
+                        <CheckBox 
+                            x:Name="PyykinpesukoneCheckBox"
+                            Scale="1.5" />
                         <Label
                             FontFamily="PoppinsRegular"
                             FontSize="18"
@@ -338,10 +361,10 @@
     </ContentPage>
     <ContentPage
         Title="Hae varauksia"
-        BackgroundColor="#f2f2f2"
+        BackgroundColor="GhostWhite"
         NavigationPage.HasNavigationBar="False">
         <!--  jakaa sivun kahtia  -->
-        <Grid BackgroundColor="#f7f7f8">
+        <Grid BackgroundColor="GhostWhite">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="3*" />

@@ -4,11 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Hallinta"
+    SelectedTabColor="GhostWhite" 
+    BarBackgroundColor="#E8E8F0"
+    
     >
 
 
     <!--  Asiakkuudet  -->
-    <ContentPage Title="Asiakkuudet" NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Asiakkuudet" 
+                 NavigationPage.HasNavigationBar="False" 
+                 BackgroundColor="GhostWhite">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
@@ -173,7 +178,7 @@
     </ContentPage>
 
     <!--  Alue  -->
-    <ContentPage Title="Alue" NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Alue" NavigationPage.HasNavigationBar="False" BackgroundColor="GhostWhite">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
@@ -254,7 +259,7 @@
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
-            <VerticalStackLayout Grid.Column="1">
+            <VerticalStackLayout Grid.Column="1" >
                 <!--  Add your content for the right side here  -->
                 <ListView
                     x:Name="AlueListaLv"
@@ -297,7 +302,9 @@
     </ContentPage>
 
     <!--  Mökki  -->
-    <ContentPage Title="Mökki" NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Mökki" 
+                 NavigationPage.HasNavigationBar="False"
+                 BackgroundColor="GhostWhite">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
@@ -527,7 +534,9 @@
     </ContentPage>
 
     <!--  Palvelu  -->
-    <ContentPage Title="Palvelu" NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Palvelu" 
+                 NavigationPage.HasNavigationBar="False"
+                 BackgroundColor="GhostWhite">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
