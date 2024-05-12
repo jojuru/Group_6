@@ -763,7 +763,8 @@ public partial class HallintaPage : TabbedPage
     //Poisto napit -------------------------------------------------------
     private async void AsiakkuusPoistaBtn_Clicked(object sender, EventArgs e)
     {
-        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        await DisplayAlert("Varoitus", "Asiakkas poisto toimii vaan jos asiakkaalla ei ole sidottuja tietoja", "ok");
+        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa asiakkaan", "Kyllä", "Ei");
         if (answer)
         {
             string sql = $"DELETE FROM asiakas WHERE asiakas_id = {AsiakkuusIdEnt.Text}";
@@ -811,11 +812,15 @@ public partial class HallintaPage : TabbedPage
 
     private async void VarausPoistaBtn_Clicked(object sender, EventArgs e)
     {
-        bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti poistaa", "Kyllä", "Ei");
+        bool answer = await DisplayAlert("Varoitus", "Oletko varma, Varaukseen liittyvät laskut myös poistetaan!", "Kyllä", "Ei");
         if (answer)
         {
-            string sql = $"DELETE FROM varaus WHERE varaus_id = {VarausIdEnt.Text}";
-            SqlInsert(sql);
+            string sql1 = $"DELETE FROM varauksen_palvelut WHERE varaus_id = {VarausIdEnt.Text}";
+            SqlInsert(sql1);
+            string sql2 = $"DELETE FROM lasku WHERE varaus_id = {VarausIdEnt.Text}";
+            SqlInsert(sql2);
+            string sql3 = $"DELETE FROM varaus WHERE varaus_id = {VarausIdEnt.Text}";
+            SqlInsert(sql3);
             VarausPageReset();
             SqlHaeVaraus();
         }
