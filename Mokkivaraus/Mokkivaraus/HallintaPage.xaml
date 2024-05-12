@@ -117,6 +117,11 @@
 
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
+                <Label
+        Padding="2"
+        FontSize="19"
+        Text="ID | Nimi | Postinumero | Puhelinnumero | Sähköposti"
+        VerticalOptions="Center" />
                 <!--  Alue lista  -->
                 <ListView
                     x:Name="AsiakasListaLv"
@@ -258,10 +263,15 @@
                         TextColor="Black"
                         WidthRequest="160" />
             </VerticalStackLayout>
-
+ 
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1" >
                 <!--  Add your content for the right side here  -->
+                <Label
+        Padding="2"
+        FontSize="19"
+        Text="ID | Alue"
+        VerticalOptions="Center" />
                 <ListView
                     x:Name="AlueListaLv"
                     HorizontalOptions="Start"
@@ -308,6 +318,7 @@
                  BackgroundColor="GhostWhite">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
+            
             <VerticalStackLayout
                 Grid.Column="0"
                 Padding="15"
@@ -475,6 +486,11 @@
 
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
+                <Label
+Padding="2"
+FontSize="19"
+Text="ID | Mökinnimi | Alue | Osoite | Postinumero | Hinta | Henkilömäärä | Kuvaus"
+VerticalOptions="Center" />
                 <ListView
                     x:Name="MokkiListaLv"
                     HorizontalOptions="Start"
@@ -637,6 +653,11 @@
             
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
+                <Label
+Padding="2"
+FontSize="19"
+Text="ID | Nimi | Alue | Hinta | Kuvaus"
+VerticalOptions="Center" />
                 <ListView
                     x:Name="PalveluListaLv"
                     HorizontalOptions="Start"
@@ -709,8 +730,9 @@
                         Placeholder="Varaus ID"
                         WidthRequest="200" />
                     <Entry
-                        x:Name="VarausMökkiIdEnt"
+                        x:Name="VarausMokkiIdEnt"
                         HorizontalOptions="Start"
+                        IsReadOnly="True"
                         Placeholder="Mökin nimi"
                         WidthRequest="200" />
                 </HorizontalStackLayout>
@@ -720,6 +742,7 @@
                     <Entry
                         x:Name="VarausAsiakasIdEnt"
                         HorizontalOptions="Start"
+                        IsReadOnly="True"
                         VerticalOptions="EndAndExpand"
                         Placeholder="Asiakas"
                         WidthRequest="200" />
@@ -746,6 +769,7 @@
                     VerticalOptions="Center" />
                                 <DatePicker 
                     x:Name="varattuDp"
+                    IsEnabled="False"                
                     WidthRequest="200"
                     HorizontalOptions="StartAndExpand"
                     BackgroundColor="Transparent" 
@@ -761,6 +785,7 @@
                                     <DatePicker 
                         x:Name="varattualkuDp"
                         WidthRequest="200"
+                        IsEnabled="False"   
                         HorizontalOptions="StartAndExpand"
                         BackgroundColor="Transparent" 
                         TextColor="Black" />
@@ -772,8 +797,9 @@
                         Text="Varattu Loppu Pvm"
                         VerticalOptions="Center" />
                         <DatePicker 
-                        x:Name="vahvistuloppDp"
+                        x:Name="varattuloppDp"
                         WidthRequest="200"
+                        IsEnabled="False" 
                         HorizontalOptions="StartAndExpand"
                         BackgroundColor="Transparent" 
                         TextColor="Black" />
@@ -785,19 +811,11 @@
                     <Button
                 x:Name="VarausHaeBtn"
                 BackgroundColor="#DEE1E6"
+                Clicked="VarausHaeBtn_Clicked"
                 BorderColor="Black"
                 BorderWidth="2"
                 HorizontalOptions="Start"
                 Text="Hae Varaus"
-                TextColor="Black"
-                WidthRequest="160" />
-                    <Button
-                x:Name="VarausLuoBtn"
-                BackgroundColor="#DEE1E6"
-                BorderColor="Black"
-                BorderWidth="2"
-                HorizontalOptions="Start"
-                Text="Luo uusi varaus"
                 TextColor="Black"
                 WidthRequest="160" />
                 </HorizontalStackLayout>

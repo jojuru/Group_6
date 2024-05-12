@@ -174,7 +174,40 @@ public partial class HallintaPage : TabbedPage
     }
 
     //Napit ----------------------------------------------------------------------------------------------------------------------------------------------
+    
+    //Hakee alueita alkean ensimmäisestä kirjaimesta
+    private void VarausHaeBtn_Clicked(object sender, EventArgs e)
+    {
+        VarausCollection.Clear();
 
+        string sql = "SELECT * FROM varaus WHERE "
+                + "varaus_id LIKE '" + VarausIdEnt.Text + "%'";
+
+               
+        SqlGet(sql, reader =>
+        {
+            Varaus VARAUS = new Varaus();
+            VARAUS.varaus_id = reader["varaus_id"].ToString();
+            VARAUS.asiakas_id = reader["asiakas_id"].ToString();
+            VARAUS.mokki_id = reader["mokki_id"].ToString();
+            VARAUS.varattupvm = Convert.ToDateTime(reader["varattu_pvm"]).ToString("yyyy-MM-dd");
+            VARAUS.vahvistuspvm = Convert.ToDateTime(reader["vahvistus_pvm"]).ToString("yyyy-MM-dd");
+            VARAUS.varattualkupvm = Convert.ToDateTime(reader["varattu_alkupvm"]).ToString("yyyy-MM-dd");
+            VARAUS.varattuloppupvm = Convert.ToDateTime(reader["varattu_loppupvm"]).ToString("yyyy-MM-dd"); ;
+
+            var asiakas = AsiakasCollection.FirstOrDefault(a => a.asiakas_id == VARAUS.asiakas_id);
+            if (asiakas != null)
+                VARAUS.asiakas_id = asiakas.etunimi + " " + asiakas.sukunimi;
+
+            var mokki = MokkiCollection.FirstOrDefault(a => a.mokki_id == VARAUS.mokki_id);
+            if (mokki != null)
+                VARAUS.mokki_id = mokki.mokkinimi;
+
+            VarausCollection.Add(VARAUS);
+        });
+
+        VarausListaLv.ItemsSource = VarausCollection;
+    }
     //Hakee alueita alkean ensimmäisestä kirjaimesta
     private void AlueHaeBtn_Clicked(object sender, EventArgs e)
     {
@@ -372,21 +405,26 @@ public partial class HallintaPage : TabbedPage
             return;
         Varaus varaus = (Varaus)e.SelectedItem;
 
-        VarausLuoBtn.IsVisible = false;
+
         VarausHaeBtn.IsVisible = false;
         VarausHyvaksyMuutosBtn.IsVisible = true;
         VarausHylkaaMuutosBtn.IsVisible = true;
         VarausPoistaBtn.IsVisible = true;
-        VarausAsiakasIdEnt.IsReadOnly = true;
         VarausIdEnt.IsReadOnly = true;
+        VarausMokkiIdEnt.IsReadOnly = false;
+        vahvistuDp.IsEnabled = true;
+        varattuDp.IsEnabled = true;
+        varattualkuDp.IsEnabled = true;
+        varattuloppDp.IsEnabled = true;
+
 
         VarausIdEnt.Text = varaus.varaus_id;
-        VarausMökkiIdEnt.Text = varaus.mokki_id;
+        VarausMokkiIdEnt.Text = varaus.mokki_id;
         VarausAsiakasIdEnt.Text = varaus.asiakas_id;
         vahvistuDp.Date = DateTime.Parse(varaus.vahvistuspvm);
         varattuDp.Date = DateTime.Parse(varaus.varattupvm);
         varattualkuDp.Date = DateTime.Parse(varaus.varattualkupvm);
-        vahvistuloppDp.Date = DateTime.Parse(varaus.varattuloppupvm);
+        varattuloppDp.Date = DateTime.Parse(varaus.varattuloppupvm);
 
         VarausLbl.Text = "Muokkaa Varaus";
         VarausLbl.TextColor = Colors.Red;
@@ -399,8 +437,14 @@ public partial class HallintaPage : TabbedPage
         bool answer = await DisplayAlert("Varoitus", "Haluatko varmasti tallentaa muutokset", "Kyllä", "Ei");
         if (answer)
         {
-           
-
+            string sql = "UPDATE varaus SET "
+                + "mokki_id = '" + MokkiNimiToId(VarausMokkiIdEnt.Text) + "', "
+                + "varattu_pvm = '" + varattuDp.Date.ToString("yyyy-MM-dd") + "', "
+                + "vahvistus_pvm = '" + vahvistuDp.Date.ToString("yyyy-MM-dd") + "', "
+                + "varattu_alkupvm = '" + varattualkuDp.Date.ToString("yyyy-MM-dd") + "', "
+                + "varattu_loppupvm = '" + varattuloppDp.Date.ToString("yyyy-MM-dd") + "' "
+                + "WHERE varaus_id = '" + VarausIdEnt.Text + "'";
+            SqlInsert(sql);
             VarausPageReset();
             SqlHaeVaraus();
         }
@@ -415,21 +459,25 @@ public partial class HallintaPage : TabbedPage
     //muuttaa alue sivun perus näkymään
     private void VarausPageReset()
     {
-        VarausAsiakasIdEnt.IsReadOnly = false;
+        VarausMokkiIdEnt.IsReadOnly = true;
         VarausIdEnt.IsReadOnly = false;
-        VarausLuoBtn.IsVisible = true;
         VarausHaeBtn.IsVisible = true;
         VarausHyvaksyMuutosBtn.IsVisible = false;
         VarausHylkaaMuutosBtn.IsVisible = false;
         VarausPoistaBtn.IsVisible = false;
 
+        vahvistuDp.IsEnabled = false;
+        varattuDp.IsEnabled = false;
+        varattualkuDp.IsEnabled = false;
+        varattuloppDp.IsEnabled = false;
+
         VarausIdEnt.Text = string.Empty;
-        VarausMökkiIdEnt.Text = string.Empty;
+        VarausMokkiIdEnt.Text = string.Empty;
         VarausAsiakasIdEnt.Text = string.Empty;
         vahvistuDp.Date = DateTime.Now;
         varattuDp.Date = DateTime.Now;
         varattualkuDp.Date = DateTime.Now;
-        vahvistuloppDp.Date = DateTime.Now;
+        varattuloppDp.Date = DateTime.Now;
 
         VarausLbl.Text = "Hae/luo Varaus";
         VarausLbl.TextColor = Colors.Black;
@@ -842,18 +890,17 @@ public partial class HallintaPage : TabbedPage
         return ALUE_ID;
     }
 
-
-    private string AlueIdToNimi(string s)
+    private string MokkiNimiToId(string s)
     {
-        String ALUE_NIMI = null;
-        foreach (var item in AlueCollection)
+        String MOKKI_ID = null;
+        foreach (var item in MokkiCollection)
         {
-            if (item.alue_id == s)
+            if (item.mokkinimi == s)
             {
-                ALUE_NIMI = item.nimi;
+                MOKKI_ID = item.mokki_id;
             }
         }
-        return ALUE_NIMI;
+        return MOKKI_ID;
     }
 
     private string VarusteluToString()
