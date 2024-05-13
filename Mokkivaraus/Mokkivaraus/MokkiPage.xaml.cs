@@ -1,3 +1,4 @@
+using Microsoft.UI.Xaml;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,37 +9,106 @@ namespace Mokkivaraus;
 public partial class MokkiPage : ContentPage
 {
     public ObservableCollection<Mokki> ClickedMokkiList { get; }
+    public ObservableCollection<Palvelu> PalveluCollection { get; set; }
+    public ObservableCollection<ServiceOption> ServiceOptions { get; set; } = new ObservableCollection<ServiceOption>();
     static private String connstring = "server=localhost;uid=root;port=3306;pwd=root;database=vn";
+    public double hinta = 0;
+    public string SelectedMokkiAlueId { get; set; }
 
     public MokkiPage(Mokki clickedMokki)
     {
         InitializeComponent();
+
+        PalveluCollection = new ObservableCollection<Palvelu>();
         ClickedMokkiList = new ObservableCollection<Mokki> { clickedMokki };
         BindingContext = this;
-        // Print all properties of the clickedMokki object
+        Debug.WriteLine(ClickedMokkiList[0].varustelu);
+
+        double.Parse(ClickedMokkiList[0].hinta);
+        SelectedMokkiAlueId = ClickedMokkiList[0].alue_id;
+
         foreach (var property in typeof(Mokki).GetProperties())
         {
             var value = property.GetValue(clickedMokki);
             Debug.WriteLine($"{property.Name}: {value}");
         }
 
+        SqlHaePalvelut();
     }
     private void OnDateChanged(object sender, PropertyChangedEventArgs e)
     {
-        //muokataan hintaLabel teksti jos datepickerissä tehdään muutoksia
         if (e.PropertyName == "Date")
         {
-            DateTime alkupvm = saapuminenDate.Date;
-            DateTime loppupvm = lahtoDate.Date;
-            int daysDifference = (loppupvm - alkupvm).Days;
-
-            string hintaString = ClickedMokkiList[0].hinta;
-            double hintaDouble = double.Parse(hintaString);
-            double mokkihinta = hintaDouble * daysDifference;
-
-            mokkihinta = Math.Round(mokkihinta, 2);
-            hintaLabel.Text = $"Tämänhetkinen hinta: {mokkihinta.ToString()}€";
+            UpdateHintaLabel();
         }
+    }
+    private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        UpdateHintaLabel();
+    }
+    private void UpdateHintaLabel()
+    {
+        DateTime alkupvm = saapuminenDate.Date;
+        DateTime loppupvm = lahtoDate.Date;
+        int daysDifference = (loppupvm - alkupvm).Days;
+
+        double mokkihinta;
+        if (double.TryParse(ClickedMokkiList[0].hinta, out double hintaDouble))
+        {
+            mokkihinta = hintaDouble * daysDifference;
+            mokkihinta = Math.Round(mokkihinta, 2);
+        }
+        else
+        {
+            mokkihinta = 0;
+        }
+
+        double palveluHinta = 0;
+        foreach (var service in ServiceOptions.Where(s => s.IsSelected))
+        {
+            palveluHinta += service.Price;
+        }
+        double kokonaishinta = mokkihinta + palveluHinta;
+
+        hintaLabel.Text = $"Tämänhetkinen hinta: {kokonaishinta.ToString("C")}";
+    }
+    private void SqlHaePalvelut()
+    {
+        PalveluCollection.Clear();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = connstring;
+        con.Open();
+
+        // SQL query to select services associated with the selected area
+        string sql = "SELECT palvelu.*, alue.nimi AS alue_nimi FROM palvelu JOIN alue ON palvelu.alue_id = alue.alue_id WHERE palvelu.alue_id = @alue_id";
+        MySqlCommand cmd = new MySqlCommand(sql, con);
+        cmd.Parameters.AddWithValue("@alue_id", SelectedMokkiAlueId);
+        MySqlDataReader reader = cmd.ExecuteReader();
+
+        HashSet<string> addedServices = new HashSet<string>();
+
+        while (reader.Read())
+        {
+            Palvelu PALVELU = new Palvelu();
+            string palveluNimi = reader["nimi"].ToString();
+            PALVELU.palvelu_id = reader["palvelu_id"].ToString();
+            PALVELU.alue_id = reader["alue_id"].ToString();
+            PALVELU.nimi = reader["nimi"].ToString();
+            PALVELU.kuvaus = reader["kuvaus"].ToString();
+            PALVELU.hinta = reader["hinta"].ToString();
+            double hinta = double.Parse(reader["hinta"].ToString());
+            PALVELU.alv = reader["alv"].ToString();
+
+            if (!addedServices.Contains(palveluNimi))
+            {
+                // Create a new ServiceOption and add it to the collection
+                ServiceOptions.Add(new ServiceOption { Name = palveluNimi, IsSelected = false, Price = hinta });
+                addedServices.Add(palveluNimi); // Keep track of added services
+            }
+
+            PalveluCollection.Add(PALVELU);
+        }
+        con.Close();
     }
     private async void VarausBtnClicked(object sender, EventArgs e)
     {
@@ -50,47 +120,56 @@ public partial class MokkiPage : ContentPage
 
         try
         {
-            // 1.Ensin luodaan uusi asiakas tietokantaan
-            // Get user input values from the Entry elements
-            string etunimi = etunimi_Ent.Text;
-            string sukunimi = sukunimi_Ent.Text;
-            string postinro = postinro_Ent.Text;
-            string lahiosoite = lahiosoite_Ent.Text;
-            string email = email_Ent.Text;
+
+            // 1. Check if the phone number exists in the database
             string puhelinnro = puhelinnro_Ent.Text;
+            int asiakasId = await CheckPhoneNumberExists(puhelinnro);
 
-            // Check if any of the input fields are empty
-            if (string.IsNullOrEmpty(etunimi) || string.IsNullOrEmpty(sukunimi) || string.IsNullOrEmpty(postinro) 
-                || string.IsNullOrEmpty(lahiosoite) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(puhelinnro))
+            if (asiakasId == 0)
             {
-                DisplayAlert("Virhe", "Tietoja puuttuu", "ok");
-                return;
-            }
+                // If the phone number does not exist, create a new asiakas
+                // Get user input values from the Entry elements
+                string etunimi = etunimi_Ent.Text;
+                string sukunimi = sukunimi_Ent.Text;
+                string postinro = postinro_Ent.Text;
+                string lahiosoite = lahiosoite_Ent.Text;
+                string email = email_Ent.Text;
 
-            int asiakasId = 0;
+                string asiakas_sql = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) " +
+                              "VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro); SELECT LAST_INSERT_ID();";
 
-            string asiakas_sql = "INSERT INTO asiakas (postinro, etunimi, sukunimi, lahiosoite, email, puhelinnro) " +
-                                "VALUES (@postinro, @etunimi, @sukunimi, @lahiosoite, @email, @puhelinnro); SELECT LAST_INSERT_ID();";
-
-            // Syötetään tiedot sql
-            using (MySqlConnection connection = new MySqlConnection(connstring))
-            {
-                connection.Open();
-
-                using (MySqlCommand command = new MySqlCommand(asiakas_sql, connection))
+                // Check if any of the input fields are empty
+                if (string.IsNullOrEmpty(etunimi) || string.IsNullOrEmpty(sukunimi) || string.IsNullOrEmpty(postinro)
+                    || string.IsNullOrEmpty(lahiosoite) || string.IsNullOrEmpty(email))
                 {
-                    command.Parameters.AddWithValue("@postinro", postinro);
-                    command.Parameters.AddWithValue("@etunimi", etunimi);
-                    command.Parameters.AddWithValue("@sukunimi", sukunimi);
-                    command.Parameters.AddWithValue("@lahiosoite", lahiosoite);
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@puhelinnro", puhelinnro);
-
-                    asiakasId = Convert.ToInt32(await command.ExecuteScalarAsync());
+                    await DisplayAlert("Virhe", "Tietoja puuttuu", "ok");
+                    return;
                 }
+
+                using (MySqlConnection con = new MySqlConnection(connstring))
+                {
+                    con.Open();
+
+                    using (MySqlCommand command = new MySqlCommand(asiakas_sql, con))
+                    {
+                        command.Parameters.AddWithValue("@postinro", postinro);
+                        command.Parameters.AddWithValue("@etunimi", etunimi);
+                        command.Parameters.AddWithValue("@sukunimi", sukunimi);
+                        command.Parameters.AddWithValue("@lahiosoite", lahiosoite);
+                        command.Parameters.AddWithValue("@email", email);
+                        command.Parameters.AddWithValue("@puhelinnro", puhelinnro);
+
+                        asiakasId = Convert.ToInt32(await command.ExecuteScalarAsync());
+                    }
+                }
+
+                Debug.WriteLine($"Luotu uudella asiakas_id:llä: {asiakasId}");
+            }
+            else
+            {
+                Debug.WriteLine($"Luotu vanhalla asiakas_id:llä: {asiakasId}");
             }
 
-            Debug.WriteLine($"luotu asiakas_id: {asiakasId}");
             asiakasSuccess = true;
 
             // 2. Sitten luodaan uusi varaus tietokantaan
@@ -169,36 +248,24 @@ public partial class MokkiPage : ContentPage
 
             laskuSuccess = true;
             //4. Luodaan varauksen_palvelut tietokantaan KESKEN!!
-            List<string> selectedServices = new List<string>();
+            List<string> selectedPalveluIds = new List<string>();
 
-            if (porosafariBox.IsChecked)
+            foreach (var service in ServiceOptions.Where(s => s.IsSelected))
             {
-                selectedServices.Add("Porosafari");
+                // Find the corresponding Palvelu object in PalveluCollection
+                var palvelu = PalveluCollection.FirstOrDefault(p => p.nimi == service.Name);
+
+                if (palvelu != null)
+                {
+                    selectedPalveluIds.Add(palvelu.palvelu_id);
+                }
             }
-
-            if (koiravaljakkoBox.IsChecked)
+            foreach (var item in selectedPalveluIds)
             {
-                selectedServices.Add("Koiravaljakkoajelu");
-            }
-
-            if (vesiskootteriBox.IsChecked)
-            {
-                selectedServices.Add("Vesiskootteri");
-            }
-
-            if (airsoftBox.IsChecked)
-            {
-                selectedServices.Add("Airsoftaus");
+                Debug.WriteLine(item);
             }
 
-            if (hevosajeluBox.IsChecked)
-            {
-                selectedServices.Add("Hevosajelu");
-            }
-            foreach (string service in selectedServices)
-            {
-                Debug.WriteLine(service);
-            }
+
 
 
 
@@ -208,13 +275,13 @@ public partial class MokkiPage : ContentPage
         {
             // Handle exceptions for each operation separately
             Debug.WriteLine("Error: " + ex.Message);
-            DisplayAlert("SQL virhe", ex.Message, "OK");
+            await DisplayAlert("SQL virhe", ex.Message, "OK");
         }
 
         // Display "Onnistui" only if all operations were successful
         if (asiakasSuccess && varausSuccess && laskuSuccess && varPalvelutSuccess)
         {
-            DisplayAlert("Onnistui", "Varaus tehty!", "OK");
+            await DisplayAlert("Onnistui", "Varaus tehty!", "OK");
             // Clear input fields 
             etunimi_Ent.Text = "";
             sukunimi_Ent.Text = "";
@@ -224,5 +291,30 @@ public partial class MokkiPage : ContentPage
             puhelinnro_Ent.Text = "";
         }
     }
+    private async Task<int> CheckPhoneNumberExists(string puhelinnro)
+    {
+        int asiakasId = 0;
 
+        string sql = "SELECT asiakas_id FROM asiakas WHERE puhelinnro = @puhelinnro";
+
+        using (MySqlConnection con = new MySqlConnection(connstring))
+        {
+            con.Open();
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@puhelinnro", puhelinnro);
+
+                object result = await cmd.ExecuteScalarAsync();
+
+                if (result != null)
+                {
+                    asiakasId = Convert.ToInt32(result);
+                }
+            }
+            con.Close();
+        }
+
+        return asiakasId;
+    }
 }

@@ -29,13 +29,13 @@
     <AppXManifest Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-05-13T13:08:12.583</Modified>
+      <Modified>2024-05-13T21:57:44.473</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-05-13T13:04:41.229</Modified>
+      <Modified>2024-05-13T21:57:44.264</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.runtimeconfig.json">
       <PackagePath>Mokkivaraus.runtimeconfig.json</PackagePath>
@@ -43,11 +43,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.dll">
       <PackagePath>Mokkivaraus.dll</PackagePath>
-      <Modified>2024-05-13T13:08:11.559</Modified>
+      <Modified>2024-05-13T21:57:43.398</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Mokkivaraus.exe</PackagePath>
-      <Modified>2024-05-13T13:08:11.563</Modified>
+      <Modified>2024-05-13T21:57:43.402</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json">
       <PackagePath>Mokkivaraus.deps.json</PackagePath>

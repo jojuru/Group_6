@@ -10,4 +10,5 @@ public class ServiceOption
 {
     public string Name { get; set; }
     public bool IsSelected { get; set; }
+    public double Price { get; set; } // Add this property
 }

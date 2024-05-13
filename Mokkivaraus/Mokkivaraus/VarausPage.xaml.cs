@@ -14,7 +14,8 @@ public partial class VarausPage : TabbedPage
     public ObservableCollection<ServiceOption> ServiceOptions { get; set; } = new ObservableCollection<ServiceOption>();
     public ObservableCollection<ServiceOption> VarusteluOptions { get; set; } = new ObservableCollection<ServiceOption>();
 
-
+    public HashSet<string> addedServices = new HashSet<string>();
+    public HashSet<string> addedVarustelu = new HashSet<string>();
     // grouppaa aktiviteetit alueen mukaan
     public Dictionary<string, List<string>> ServicesByArea = new Dictionary<string, List<string>>();
 
@@ -34,11 +35,11 @@ public partial class VarausPage : TabbedPage
         SqlHaeAlueet();
         SqlHaePalvelut();
         SqlHaeMokit();
-
     }
     private void SqlHaeMokit()
     {
         MokkiCollection.Clear();
+        addedVarustelu.Clear();
 
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
@@ -53,8 +54,6 @@ public partial class VarausPage : TabbedPage
 
         MySqlCommand cmd = new MySqlCommand(sql, con);
         MySqlDataReader reader = cmd.ExecuteReader();
-        HashSet<string> addedVarustelu = new HashSet<string>();
-
 
         while (reader.Read())
         {
@@ -68,6 +67,7 @@ public partial class VarausPage : TabbedPage
             MOKKI.kuva = reader["kuva"].ToString();
             MOKKI.kuvaus = reader["kuvaus"].ToString();
             MOKKI.henkilomaara = reader["henkilomaara"].ToString();
+            MOKKI.varustelu = reader["varustelu"].ToString();
 
             // Split the varustelu string and populate VarusteluOptions
             string varusteluString = reader["varustelu"].ToString();
@@ -130,6 +130,8 @@ public partial class VarausPage : TabbedPage
     private void SqlHaePalvelut()
     {
         PalveluCollection.Clear();
+        addedServices.Clear();
+
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = connstring;
         con.Open();
@@ -138,8 +140,6 @@ public partial class VarausPage : TabbedPage
         string sql = "SELECT palvelu.*, alue.nimi AS alue_nimi FROM palvelu JOIN alue ON palvelu.alue_id = alue.alue_id";
         MySqlCommand cmd = new MySqlCommand(sql, con);
         MySqlDataReader reader = cmd.ExecuteReader();
-
-        HashSet<string> addedServices = new HashSet<string>();
 
         while (reader.Read())
         {
@@ -154,6 +154,7 @@ public partial class VarausPage : TabbedPage
             }
             ServicesByArea[alueNimi].Add(palveluNimi);
             // Check if the service name has already been added to avoid duplicates
+
             if (!addedServices.Contains(palveluNimi))
             {
                 // Create a new ServiceOption and add it to the collection
@@ -161,29 +162,37 @@ public partial class VarausPage : TabbedPage
                 addedServices.Add(palveluNimi); // Keep track of added services
             }
         }
+
         con.Close();
 
     }
 
     private void ResetButton_Clicked(object sender, EventArgs e)
     {
+
+        MokkiCollection.Clear();
+        AlueCollection.Clear();
+        PalveluCollection.Clear();
+        ServiceOptions.Clear();
+        VarusteluOptions.Clear();
+        ServicesByArea.Clear();
+        addedServices.Clear();
+        addedVarustelu.Clear();
+
         // Reset the UI elements to their default state
         MokinNimiEntry.Text = "";
         MinHintaEntry.Text = "";
         MaxHintaEntry.Text = "";
         AlueListaPicker.SelectedIndex = -1;
-        
-        foreach (ServiceOption option in VarusteluOptions)
-        { 
-            option.IsSelected = false;
-        }
-        foreach (ServiceOption option in ServiceOptions)
-        {
-            option.IsSelected = false;
-        }
-        
 
-        // alkuperäinen näkymä
+        //reset checkboxes
+        VarusteluOptions.Clear();
+        ServiceOptions.Clear();
+
+
+        //alkuper näkymä
+        SqlHaeAlueet();
+        SqlHaePalvelut();
         SqlHaeMokit();
     }
     private void HaeButton_Clicked(object sender, EventArgs e)

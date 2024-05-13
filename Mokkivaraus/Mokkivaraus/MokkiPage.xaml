@@ -89,7 +89,7 @@
                 <Label
                     FontFamily="PoppinsRegular"
                     FontSize="25"
-                    Text="Uusi asiakas"
+                    Text="Uusi asiakas/Vanha asiakas puh."
                     TextColor="Grey" />
                 <HorizontalStackLayout Margin="0,10" Spacing="20">
                     <Border
@@ -154,7 +154,7 @@
 
                 <HorizontalStackLayout Margin="0,10" Spacing="20">
                     <Border
-                        Stroke="#9dabc4"
+                        Stroke="Red"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
                         <Entry
@@ -217,47 +217,42 @@
                     FontSize="26"
                     Text="Laskulle valitut palvelut"
                     TextColor="Black" />
-                <HorizontalStackLayout Spacing="20">
-                    <CheckBox x:Name="porosafariBox" Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Porosafari"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                    <CheckBox x:Name="koiravaljakkoBox" Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Koiravaljakkoajelu"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Margin="0,10" Spacing="20">
-                    <CheckBox x:Name="vesiskootteriBox" Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Vesiskootteri"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="20">
-                    <CheckBox x:Name="airsoftBox" Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Airsoftaus"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                    <CheckBox x:Name="hevosajeluBox" Scale="1.5" />
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="18"
-                        Text="Hevosajelu"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
+
+                <CollectionView
+                    x:Name="PalveluCV"
+                    Margin="0,5,0,10"
+                    HorizontalOptions="Start"
+                    ItemsLayout="VerticalGrid,2"
+                    ItemsSource="{Binding ServiceOptions}"
+                    SelectionMode="None"
+                    VerticalOptions="Start"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="600">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Padding="10">
+                                <CheckBox
+                                    CheckedChanged="CheckBox_CheckedChanged"
+                                    IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                    Scale="1.5"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="1"
+                                    FontFamily="PoppinsRegular"
+                                    FontSize="18"
+                                    Text="{Binding Name}"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    FontFamily="PoppinsRegular"
+                                    FontSize="18"
+                                    Text="{Binding Price, StringFormat='+{0}€'}"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <Border
                     Margin="0,20,0,0"

@@ -131,6 +131,7 @@
                             <DataTemplate>
                                 <HorizontalStackLayout Padding="10">
                                     <CheckBox
+                                        x:Name="checkboxx"
                                         IsChecked="{Binding IsSelected, Mode=TwoWay}"
                                         Scale="1.5"
                                         VerticalOptions="Center" />
