@@ -5,11 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     BarBackground="#E8E8F0"
     BarTextColor="Black"
-    SelectedTabColor="GhostWhite"
-    >
+    SelectedTabColor="GhostWhite">
 
 
-    <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False" BackgroundColor="GhostWhite">
+    <ContentPage
+        Title="Hae mökkejä"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
 
         <!--  jakaa sivun kahtia  -->
         <Grid BackgroundColor="#f7f7f8">
@@ -71,9 +73,6 @@
                         </Border>
                     </HorizontalStackLayout>
 
-
-
-
                     <!--  HINTA  -->
                     <Label
                         Margin="0,15"
@@ -118,60 +117,34 @@
                         FontSize="26"
                         Text="Palvelut"
                         TextColor="Black" />
-
-                    <HorizontalStackLayout Spacing="20">
-                        <CheckBox 
-                            x:Name="PorosafariCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            Padding="0,0,25,0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Porosafari"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                        <CheckBox 
-                            x:Name="AirsoftausCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Airsoftaus"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Margin="0,10" Spacing="20">
-                        <CheckBox 
-                            x:Name="VesiskootteriCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Vesiskootteri"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                        <CheckBox 
-                            x:Name="HevosajeluCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Hevosajelu"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Spacing="20">
-                        <CheckBox 
-                            x:Name="KoiravaljakkoajeluCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Koiravaljakkoajelu"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+                    <CollectionView
+                        x:Name="PalveluCV"
+                        Margin="0,5,0,10"
+                        HorizontalOptions="Start"
+                        ItemsLayout="VerticalGrid,2"
+                        ItemsSource="{Binding ServiceOptions}"
+                        SelectionMode="None"
+                        VerticalOptions="Start"
+                        VerticalScrollBarVisibility="Never"
+                        WidthRequest="500">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Padding="10">
+                                    <CheckBox
+                                        IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                        Scale="1.5"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontFamily="PoppinsRegular"
+                                        FontSize="18"
+                                        Text="{Binding Name}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
                     <!--  VARUSTELUTASO  -->
                     <Label
@@ -181,70 +154,59 @@
                         Text="Varustelutaso"
                         TextColor="Black" />
 
-                    <HorizontalStackLayout Spacing="20">
-                        <CheckBox 
-                            x:Name="TVCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            Margin="20,0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="TV"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                        <CheckBox 
-                            x:Name="AstianpesukoneCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Astianpesukone"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Margin="0,10" Spacing="20">
-                        <CheckBox 
-                            x:Name="SaunaCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            Padding="2,0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Sauna"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                        <CheckBox 
-                            x:Name="TakkaCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Takka"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Spacing="20">
-                        <CheckBox 
-                            x:Name="PyykinpesukoneCheckBox"
-                            Scale="1.5" />
-                        <Label
-                            FontFamily="PoppinsRegular"
-                            FontSize="18"
-                            Text="Pyykinpesukone"
-                            TextColor="Black"
-                            VerticalOptions="Center" />
-                    </HorizontalStackLayout>
+                    <CollectionView
+                        x:Name="VarusteluCV"
+                        Margin="0,5,0,10"
+                        HorizontalOptions="Start"
+                        ItemsLayout="VerticalGrid,2"
+                        ItemsSource="{Binding VarusteluOptions}"
+                        SelectionMode="None"
+                        VerticalOptions="Start"
+                        VerticalScrollBarVisibility="Never"
+                        WidthRequest="500">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Padding="10">
+                                    <CheckBox
+                                        IsChecked="{Binding IsSelected}"
+                                        Scale="1.5"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontFamily="PoppinsRegular"
+                                        FontSize="18"
+                                        Text="{Binding Name}"
+                                        TextColor="Black"
+                                        VerticalOptions="Center" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                    <Button
-                        Margin="0,15"
-                        BackgroundColor="#b2f7ab"
-                        BorderColor="Black"
-                        BorderWidth="2"
-                        Clicked="HaeButton_Clicked"
-                        FontFamily="PoppinsRegular"
-                        FontSize="25"
-                        Text="Hae"
-                        TextColor="Black" />
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                        <Button
+                            Margin="0,15"
+                            BackgroundColor="#b2f7ab"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            Clicked="HaeButton_Clicked"
+                            FontFamily="PoppinsRegular"
+                            FontSize="25"
+                            Text="Hae"
+                            TextColor="Black"
+                            WidthRequest="200" />
+                        <Button
+                            Margin="0,15"
+                            BackgroundColor="#b2f7ab"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            Clicked="ResetButton_Clicked"
+                            FontFamily="PoppinsRegular"
+                            FontSize="25"
+                            Text="Reset"
+                            TextColor="Black"
+                            WidthRequest="200" />
+                    </HorizontalStackLayout>
 
                 </VerticalStackLayout>
             </ScrollView>
@@ -333,6 +295,8 @@
                                                     </MultiBinding>
                                                 </Label.Text>
                                             </Label>
+
+
 
                                             <Button
                                                 x:Name="TutustuButton_{Binding mokki_id}"

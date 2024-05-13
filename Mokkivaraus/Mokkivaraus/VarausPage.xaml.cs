@@ -1,3 +1,5 @@
+using Google.Protobuf.Reflection;
+using Microsoft.Maui.Controls;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -9,6 +11,9 @@ public partial class VarausPage : TabbedPage
     public ObservableCollection<Alue> AlueCollection { get; set; }
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
+    public ObservableCollection<ServiceOption> ServiceOptions { get; set; } = new ObservableCollection<ServiceOption>();
+    public ObservableCollection<ServiceOption> VarusteluOptions { get; set; } = new ObservableCollection<ServiceOption>();
+
 
     // grouppaa aktiviteetit alueen mukaan
     public Dictionary<string, List<string>> ServicesByArea = new Dictionary<string, List<string>>();
@@ -29,6 +34,7 @@ public partial class VarausPage : TabbedPage
         SqlHaeAlueet();
         SqlHaePalvelut();
         SqlHaeMokit();
+
     }
     private void SqlHaeMokit()
     {
@@ -38,9 +44,17 @@ public partial class VarausPage : TabbedPage
         con.ConnectionString = connstring;
         con.Open();
 
-        string sql = "SELECT * FROM mokki";
+        string sql = "SELECT m.*, a.nimi AS alue, p.nimi AS palvelut " +
+                    "FROM mokki m " +
+                    "JOIN alue a ON m.alue_id = a.alue_id " +
+                    "LEFT JOIN varauksen_palvelut vp ON m.mokki_id = vp.varaus_id " +
+                    "LEFT JOIN palvelu p ON vp.palvelu_id = p.palvelu_id " +
+                    "GROUP BY m.mokki_id";
+
         MySqlCommand cmd = new MySqlCommand(sql, con);
         MySqlDataReader reader = cmd.ExecuteReader();
+        HashSet<string> addedVarustelu = new HashSet<string>();
+
 
         while (reader.Read())
         {
@@ -54,14 +68,22 @@ public partial class VarausPage : TabbedPage
             MOKKI.kuva = reader["kuva"].ToString();
             MOKKI.kuvaus = reader["kuvaus"].ToString();
             MOKKI.henkilomaara = reader["henkilomaara"].ToString();
-            // Split the varustelu string into individual items and join them with ", "
-            MOKKI.varustelu = reader["varustelu"].ToString();
-            string[] varusteluItems = MOKKI.varustelu.Split(',');
-            for (int i = 0; i < varusteluItems.Length; i++)
+
+            // Split the varustelu string and populate VarusteluOptions
+            string varusteluString = reader["varustelu"].ToString();
+            string varusteluString2 = varusteluString.Replace(" ", "");
+            string[] varusteluItems = varusteluString2.Split(',');
+            foreach (var item in varusteluItems)
             {
-                varusteluItems[i] = char.ToUpper(varusteluItems[i][0]) + varusteluItems[i].Substring(1);
+                if (!addedVarustelu.Contains(item))
+                {
+                    Debug.WriteLine(item);
+
+                    // Create a new ServiceOption and add it to the collection
+                    VarusteluOptions.Add(new ServiceOption { Name = item, IsSelected = false });
+                    addedVarustelu.Add(item); // Keep track of added services
+                }
             }
-            MOKKI.varustelu = string.Join(", ", varusteluItems);
 
             //etsii alue collectionista oikean alueen id perusteella
             var mok = AlueCollection.FirstOrDefault(m => m.alue_id == reader["alue_id"].ToString());
@@ -76,7 +98,7 @@ public partial class VarausPage : TabbedPage
 
             MokkiCollection.Add(MOKKI);
         }
-
+        con.Close();
         MokkiListaLv.ItemsSource = MokkiCollection;
     }
     private void SqlHaeAlueet()
@@ -102,6 +124,8 @@ public partial class VarausPage : TabbedPage
         }
         //pickeriin alueet
         AlueListaPicker.ItemsSource = AlueCollection;
+        con.Close();
+
     }
     private void SqlHaePalvelut()
     {
@@ -115,6 +139,8 @@ public partial class VarausPage : TabbedPage
         MySqlCommand cmd = new MySqlCommand(sql, con);
         MySqlDataReader reader = cmd.ExecuteReader();
 
+        HashSet<string> addedServices = new HashSet<string>();
+
         while (reader.Read())
         {
             // Retrieve the area name and service name
@@ -127,17 +153,42 @@ public partial class VarausPage : TabbedPage
                 ServicesByArea[alueNimi] = new List<string>();
             }
             ServicesByArea[alueNimi].Add(palveluNimi);
+            // Check if the service name has already been added to avoid duplicates
+            if (!addedServices.Contains(palveluNimi))
+            {
+                // Create a new ServiceOption and add it to the collection
+                ServiceOptions.Add(new ServiceOption { Name = palveluNimi, IsSelected = false });
+                addedServices.Add(palveluNimi); // Keep track of added services
+            }
         }
+        con.Close();
 
     }
 
-    private void valitseBtn_Clicked(object sender, EventArgs e)
+    private void ResetButton_Clicked(object sender, EventArgs e)
     {
+        // Reset the UI elements to their default state
+        MokinNimiEntry.Text = "";
+        MinHintaEntry.Text = "";
+        MaxHintaEntry.Text = "";
+        AlueListaPicker.SelectedIndex = -1;
+        
+        foreach (ServiceOption option in VarusteluOptions)
+        { 
+            option.IsSelected = false;
+        }
+        foreach (ServiceOption option in ServiceOptions)
+        {
+            option.IsSelected = false;
+        }
+        
 
+        // alkuperäinen näkymä
+        SqlHaeMokit();
     }
     private void HaeButton_Clicked(object sender, EventArgs e)
     {
-        // Tähän lisätään hakutoiminnallisuus: TÄMÄ LISÄTTY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // HERE WE ADD FILTERS FOR SEARCH
         MokkiCollection.Clear();
 
         using (MySqlConnection con = new MySqlConnection(connstring))
@@ -145,6 +196,7 @@ public partial class VarausPage : TabbedPage
             con.Open();
 
             string sql = "SELECT * FROM mokki WHERE ";
+
 
             List<string> conditions = new List<string>();
 
@@ -156,17 +208,13 @@ public partial class VarausPage : TabbedPage
 
             // VARUSTELU
             List<string> selectedVarustelu = new List<string>();
-            if (TVCheckBox.IsChecked)
-                selectedVarustelu.Add("tv");
-            if (AstianpesukoneCheckBox.IsChecked)
-                selectedVarustelu.Add("astianpesukone");
-            if (SaunaCheckBox.IsChecked)
-                selectedVarustelu.Add("sauna");
-            if (TakkaCheckBox.IsChecked)
-                selectedVarustelu.Add("takka");
-            if (PyykinpesukoneCheckBox.IsChecked)
-                selectedVarustelu.Add("pyykinpesukone");
-
+            foreach (ServiceOption option in VarusteluOptions)
+            {
+                if (option.IsSelected)
+                {
+                    selectedVarustelu.Add(option.Name);
+                }
+            }
             if (selectedVarustelu.Count > 0)
             {
                 List<string> varusteluConditions = new List<string>();
@@ -208,7 +256,6 @@ public partial class VarausPage : TabbedPage
             {
                 sql += "1=1"; // Jos mitään ehtoja ei ole, palauta kaikki tulokset
             }
-
             MySqlCommand cmd = new MySqlCommand(sql, con);
 
             // Lisätään parametri, jos hakuteksti on annettu
@@ -234,9 +281,6 @@ public partial class VarausPage : TabbedPage
             cmd.Parameters.AddWithValue("@minHinta", minHinta);
             cmd.Parameters.AddWithValue("@maxHinta", maxHinta);
 
-            // PALVELUT
-
-
             using (MySqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -249,6 +293,7 @@ public partial class VarausPage : TabbedPage
                     MOKKI.mokkinimi = reader["mokkinimi"].ToString();
                     MOKKI.katuosoite = reader["katuosoite"].ToString();
                     MOKKI.hinta = reader["hinta"].ToString();
+                    MOKKI.kuva = reader["kuva"].ToString();
                     MOKKI.kuvaus = reader["kuvaus"].ToString();
                     MOKKI.henkilomaara = reader["henkilomaara"].ToString();
                     MOKKI.varustelu = reader["varustelu"].ToString();
@@ -276,8 +321,8 @@ public partial class VarausPage : TabbedPage
                     MokkiCollection.Add(MOKKI);
                 }
             }
+            con.Close();
         }
-
         MokkiListaLv.ItemsSource = MokkiCollection;
     }
     private async void TutustuButton_Clicked(object sender, EventArgs e)
