@@ -4,15 +4,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Hallinta"
-    BarBackgroundColor="#E8E8F0"
-    SelectedTabColor="GhostWhite">
-
+    Style="{StaticResource TabbedPageStyle}">
 
     <!--  Asiakkuudet  -->
-    <ContentPage
-        Title="Asiakkuudet"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Asiakkuudet" NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
@@ -192,10 +187,7 @@
     </ContentPage>
 
     <!--  Alue  -->
-    <ContentPage
-        Title="Alue"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Alue" NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
@@ -326,10 +318,7 @@
     </ContentPage>
 
     <!--  Mökki  -->
-    <ContentPage
-        Title="Mökki"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Mökki" NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
 
@@ -570,10 +559,7 @@
     </ContentPage>
 
     <!--  Palvelu  -->
-    <ContentPage
-        Title="Palvelu"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Palvelu" NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
@@ -741,10 +727,7 @@
         </Grid>
     </ContentPage>
 
-    <ContentPage
-        Title="Varaukset"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Varaukset" NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout

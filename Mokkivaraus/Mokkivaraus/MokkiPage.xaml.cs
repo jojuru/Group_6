@@ -1,4 +1,3 @@
-using Microsoft.UI.Xaml;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

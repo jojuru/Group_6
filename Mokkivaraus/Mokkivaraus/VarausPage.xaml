@@ -3,15 +3,9 @@
     x:Class="Mokkivaraus.VarausPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BarBackground="#E8E8F0"
-    BarTextColor="Black"
-    SelectedTabColor="Grey">
+    Style="{StaticResource TabbedPageStyle}">
 
-
-    <ContentPage
-        Title="Hae mökkejä"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False">
 
         <!--  jakaa sivun kahtia  -->
         <Grid BackgroundColor="#f7f7f8">
@@ -322,10 +316,7 @@
             </ScrollView>
         </Grid>
     </ContentPage>
-    <ContentPage
-        Title="Hae varauksia"
-        BackgroundColor="GhostWhite"
-        NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="Hae varauksia" NavigationPage.HasNavigationBar="False">
         <!--  jakaa sivun kahtia  -->
         <Grid BackgroundColor="GhostWhite">
             <Grid.ColumnDefinitions>
