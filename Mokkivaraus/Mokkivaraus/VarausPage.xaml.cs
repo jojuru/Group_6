@@ -77,8 +77,6 @@ public partial class VarausPage : TabbedPage
             {
                 if (!addedVarustelu.Contains(item))
                 {
-                    Debug.WriteLine(item);
-
                     // Create a new ServiceOption and add it to the collection
                     VarusteluOptions.Add(new ServiceOption { Name = item, IsSelected = false });
                     addedVarustelu.Add(item); // Keep track of added services
@@ -169,7 +167,7 @@ public partial class VarausPage : TabbedPage
 
     private void ResetButton_Clicked(object sender, EventArgs e)
     {
-
+        //clear all lists
         MokkiCollection.Clear();
         AlueCollection.Clear();
         PalveluCollection.Clear();

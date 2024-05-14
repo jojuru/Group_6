@@ -101,6 +101,7 @@ public partial class MokkiPage : ContentPage
 
             if (!addedServices.Contains(palveluNimi))
             {
+
                 // Create a new ServiceOption and add it to the collection
                 ServiceOptions.Add(new ServiceOption { Name = palveluNimi, IsSelected = false, Price = hinta });
                 addedServices.Add(palveluNimi); // Keep track of added services
@@ -215,7 +216,7 @@ public partial class MokkiPage : ContentPage
 
             Debug.Write(hintaString + " " + mokkihinta + " " + alvhinta);
             // Check which radio button is selected
-            int laskuntyyppi = 0;
+            int laskuntyyppi = 1; //default email
             if (paperiBox.IsChecked)
             {
                 laskuntyyppi = 0;
@@ -238,7 +239,7 @@ public partial class MokkiPage : ContentPage
                     cmd.Parameters.AddWithValue("@varaus_id", varausId);
                     cmd.Parameters.AddWithValue("@summa", mokkihinta);
                     cmd.Parameters.AddWithValue("@alv", alvhinta);
-                    cmd.Parameters.AddWithValue("@maksettu", 0);
+                    cmd.Parameters.AddWithValue("@maksettu", 0); 
                     cmd.Parameters.AddWithValue("@laskun_tyyppi", laskuntyyppi);
 
                     cmd.ExecuteNonQuery();
@@ -258,14 +259,30 @@ public partial class MokkiPage : ContentPage
                 if (palvelu != null)
                 {
                     selectedPalveluIds.Add(palvelu.palvelu_id);
+                    string varPalvelu_sql = "INSERT INTO vn.varauksen_palvelut (varaus_id, palvelu_id, lkm) " +
+                        "VALUES (@varaus_id, @palvelu_id, @lkm)";
+
+                    using (MySqlConnection con = new MySqlConnection(connstring))
+                    {
+                        con.Open();
+
+                        using (MySqlCommand cmd = new MySqlCommand(varPalvelu_sql, con))
+                        {
+                            cmd.Parameters.AddWithValue("@varaus_id", varausId);
+                            cmd.Parameters.AddWithValue("@palvelu_id", palvelu.palvelu_id);
+                            cmd.Parameters.AddWithValue("@lkm", 1); // Assuming quantity is always 1
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        con.Close();
+                    }
                 }
             }
             foreach (var item in selectedPalveluIds)
             {
-                Debug.WriteLine(item);
+                Debug.WriteLine("palveluid: " + item);
             }
-
-
 
 
 

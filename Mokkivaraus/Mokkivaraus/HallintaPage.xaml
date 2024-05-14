@@ -4,33 +4,41 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Hallinta"
-    SelectedTabColor="GhostWhite" 
     BarBackgroundColor="#E8E8F0"
-    
-    >
+    SelectedTabColor="GhostWhite">
 
 
     <!--  Asiakkuudet  -->
-    <ContentPage Title="Asiakkuudet" 
-                 NavigationPage.HasNavigationBar="False" 
-                 BackgroundColor="GhostWhite">
+    <ContentPage
+        Title="Asiakkuudet"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
                 Grid.Column="0"
                 Padding="15"
                 Spacing="13">
-                <Label x:Name="AsiakkuusLbl" FontSize="Large" Text="Hae/luo asiakkuus" />
+                <Label
+                    x:Name="AsiakkuusLbl"
+                    FontSize="Large"
+                    Text="Hae/luo asiakkuus" />
                 <Entry
-                x:Name="AsiakkuusIdEnt"
-                HorizontalOptions="Start"
-                Placeholder="Asiakas ID"
-                WidthRequest="413" />
+                    x:Name="AsiakkuusIdEnt"
+                    HorizontalOptions="Start"
+                    Placeholder="Asiakas ID"
+                    WidthRequest="413" />
                 <HorizontalStackLayout Spacing="13">
-                    <Entry x:Name="AsiakkuusEtunimiEnt"  Placeholder="Etunimi" WidthRequest="200" />
-                    <Entry x:Name="AsiakkuusSukunimiEnt" Placeholder="Sukunimi" WidthRequest="200" />
+                    <Entry
+                        x:Name="AsiakkuusEtunimiEnt"
+                        Placeholder="Etunimi"
+                        WidthRequest="200" />
+                    <Entry
+                        x:Name="AsiakkuusSukunimiEnt"
+                        Placeholder="Sukunimi"
+                        WidthRequest="200" />
                 </HorizontalStackLayout>
-    
+
                 <Entry
                     x:Name="AsiakkuusLahiosoiteEnt"
                     HorizontalOptions="Start"
@@ -56,60 +64,60 @@
 
                 <HorizontalStackLayout Spacing="13">
                     <Button
-                    x:Name="AsiakkuusHaeBtn"
-                    Clicked="AsiakkuusHaeBtn_Clicked"
-                    BackgroundColor="#DEE1E6"
-                    BorderColor="Black"
-                    BorderWidth="2"
-                    HorizontalOptions="Start"
-                    Text="Hae Asiakas"
-                    TextColor="Black"
-                    WidthRequest="160" />
+                        x:Name="AsiakkuusHaeBtn"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="AsiakkuusHaeBtn_Clicked"
+                        HorizontalOptions="Start"
+                        Text="Hae Asiakas"
+                        TextColor="Black"
+                        WidthRequest="160" />
                     <Button
-                    x:Name="AsiakkuusLuoBtn"
-                    Clicked="AsiakkuusLuoBtn_Clicked"
-                    BackgroundColor="#DEE1E6"
-                    BorderColor="Black"
-                    BorderWidth="2"
-                    HorizontalOptions="Start"
-                    Text="Luo uusi asiakas"
-                    TextColor="Black"
-                    WidthRequest="160" />
+                        x:Name="AsiakkuusLuoBtn"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="AsiakkuusLuoBtn_Clicked"
+                        HorizontalOptions="Start"
+                        Text="Luo uusi asiakas"
+                        TextColor="Black"
+                        WidthRequest="160" />
                 </HorizontalStackLayout>
                 <!--  Asiakas muokkaus  -->
                 <HorizontalStackLayout Spacing="13">
                     <Button
                         x:Name="AsiakkuusHyvaksyMuutosBtn"
-                        Clicked="AsiakkuusHyvaksyMuutosBtn_Clicked"
                         BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
-                        IsVisible="false"
+                        Clicked="AsiakkuusHyvaksyMuutosBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
                     <Button
                         x:Name="AsiakkuusPoistaBtn"
                         BackgroundColor="#FF6961"
-                        Clicked="AsiakkuusPoistaBtn_Clicked"
                         BorderColor="Black"
-                        IsVisible="false"
                         BorderWidth="2"
+                        Clicked="AsiakkuusPoistaBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
-                        
+
                 </HorizontalStackLayout>
                 <Button
                     x:Name="AsiakkuusHylkaaMuutosBtn"
                     BackgroundColor="#DEE1E6"
-                    Clicked="AsiakkuusHylkaaMuutosBtn_Clicked"
                     BorderColor="Black"
-                    IsVisible="false"
                     BorderWidth="2"
+                    Clicked="AsiakkuusHylkaaMuutosBtn_Clicked"
                     HorizontalOptions="Start"
+                    IsVisible="false"
                     Text="Hylkää"
                     TextColor="Black"
                     WidthRequest="160" />
@@ -118,18 +126,18 @@
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
                 <Label
-        Padding="2"
-        FontSize="19"
-        Text="ID | Nimi | Postinumero | Puhelinnumero | Sähköposti"
-        VerticalOptions="Center" />
+                    Padding="2"
+                    FontSize="19"
+                    Text="ID | Nimi | Postinumero | Puhelinnumero | Sähköposti"
+                    VerticalOptions="Center" />
                 <!--  Alue lista  -->
                 <ListView
                     x:Name="AsiakasListaLv"
+                    HeightRequest="600"
                     HorizontalOptions="Start"
-                    VerticalScrollBarVisibility="Never"
                     ItemSelected="AsiakkuusOnItemSelected"
-                    WidthRequest="800"
-                    HeightRequest="600">
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -184,33 +192,38 @@
     </ContentPage>
 
     <!--  Alue  -->
-    <ContentPage Title="Alue" NavigationPage.HasNavigationBar="False" BackgroundColor="GhostWhite">
+    <ContentPage
+        Title="Alue"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
                 Grid.Column="0"
                 Padding="15"
                 Spacing="13">
-                <Label x:Name="AlueLbl" FontSize="Large" Text="Hae/luo alue"/>
-                 <Entry
-                 x:Name="AlueIdEnt"
-                 HorizontalOptions="Start"
-                 Placeholder="Alue ID"
-                 WidthRequest="330" 
-                 />
-                        <Entry
-                        x:Name="AlueNimiEnt"
-                        HorizontalOptions="Start"
-                        Placeholder="Alueen nimi"
-                        WidthRequest="330" />
+                <Label
+                    x:Name="AlueLbl"
+                    FontSize="Large"
+                    Text="Hae/luo alue" />
+                <Entry
+                    x:Name="AlueIdEnt"
+                    HorizontalOptions="Start"
+                    Placeholder="Alue ID"
+                    WidthRequest="330" />
+                <Entry
+                    x:Name="AlueNimiEnt"
+                    HorizontalOptions="Start"
+                    Placeholder="Alueen nimi"
+                    WidthRequest="330" />
 
                 <HorizontalStackLayout Spacing="13">
                     <Button
                         x:Name="AlueLuoBtn"
-                        Clicked="AlueLuoBtn_Clicked"
                         BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
+                        Clicked="AlueLuoBtn_Clicked"
                         HorizontalOptions="Start"
                         Text="Luo uusi alue"
                         TextColor="Black"
@@ -227,59 +240,59 @@
                         WidthRequest="160" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="13">
-                        <Button
+                    <Button
                         x:Name="AlueHyvaksyMuutosBtn"
-                        Clicked="AlueHyvaksyMuutosBtn_Clicked"
                         BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
-                        IsVisible="false"
+                        Clicked="AlueHyvaksyMuutosBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
                     <Button
                         x:Name="AluePoistaBtn"
                         BackgroundColor="#FF6961"
-                        Clicked="AluePoistaBtn_Clicked"
                         BorderColor="Black"
-                        IsVisible="false"
                         BorderWidth="2"
+                        Clicked="AluePoistaBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
-    
+
                 </HorizontalStackLayout>
                 <Button
-                        x:Name="AlueHylkaaMuutosBtn"
-                        BackgroundColor="#DEE1E6"
-                        Clicked="AlueHylkaaMuutosBtn_Clicked"
-                        BorderColor="Black"
-                        IsVisible="false"
-                        BorderWidth="2"
-                        HorizontalOptions="Start"
-                        Text="Hylkää"
-                        TextColor="Black"
-                        WidthRequest="160" />
+                    x:Name="AlueHylkaaMuutosBtn"
+                    BackgroundColor="#DEE1E6"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    Clicked="AlueHylkaaMuutosBtn_Clicked"
+                    HorizontalOptions="Start"
+                    IsVisible="false"
+                    Text="Hylkää"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
- 
+
             <!--  oikea puoli  -->
-            <VerticalStackLayout Grid.Column="1" >
+            <VerticalStackLayout Grid.Column="1">
                 <!--  Add your content for the right side here  -->
                 <Label
-        Padding="2"
-        FontSize="19"
-        Text="ID | Alue"
-        VerticalOptions="Center" />
+                    Padding="2"
+                    FontSize="19"
+                    Text="ID | Alue"
+                    VerticalOptions="Center" />
                 <ListView
                     x:Name="AlueListaLv"
+                    HeightRequest="600"
                     HorizontalOptions="Start"
-                    VerticalScrollBarVisibility="Never"
-                    WidthRequest="800"
-                    ItemsSource="{Binding AlueCollection}"
                     ItemSelected="AlueOnItemSelected"
-                    HeightRequest="600">
+                    ItemsSource="{Binding AlueCollection}"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -313,17 +326,21 @@
     </ContentPage>
 
     <!--  Mökki  -->
-    <ContentPage Title="Mökki" 
-                 NavigationPage.HasNavigationBar="False"
-                 BackgroundColor="GhostWhite">
+    <ContentPage
+        Title="Mökki"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
-            
+
             <VerticalStackLayout
                 Grid.Column="0"
                 Padding="15"
                 Spacing="13">
-                <Label x:Name="MokkiLbl" FontSize="Large" Text="Hae/luo Mökki" />
+                <Label
+                    x:Name="MokkiLbl"
+                    FontSize="Large"
+                    Text="Hae/luo Mökki" />
 
                 <HorizontalStackLayout Spacing="13">
                     <Entry
@@ -372,55 +389,57 @@
                         x:Name="MokkiImagePicker"
                         Title="Valitse Kuva"
                         Background="Transparent"
-                        SelectedIndexChanged="MokkiImagePicker_SelectedIndexChanged"
-                        SelectedItem="mokki1.jpg"
                         BackgroundColor="Transparent"
                         FontSize="18"
-                        HorizontalOptions="StartAndExpand"
-                        VerticalOptions="StartAndExpand"
                         HeightRequest="70"
+                        HorizontalOptions="StartAndExpand"
+                        SelectedIndexChanged="MokkiImagePicker_SelectedIndexChanged"
+                        SelectedItem="mokki1.jpg"
                         TextColor="Black"
                         TitleColor="Black"
-                        WidthRequest="180">
-                    </Picker>
-                    <Image x:Name="MokkiImg" Source="mokki1.jpg" WidthRequest="200"></Image>
+                        VerticalOptions="StartAndExpand"
+                        WidthRequest="180" />
+                    <Image
+                        x:Name="MokkiImg"
+                        Source="mokki1.jpg"
+                        WidthRequest="200" />
                 </HorizontalStackLayout>
 
                 <Label
-                FontAttributes="Bold"
-                FontSize="17"
-                Text="Varustelu" />
+                    FontAttributes="Bold"
+                    FontSize="17"
+                    Text="Varustelu" />
                 <HorizontalStackLayout>
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="TV"
                         VerticalOptions="Center" />
-                    <CheckBox x:Name="VarusteluTvCb"/>
+                    <CheckBox x:Name="VarusteluTvCb" />
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Astianpesukone"
                         VerticalOptions="Center" />
-                    <CheckBox x:Name="VarusteluAstianpesukoneCb"/>
+                    <CheckBox x:Name="VarusteluAstianpesukoneCb" />
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Pyykinpesukone"
                         VerticalOptions="Center" />
-                    <CheckBox x:Name="VarusteluPyykinpesukoneCb"/>
+                    <CheckBox x:Name="VarusteluPyykinpesukoneCb" />
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Sauna"
                         VerticalOptions="Center" />
-                    <CheckBox x:Name="VarusteluSaunaCb"/>
+                    <CheckBox x:Name="VarusteluSaunaCb" />
                     <Label
                         FontAttributes="Bold"
                         FontSize="14"
                         Text="Takka"
                         VerticalOptions="Center" />
-                    <CheckBox x:Name="VarusteluTakkaCb"/>
+                    <CheckBox x:Name="VarusteluTakkaCb" />
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Spacing="12">
@@ -436,10 +455,10 @@
                         WidthRequest="160" />
                     <Button
                         x:Name="MokkiLuoBtn"
-                        Clicked="MokkiLuoBtn_Clicked"
                         BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
+                        Clicked="MokkiLuoBtn_Clicked"
                         HorizontalOptions="Start"
                         Text="Luo uusi mökki"
                         TextColor="Black"
@@ -449,36 +468,36 @@
                 <HorizontalStackLayout Spacing="13">
                     <Button
                         x:Name="MokkiHyvaksyMuutosBtn"
-                        Clicked="MokkiHyvaksyMuutosBtn_Clicked"
                         BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
-                        IsVisible="false"
+                        Clicked="MokkiHyvaksyMuutosBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
                     <Button
                         x:Name="MokkiPoistaBtn"
                         BackgroundColor="#FF6961"
-                        Clicked="MokkiPoistaBtn_Clicked"
                         BorderColor="Black"
-                        IsVisible="false"
                         BorderWidth="2"
+                        Clicked="MokkiPoistaBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
-                    
+
                 </HorizontalStackLayout>
                 <Button
                     x:Name="MokkiHylkaaMuutosBtn"
                     BackgroundColor="#DEE1E6"
-                    Clicked="MokkiHylkaaMuutosBtn_Clicked"
                     BorderColor="Black"
-                    IsVisible="false"
                     BorderWidth="2"
+                    Clicked="MokkiHylkaaMuutosBtn_Clicked"
                     HorizontalOptions="Start"
+                    IsVisible="false"
                     Text="Hylkää"
                     TextColor="Black"
                     WidthRequest="160" />
@@ -487,18 +506,18 @@
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
                 <Label
-Padding="2"
-FontSize="19"
-Text="ID | Mökinnimi | Alue | Osoite | Postinumero | Hinta | Henkilömäärä | Kuvaus"
-VerticalOptions="Center" />
+                    Padding="2"
+                    FontSize="19"
+                    Text="ID | Mökinnimi | Alue | Osoite | Postinumero | Hinta | Henkilömäärä | Kuvaus"
+                    VerticalOptions="Center" />
                 <ListView
                     x:Name="MokkiListaLv"
-                    HorizontalOptions="Start"
-                    VerticalScrollBarVisibility="Never"
-                    WidthRequest="800"
                     HeightRequest="600"
+                    HorizontalOptions="Start"
+                    ItemSelected="MokkiOnItemSelected"
                     ItemsSource="{Binding MokkiCollection}"
-                    ItemSelected="MokkiOnItemSelected" >
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -551,20 +570,30 @@ VerticalOptions="Center" />
     </ContentPage>
 
     <!--  Palvelu  -->
-    <ContentPage Title="Palvelu" 
-                 NavigationPage.HasNavigationBar="False"
-                 BackgroundColor="GhostWhite">
+    <ContentPage
+        Title="Palvelu"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
                 Grid.Column="0"
                 Padding="15"
                 Spacing="13">
-                <Label x:Name="PalveluLbl" FontSize="Large" Text="Hae/luo palvelu" />
+                <Label
+                    x:Name="PalveluLbl"
+                    FontSize="Large"
+                    Text="Hae/luo palvelu" />
 
                 <HorizontalStackLayout Spacing="13">
-                    <Entry x:Name="PalveluIdEnt" Placeholder="Palvelu ID" WidthRequest="200" />
-                    <Entry x:Name="PalveluNimiEnt" Placeholder="Palvelun nimi" WidthRequest="200" />
+                    <Entry
+                        x:Name="PalveluIdEnt"
+                        Placeholder="Palvelu ID"
+                        WidthRequest="200" />
+                    <Entry
+                        x:Name="PalveluNimiEnt"
+                        Placeholder="Palvelun nimi"
+                        WidthRequest="200" />
                 </HorizontalStackLayout>
                 <Entry
                     x:Name="PalveluAlueEnt"
@@ -590,81 +619,81 @@ VerticalOptions="Center" />
                     WidthRequest="413" />
                 <HorizontalStackLayout Spacing="13">
                     <Button
-                    x:Name="PalveluHaeBtn"
-                    BackgroundColor="#DEE1E6"
-                    Clicked="PalveluHaeBtn_Clicked"
-                    BorderColor="Black"
-                    BorderWidth="2"
-                    HorizontalOptions="Start"
-                    Text="Hae palvelu"
-                    TextColor="Black"
-                    WidthRequest="160" />
+                        x:Name="PalveluHaeBtn"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="PalveluHaeBtn_Clicked"
+                        HorizontalOptions="Start"
+                        Text="Hae palvelu"
+                        TextColor="Black"
+                        WidthRequest="160" />
                     <Button
-                    x:Name="PalveluLuoBtn"
-                    Clicked="PalveluLuoBtn_Clicked"
-                    BackgroundColor="#DEE1E6"
-                    BorderColor="Black"
-                    BorderWidth="2"
-                    HorizontalOptions="Start"
-                    Text="Luo uusi palvelu"
-                    TextColor="Black"
-                    WidthRequest="160" />
+                        x:Name="PalveluLuoBtn"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="PalveluLuoBtn_Clicked"
+                        HorizontalOptions="Start"
+                        Text="Luo uusi palvelu"
+                        TextColor="Black"
+                        WidthRequest="160" />
                 </HorizontalStackLayout>
 
                 <!--  Muokkaus  -->
                 <HorizontalStackLayout Spacing="13">
                     <Button
                         x:Name="PalveluHyvaksyMuutosBtn"
-                        Clicked="PalveluHyvaksyMuutosBtn_Clicked"
                         BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
-                        IsVisible="false"
+                        Clicked="PalveluHyvaksyMuutosBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Muokkaa"
                         TextColor="Black"
                         WidthRequest="160" />
                     <Button
                         x:Name="PalveluPoistaBtn"
                         BackgroundColor="#FF6961"
-                        Clicked="PalveluPoistaBtn_Clicked"
                         BorderColor="Black"
-                        IsVisible="false"
                         BorderWidth="2"
+                        Clicked="PalveluPoistaBtn_Clicked"
                         HorizontalOptions="Start"
+                        IsVisible="false"
                         Text="Poista"
                         TextColor="Black"
                         WidthRequest="160" />
-                    
+
                 </HorizontalStackLayout>
 
                 <Button
                     x:Name="PalveluHylkaaMuutosBtn"
                     BackgroundColor="#DEE1E6"
-                    Clicked="PalveluHylkaaMuutosBtn_Clicked"
                     BorderColor="Black"
-                    IsVisible="false"
                     BorderWidth="2"
+                    Clicked="PalveluHylkaaMuutosBtn_Clicked"
                     HorizontalOptions="Start"
+                    IsVisible="false"
                     Text="Hylkää"
                     TextColor="Black"
                     WidthRequest="160" />
             </VerticalStackLayout>
-            
+
             <!--  oikea puoli  -->
             <VerticalStackLayout Grid.Column="1">
                 <Label
-Padding="2"
-FontSize="19"
-Text="ID | Nimi | Alue | Hinta | Kuvaus"
-VerticalOptions="Center" />
+                    Padding="2"
+                    FontSize="19"
+                    Text="ID | Nimi | Alue | Hinta | Kuvaus"
+                    VerticalOptions="Center" />
                 <ListView
                     x:Name="PalveluListaLv"
+                    HeightRequest="600"
                     HorizontalOptions="Start"
-                    VerticalScrollBarVisibility="Never"
                     ItemSelected="PalveluOnItemSelected"
-                    WidthRequest="800"
-                    HeightRequest="600">
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -712,16 +741,20 @@ VerticalOptions="Center" />
         </Grid>
     </ContentPage>
 
-    <ContentPage Title="Varaukset" 
-             NavigationPage.HasNavigationBar="False" 
-             BackgroundColor="GhostWhite">
+    <ContentPage
+        Title="Varaukset"
+        BackgroundColor="GhostWhite"
+        NavigationPage.HasNavigationBar="False">
         <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*,Auto">
             <!--  vasen puoli  -->
             <VerticalStackLayout
-            Grid.Column="0"
-            Padding="15"
-            Spacing="13">
-                <Label x:Name="VarausLbl" FontSize="Large" Text="Hae/luo varaus" />
+                Grid.Column="0"
+                Padding="15"
+                Spacing="13">
+                <Label
+                    x:Name="VarausLbl"
+                    FontSize="Large"
+                    Text="Hae/luo varaus" />
 
                 <HorizontalStackLayout Spacing="13">
                     <Entry
@@ -736,15 +769,15 @@ VerticalOptions="Center" />
                         Placeholder="Mökin nimi"
                         WidthRequest="200" />
                 </HorizontalStackLayout>
-                
-                
+
+
                 <HorizontalStackLayout Spacing="13">
                     <Entry
                         x:Name="VarausAsiakasIdEnt"
                         HorizontalOptions="Start"
                         IsReadOnly="True"
-                        VerticalOptions="EndAndExpand"
                         Placeholder="Asiakas"
+                        VerticalOptions="EndAndExpand"
                         WidthRequest="200" />
                     <VerticalStackLayout>
                         <Label
@@ -752,110 +785,110 @@ VerticalOptions="Center" />
                             FontSize="16"
                             Text="Vahvistu Pvm"
                             VerticalOptions="Center" />
-                        <DatePicker 
+                        <DatePicker
                             x:Name="vahvistuDp"
-                            WidthRequest="200"
+                            BackgroundColor="Transparent"
                             HorizontalOptions="StartAndExpand"
-                            BackgroundColor="Transparent" 
-                            TextColor="Black" />
+                            TextColor="Black"
+                            WidthRequest="200" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
 
                 <VerticalStackLayout>
                     <Label
-                    Padding="2"
-                    FontSize="16"
-                    Text="Varattu Pvm"
-                    VerticalOptions="Center" />
-                                <DatePicker 
-                    x:Name="varattuDp"
-                    IsEnabled="False"                
-                    WidthRequest="200"
-                    HorizontalOptions="StartAndExpand"
-                    BackgroundColor="Transparent" 
-                    TextColor="Black" />
-                            </VerticalStackLayout>
+                        Padding="2"
+                        FontSize="16"
+                        Text="Varattu Pvm"
+                        VerticalOptions="Center" />
+                    <DatePicker
+                        x:Name="varattuDp"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="StartAndExpand"
+                        IsEnabled="False"
+                        TextColor="Black"
+                        WidthRequest="200" />
+                </VerticalStackLayout>
                 <HorizontalStackLayout Spacing="13">
                     <VerticalStackLayout>
                         <Label
-                        Padding="2"
-                        FontSize="16"
-                        Text="Varattu Alku Pvm"
-                        VerticalOptions="Center" />
-                                    <DatePicker 
-                        x:Name="varattualkuDp"
-                        WidthRequest="200"
-                        IsEnabled="False"   
-                        HorizontalOptions="StartAndExpand"
-                        BackgroundColor="Transparent" 
-                        TextColor="Black" />
+                            Padding="2"
+                            FontSize="16"
+                            Text="Varattu Alku Pvm"
+                            VerticalOptions="Center" />
+                        <DatePicker
+                            x:Name="varattualkuDp"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="StartAndExpand"
+                            IsEnabled="False"
+                            TextColor="Black"
+                            WidthRequest="200" />
                     </VerticalStackLayout>
                     <VerticalStackLayout>
                         <Label
-                        Padding="2"
-                        FontSize="16"
-                        Text="Varattu Loppu Pvm"
-                        VerticalOptions="Center" />
-                        <DatePicker 
-                        x:Name="varattuloppDp"
-                        WidthRequest="200"
-                        IsEnabled="False" 
-                        HorizontalOptions="StartAndExpand"
-                        BackgroundColor="Transparent" 
-                        TextColor="Black" />
+                            Padding="2"
+                            FontSize="16"
+                            Text="Varattu Loppu Pvm"
+                            VerticalOptions="Center" />
+                        <DatePicker
+                            x:Name="varattuloppDp"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="StartAndExpand"
+                            IsEnabled="False"
+                            TextColor="Black"
+                            WidthRequest="200" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
 
 
                 <HorizontalStackLayout Spacing="13">
                     <Button
-                x:Name="VarausHaeBtn"
-                BackgroundColor="#DEE1E6"
-                Clicked="VarausHaeBtn_Clicked"
-                BorderColor="Black"
-                BorderWidth="2"
-                HorizontalOptions="Start"
-                Text="Hae Varaus"
-                TextColor="Black"
-                WidthRequest="160" />
+                        x:Name="VarausHaeBtn"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="VarausHaeBtn_Clicked"
+                        HorizontalOptions="Start"
+                        Text="Hae Varaus"
+                        TextColor="Black"
+                        WidthRequest="160" />
                 </HorizontalStackLayout>
                 <!--  Asiakas muokkaus  -->
                 <HorizontalStackLayout Spacing="13">
                     <Button
-                    x:Name="VarausHyvaksyMuutosBtn"
-                    Clicked="VarausHyvaksyMuutosBtn_Clicked"
-                    BackgroundColor="#77DD77"
-                    BorderColor="Black"
-                    BorderWidth="2"
-                    IsVisible="false"
-                    HorizontalOptions="Start"
-                    Text="Muokkaa"
-                    TextColor="Black"
-                    WidthRequest="160" />
+                        x:Name="VarausHyvaksyMuutosBtn"
+                        BackgroundColor="#77DD77"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="VarausHyvaksyMuutosBtn_Clicked"
+                        HorizontalOptions="Start"
+                        IsVisible="false"
+                        Text="Muokkaa"
+                        TextColor="Black"
+                        WidthRequest="160" />
                     <Button
-                    x:Name="VarausPoistaBtn"
-                    BackgroundColor="#FF6961"
-                    Clicked="VarausPoistaBtn_Clicked"
-                    BorderColor="Black"
-                    IsVisible="false"
-                    BorderWidth="2"
-                    HorizontalOptions="Start"
-                    Text="Poista"
-                    TextColor="Black"
-                    WidthRequest="160" />
+                        x:Name="VarausPoistaBtn"
+                        BackgroundColor="#FF6961"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        Clicked="VarausPoistaBtn_Clicked"
+                        HorizontalOptions="Start"
+                        IsVisible="false"
+                        Text="Poista"
+                        TextColor="Black"
+                        WidthRequest="160" />
 
                 </HorizontalStackLayout>
                 <Button
-                x:Name="VarausHylkaaMuutosBtn"
-                Clicked="VarausHylkaaMuutosBtn_Clicked"
-                BackgroundColor="#DEE1E6"
-                BorderColor="Black"
-                IsVisible="false"
-                BorderWidth="2"
-                HorizontalOptions="Start"
-                Text="Hylkää"
-                TextColor="Black"
-                WidthRequest="160" />
+                    x:Name="VarausHylkaaMuutosBtn"
+                    BackgroundColor="#DEE1E6"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    Clicked="VarausHylkaaMuutosBtn_Clicked"
+                    HorizontalOptions="Start"
+                    IsVisible="false"
+                    Text="Hylkää"
+                    TextColor="Black"
+                    WidthRequest="160" />
             </VerticalStackLayout>
 
             <!--  oikea puoli  -->
@@ -865,23 +898,23 @@ VerticalOptions="Center" />
                     Padding="2"
                     FontSize="19"
                     Text="ID | Asiakas | Mökki | Varattu | Vahvistettu | Varattu Alku | Varattu Loppu"
-                    VerticalOptions="Center" /> 
+                    VerticalOptions="Center" />
                 <ListView
-                x:Name="VarausListaLv"
-                HorizontalOptions="Start"
-                VerticalScrollBarVisibility="Never"
-                ItemSelected="VarausOnItemSelected"
-                WidthRequest="800"
-                HeightRequest="600">
+                    x:Name="VarausListaLv"
+                    HeightRequest="600"
+                    HorizontalOptions="Start"
+                    ItemSelected="VarausOnItemSelected"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="800">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Border
-                                HeightRequest="55"
-                                Stroke="#7ED957"
-                                StrokeShape="RoundRectangle 6,6,6,6"
-                                StrokeThickness="1">
-                                    
+                                    HeightRequest="55"
+                                    Stroke="#7ED957"
+                                    StrokeShape="RoundRectangle 6,6,6,6"
+                                    StrokeThickness="1">
+
                                     <StackLayout Orientation="Horizontal">
                                         <Label
                                             Padding="2"

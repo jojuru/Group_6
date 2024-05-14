@@ -1,0 +1,27 @@
+{
+  "runtimeOptions": {
+    "tfm": "net7.0",
+    "includedFrameworks": [
+      {
+        "name": "Microsoft.NETCore.App",
+        "version": "7.0.18"
+      },
+      {
+        "name": "Microsoft.Maui.Core",
+        "version": "7.0.101"
+      },
+      {
+        "name": "Microsoft.Maui.Controls",
+        "version": "7.0.101"
+      },
+      {
+        "name": "Microsoft.Maui.Essentials",
+        "version": "7.0.101"
+      }
+    ],
+    "configProperties": {
+      "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+      "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+    }
+  }
+}

@@ -29,7 +29,7 @@
     <AppXManifest Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-05-13T21:57:44.473</Modified>
+      <Modified>2024-05-14T06:42:14.349</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -39,19 +39,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.runtimeconfig.json">
       <PackagePath>Mokkivaraus.runtimeconfig.json</PackagePath>
-      <Modified>2024-05-12T11:50:53.213</Modified>
+      <Modified>2024-05-14T06:42:13.987</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.dll">
       <PackagePath>Mokkivaraus.dll</PackagePath>
-      <Modified>2024-05-13T21:57:43.398</Modified>
+      <Modified>2024-05-14T06:42:12.435</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Mokkivaraus.exe</PackagePath>
-      <Modified>2024-05-13T21:57:43.402</Modified>
+      <Modified>2024-05-14T06:42:12.468</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json">
       <PackagePath>Mokkivaraus.deps.json</PackagePath>
-      <Modified>2024-05-12T11:50:53.207</Modified>
+      <Modified>2024-05-14T06:42:13.892</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.18\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
