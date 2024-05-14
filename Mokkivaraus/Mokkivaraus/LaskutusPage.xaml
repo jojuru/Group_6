@@ -219,52 +219,45 @@
                                     Stroke="#9dabc4"
                                     StrokeShape="RoundRectangle 6,6,6,6"
                                     StrokeThickness="2">
-                                    <StackLayout HorizontalOptions="Start" Orientation="Horizontal" Padding="5,0">
+                                    <StackLayout Orientation="Horizontal" Padding="5,0" HorizontalOptions="Start">
                                         <Label
                                             Padding="2"
-                                            FontSize="17"
+                                            FontSize="20"
                                             Text="{Binding lasku_id, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             Text="{Binding etunimi}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             Text="{Binding sukunimi, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             Text="{Binding puhelinnro, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             Text="{Binding summa, StringFormat='{}{0} euroa |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             Text="{Binding varattu_pvm, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             Text="{Binding maksettu, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="17"
+                                            Padding="2" FontSize="20"
                                             HorizontalOptions="End"
                                             IsVisible="{Binding isOverdue}"
                                             Text="Lasku myöhässä"

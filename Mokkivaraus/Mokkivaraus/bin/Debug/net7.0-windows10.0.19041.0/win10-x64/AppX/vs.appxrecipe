@@ -29,29 +29,29 @@
     <AppXManifest Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-05-14T08:35:29.011</Modified>
+      <Modified>2024-05-14T11:31:15.214</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-05-14T07:45:15.840</Modified>
+      <Modified>2024-05-14T11:30:41.254</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.runtimeconfig.json">
       <PackagePath>Mokkivaraus.runtimeconfig.json</PackagePath>
-      <Modified>2024-05-14T07:45:31.720</Modified>
+      <Modified>2024-05-14T10:01:05.301</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.dll">
       <PackagePath>Mokkivaraus.dll</PackagePath>
-      <Modified>2024-05-14T08:35:27.859</Modified>
+      <Modified>2024-05-14T11:31:14.199</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Mokkivaraus.exe</PackagePath>
-      <Modified>2024-05-14T08:35:27.864</Modified>
+      <Modified>2024-05-14T11:31:14.204</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json">
       <PackagePath>Mokkivaraus.deps.json</PackagePath>
-      <Modified>2024-05-14T07:45:31.618</Modified>
+      <Modified>2024-05-14T10:01:05.299</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.18\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>

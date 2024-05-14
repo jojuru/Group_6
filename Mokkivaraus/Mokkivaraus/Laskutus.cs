@@ -35,5 +35,6 @@ namespace Mokkivaraus
             this.puhelinnro = puhelinnro;
             this.varattu_pvm = varattu_pvm;
         }
+        
     }
 }

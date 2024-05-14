@@ -179,7 +179,7 @@
                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                         <Button
                             Margin="0,15"
-                            BackgroundColor="#b2f7ab"
+                            BackgroundColor="#DEE1E6"
                             BorderColor="Black"
                             BorderWidth="2"
                             Clicked="HaeButton_Clicked"
@@ -190,7 +190,7 @@
                             WidthRequest="200" />
                         <Button
                             Margin="0,15"
-                            BackgroundColor="#b2f7ab"
+                            BackgroundColor="#DEE1E6"
                             BorderColor="Black"
                             BorderWidth="2"
                             Clicked="ResetButton_Clicked"
@@ -303,7 +303,8 @@
                                                 HorizontalOptions="Center"
                                                 Text="TUTUSTU JA VARAA"
                                                 TextColor="White"
-                                                VerticalOptions="Center" />
+                                                VerticalOptions="Center"
+                                                WidthRequest="340" />
 
                                         </StackLayout>
                                     </Border>
@@ -318,7 +319,7 @@
     </ContentPage>
     <ContentPage Title="Hae varauksia" NavigationPage.HasNavigationBar="False">
         <!--  jakaa sivun kahtia  -->
-        <Grid BackgroundColor="GhostWhite">
+        <Grid BackgroundColor="#f7f7f8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="3*" />
@@ -328,7 +329,7 @@
                     Grid.Column="0"
                     Margin="60,10"
                     BackgroundColor="#f7f7f8"
-                    Spacing="-6">
+                    Spacing="10">
                     <Label
                         Margin="0,20"
                         FontFamily="PoppinsRegular"
@@ -345,7 +346,7 @@
                             BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
-                            Placeholder="Varausnumero"
+                            Placeholder="VarausID"
                             TextColor="Black" />
                     </Border>
 
@@ -358,7 +359,7 @@
                                 BackgroundColor="#e5e9f0"
                                 FontFamily="PoppinsRegular"
                                 FontSize="20"
-                                Placeholder="Etunimi"
+                                Placeholder="AsiakasID"
                                 TextColor="Black"
                                 WidthRequest="200" />
                         </Border>
@@ -370,54 +371,189 @@
                                 BackgroundColor="#e5e9f0"
                                 FontFamily="PoppinsRegular"
                                 FontSize="20"
-                                Placeholder="Sukunimi"
+                                Placeholder="MokkiID"
                                 TextColor="Black"
                                 WidthRequest="200" />
                         </Border>
                     </HorizontalStackLayout>
-
-                    <Border
-                        Margin="0,10"
-                        Stroke="#9dabc4"
-                        StrokeShape="RoundRectangle 3,3,3,3"
-                        StrokeThickness="3">
-                        <Entry
-                            BackgroundColor="#e5e9f0"
+                    <!--  ajat  -->
+                    <HorizontalStackLayout Spacing="120">
+                        <!--  SAAPUMINEN-LÄHTÖ  -->
+                        <Label
                             FontFamily="PoppinsRegular"
                             FontSize="20"
-                            Placeholder="Postinumero"
+                            Text="Varauksen alku"
                             TextColor="Black" />
-                    </Border>
-
-                    <HorizontalStackLayout Margin="0,10" Spacing="20">
+                        <Label
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Text="Varauksen loppu"
+                            TextColor="Black" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                        Margin="27,5"
+                        Padding="5"
+                        Spacing="120">
                         <Border
+                            BackgroundColor="#e5e9f0"
+                            Scale="1.5"
                             Stroke="#9dabc4"
                             StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                BackgroundColor="#e5e9f0"
+                            StrokeThickness="2">
+                            <DatePicker
+                                x:Name="saapuminenDate"
+                                BackgroundColor="Transparent"
                                 FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                Placeholder="Puhelinnumero"
-                                TextColor="Black"
-                                WidthRequest="200" />
+                                Scale="1.5"
+                                TextColor="Black" />
                         </Border>
                         <Border
+                            BackgroundColor="#e5e9f0"
+                            Scale="1.5"
                             Stroke="#9dabc4"
                             StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                BackgroundColor="#e5e9f0"
+                            StrokeThickness="2">
+                            <DatePicker
+                                x:Name="lahtoDate"
+                                BackgroundColor="Transparent"
                                 FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                Placeholder="Sähköposti"
-                                TextColor="Black"
-                                WidthRequest="200" />
+                                Scale="1.5"
+                                TextColor="Black" />
                         </Border>
                     </HorizontalStackLayout>
+                    <!--  napit  -->
+
+                    <Button
+                        x:Name="LaskutusHaeBtn"
+                        BackgroundColor="#DEE1E6"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        HorizontalOptions="Start"
+                        Text="Hae laskuja"
+                        TextColor="Black"
+                        WidthRequest="160" />
+                    <!--  Muokkaus  -->
+                    <HorizontalStackLayout Spacing="13">
+                        <Button
+                            x:Name="LaskutusHyvaksyMuutosBtn"
+                            BackgroundColor="#DEE1E6"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            HorizontalOptions="Start"
+                            IsVisible="false"
+                            Text="Tallenna muutos"
+                            TextColor="Black"
+                            WidthRequest="160" />
+                        <Button
+                            x:Name="LaskutusHylkaaMuutosBtn"
+                            BackgroundColor="#C61E21"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            HorizontalOptions="Start"
+                            IsVisible="false"
+                            Text="Hylkää"
+                            TextColor="Black"
+                            WidthRequest="160" />
+                    </HorizontalStackLayout>
+
+                    <Button
+                        x:Name="LaskutusPoistaLaskuBtn"
+                        BackgroundColor="#C61E21"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        HorizontalOptions="Start"
+                        IsVisible="false"
+                        Text="Poista lasku"
+                        TextColor="Black"
+                        WidthRequest="160" />
+
                 </VerticalStackLayout>
             </ScrollView>
             <!--  sivun oikea puoli, varaukset  -->
+            <StackLayout Grid.Column="1" BackgroundColor="#f2f2f2">
+                <!--  Laskulista  -->
+                <Label
+                    FontSize="28"
+                    HorizontalOptions="Center"
+                    Text="VarausID | AsiakasID | MokkiID | Varauspvm Vahvistuspvm | Varauksen alku - loppu "
+                    TextColor="Black" />
+                <ListView
+                    x:Name="VarausListaLv"
+                    BackgroundColor="#f2f2f2"
+                    HorizontalOptions="Center"
+                    ItemSelected="LaskutusOnItemSelected"
+                    ItemsSource="{Binding VarausCollection}"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="900">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Border
+                                    Margin="7"
+                                    BackgroundColor="White"
+                                    HeightRequest="57"
+                                    Stroke="#9dabc4"
+                                    StrokeShape="RoundRectangle 6,6,6,6"
+                                    StrokeThickness="2">
+                                    <StackLayout
+                                        Padding="5,0"
+                                        HorizontalOptions="Start"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            Padding="2"
+                                            FontAttributes="Bold"
+                                            FontSize="20"
+                                            Text="{Binding varaus_id, StringFormat='{0} '}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="20"
+                                            Text="{Binding asiakas_id, StringFormat='| {0} |'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="20"
+                                            Text="{Binding mokki_id, StringFormat='{0} |'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="20"
+                                            Text="{Binding varattupvm, StringFormat='{0} -'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="20"
+                                            Text="{Binding vahvistuspvm, StringFormat='{0} |'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="20"
+                                            Text="{Binding varattualkupvm, StringFormat='{0} -'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <Label
+                                            Padding="2"
+                                            FontSize="20"
+                                            Text="{Binding varattuloppupvm}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+
+                                        <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
+                                    </StackLayout>
+                                </Border>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!--  More content can be added here  -->
+            </StackLayout>
+
         </Grid>
     </ContentPage>
 
