@@ -84,6 +84,62 @@
                             WidthRequest="200" />
                     </Border>
                 </HorizontalStackLayout>
+                <HorizontalStackLayout
+                    x:Name="mokkinimiHorizontal"
+                    IsVisible="false">
+                    <VerticalStackLayout>
+                        <Label
+                            Text="Mökin nimi:"></Label>
+                        <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="2">
+                            <Entry
+                            x:Name="mokkinimiEntry"
+                            HorizontalOptions="Start"
+                            Placeholder="Mökin nimi"
+                            TextColor="Black"
+                            WidthRequest="200" 
+                            IsReadOnly="True"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout
+                    x:Name="paivatHorizontal"
+                    Spacing="13"
+                    IsVisible="false">
+                    <VerticalStackLayout>
+                        <Label
+                        Text="Varauspäivät:"></Label>
+                        <HorizontalStackLayout
+                            Spacing="13">
+                            <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="2">
+                                <Entry
+                                x:Name="varattu_alkupvmEntry"
+                                HorizontalOptions="Start"
+                                Placeholder="AlkuPvm"
+                                TextColor="Black"
+                                WidthRequest="200"
+                                IsReadOnly="True"/>
+                            </Border>
+                            <Border
+                            Stroke="#9dabc4"
+                            StrokeShape="RoundRectangle 3,3,3,3"
+                            StrokeThickness="2">
+                                <Entry
+                                x:Name="varattu_loppupvmEntry"
+                                HorizontalOptions="Start"
+                                Placeholder="LoppuPvm"
+                                TextColor="Black"
+                                WidthRequest="200"
+                                IsReadOnly="True"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
                 <HorizontalStackLayout x:Name="summaJaAlvHorizontal" Spacing="13">
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Summa (€)" TextColor="Black" />
@@ -157,7 +213,7 @@
                 <HorizontalStackLayout Spacing="13">
                     <Button
                         x:Name="LaskutusHyvaksyMuutosBtn"
-                        BackgroundColor="#DEE1E6"
+                        BackgroundColor="#77DD77"
                         BorderColor="Black"
                         BorderWidth="2"
                         Clicked="LaskutusHyvaksyMuutosBtn_Clicked"
@@ -168,7 +224,7 @@
                         WidthRequest="160" />
                     <Button
                         x:Name="LaskutusHylkaaMuutosBtn"
-                        BackgroundColor="#C61E21"
+                        BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
                         Clicked="LaskutusHylkaaMuutosBtn_Clicked"
@@ -181,7 +237,7 @@
 
                 <Button
                     x:Name="LaskutusPoistaLaskuBtn"
-                    BackgroundColor="#C61E21"
+                    BackgroundColor="#FF6961"
                     BorderColor="Black"
                     BorderWidth="2"
                     Clicked="LaskutusPoistaLaskuBtn_Clicked"
@@ -253,7 +309,7 @@
                                             VerticalOptions="Center" />
                                         <Label
                                             Padding="2" FontSize="20"
-                                            Text="{Binding maksettu, StringFormat='{0} |'}"
+                                            Text="{Binding MaksettuTeksti, StringFormat='{0} |'}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label

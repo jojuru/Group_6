@@ -62,7 +62,30 @@ public partial class LaskutusPage : TabbedPage
         var sahkoposti = sahkopostiEntry.Text;
         var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu, l.laskun_tyyppi, v.varattu_pvm FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id");
+        var query = new StringBuilder(@"
+            SELECT 
+                l.lasku_id, 
+                l.varaus_id, 
+                a.etunimi, 
+                a.sukunimi, 
+                a.puhelinnro, 
+                a.email, 
+                l.summa, 
+                l.alv, 
+                l.maksettu, 
+                l.laskun_tyyppi, 
+                v.varattu_pvm, 
+                m.mokkinimi, 
+                v.varattu_alkupvm, 
+                v.varattu_loppupvm 
+            FROM 
+                lasku l 
+            JOIN 
+                varaus v ON l.varaus_id = v.varaus_id 
+            JOIN 
+                asiakas a ON v.asiakas_id = a.asiakas_id 
+            JOIN 
+                mokki m ON v.mokki_id = m.mokki_id");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -117,6 +140,10 @@ public partial class LaskutusPage : TabbedPage
                 maksettu = reader["maksettu"].ToString(),
                 laskun_tyyppi = reader["laskun_tyyppi"].ToString(),
                 puhelinnro = reader["puhelinnro"].ToString(),
+                email = reader["email"].ToString(),
+                mokkinimi = reader["mokkinimi"].ToString(),
+                varattu_alkupvm = reader.GetDateTime(reader.GetOrdinal("varattu_alkupvm")).ToString("dd.MM.yyyy"),
+                varattu_loppupvm = reader.GetDateTime(reader.GetOrdinal("varattu_loppupvm")).ToString("dd.MM.yyyy"),
                 varattu_pvm = reader.IsDBNull(reader.GetOrdinal("varattu_pvm")) ? "" : reader.GetDateTime(reader.GetOrdinal("varattu_pvm")).ToString("dd.MM.yyyy"),
                 isOverdue = paiviaMennyt > 14 && maksettu
             };
@@ -137,7 +164,30 @@ public partial class LaskutusPage : TabbedPage
         var sahkoposti = sahkopostiEntry.Text;
         var puhelinnro = puhelinNumeroEntry.Text;
 
-        var query = new StringBuilder("SELECT l.lasku_id, l.varaus_id, a.etunimi, a.sukunimi, a.puhelinnro, l.summa, l.alv, l.maksettu, l.laskun_tyyppi FROM lasku l JOIN varaus v ON l.varaus_id = v.varaus_id JOIN asiakas a ON v.asiakas_id = a.asiakas_id ");
+        var query = new StringBuilder(@"
+            SELECT 
+                l.lasku_id, 
+                l.varaus_id, 
+                a.etunimi, 
+                a.sukunimi, 
+                a.puhelinnro, 
+                a.email, 
+                l.summa, 
+                l.alv, 
+                l.maksettu, 
+                l.laskun_tyyppi, 
+                v.varattu_pvm, 
+                m.mokkinimi, 
+                v.varattu_alkupvm, 
+                v.varattu_loppupvm 
+            FROM 
+                lasku l 
+            JOIN 
+                varaus v ON l.varaus_id = v.varaus_id 
+            JOIN 
+                asiakas a ON v.asiakas_id = a.asiakas_id 
+            JOIN 
+                mokki m ON v.mokki_id = m.mokki_id");
         var conditions = new List<string>();
 
         if (!string.IsNullOrEmpty(etunimi))
@@ -173,9 +223,14 @@ public partial class LaskutusPage : TabbedPage
 
         var reader = cmd.ExecuteReader();
         LaskutusCollection.Clear();
+        var tanaanDate = DateTime.Today;
 
         while (reader.Read())
         {
+            var varattuPvm = reader.GetDateTime(reader.GetOrdinal("varattu_pvm"));
+            var paiviaMennyt = (tanaanDate - varattuPvm).Days;
+            var maksettu = reader["maksettu"].ToString() == "0";
+
             var laskutus = new Laskutus
             {
                 lasku_id = reader["lasku_id"].ToString(),
@@ -185,7 +240,14 @@ public partial class LaskutusPage : TabbedPage
                 summa = reader["summa"].ToString(),
                 alv = reader["alv"].ToString(),
                 maksettu = reader["maksettu"].ToString(),
-                puhelinnro = reader["puhelinnro"].ToString()
+                laskun_tyyppi = reader["laskun_tyyppi"].ToString(),
+                puhelinnro = reader["puhelinnro"].ToString(),
+                email = reader["email"].ToString(),
+                mokkinimi = reader["mokkinimi"].ToString(),
+                varattu_alkupvm = reader.GetDateTime(reader.GetOrdinal("varattu_alkupvm")).ToString("dd.MM.yyyy"),
+                varattu_loppupvm = reader.GetDateTime(reader.GetOrdinal("varattu_loppupvm")).ToString("dd.MM.yyyy"),
+                varattu_pvm = reader.IsDBNull(reader.GetOrdinal("varattu_pvm")) ? "" : reader.GetDateTime(reader.GetOrdinal("varattu_pvm")).ToString("dd.MM.yyyy"),
+                isOverdue = paiviaMennyt > 14 && maksettu
             };
             LaskutusCollection.Add(laskutus);
         }
@@ -381,18 +443,24 @@ public partial class LaskutusPage : TabbedPage
         laskuMaksettuHorizontal.IsVisible = true;
         laskuTyyppiHorizontal.IsVisible = true;
         varausNumeroBorder.IsVisible = false;
+        mokkinimiHorizontal.IsVisible = true;
+        paivatHorizontal.IsVisible = true;
 
         varausNumeroEntry.Text = lasku.varaus_id;
         puhelinNumeroEntry.Text = lasku.puhelinnro;
-        //sahkopostiEntry.Text (Tähän valitun laskun sähköposti Entryyn ei muuta)
+        sahkopostiEntry.Text = lasku.email;
         etunimiEntry.Text = lasku.etunimi;
         sukunimiEntry.Text = lasku.sukunimi;
         summaEntry.Text = lasku.summa;
         alvEntry.Text = lasku.alv;
+        mokkinimiEntry.Text = lasku.mokkinimi;
+        varattu_alkupvmEntry.Text = lasku.varattu_alkupvm;
+        varattu_loppupvmEntry.Text = lasku.varattu_loppupvm;
         maksettuKyllaRadioButton.IsChecked = lasku.maksettu == "1";
         maksettuEiRadioButton.IsChecked = lasku.maksettu == "0";
         tyyppiSahkoRadioButton.IsChecked = lasku.laskun_tyyppi == "True";
         tyyppiPaperiRadioButton.IsChecked = lasku.laskun_tyyppi == "False";
+
 
 
         LaskuLbl.Text = $"Muokkaat laskua nro: {lasku.lasku_id}";
@@ -470,6 +538,8 @@ public partial class LaskutusPage : TabbedPage
         LaskutusHylkaaMuutosBtn.IsVisible = false;
         LaskutusPoistaLaskuBtn.IsVisible = false;
         varausNumeroBorder.IsVisible = true;
+        mokkinimiHorizontal.IsVisible = false;
+        paivatHorizontal.IsVisible = false;
 
 
         varausNumeroEntry.Text = "";
