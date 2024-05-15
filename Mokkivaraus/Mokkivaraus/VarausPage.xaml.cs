@@ -6,14 +6,13 @@ using System.Diagnostics;
 
 namespace Mokkivaraus;
 
-public partial class VarausPage : TabbedPage
+public partial class VarausPage : ContentPage
 {
     public ObservableCollection<Alue> AlueCollection { get; set; }
     public ObservableCollection<Mokki> MokkiCollection { get; set; }
     public ObservableCollection<Palvelu> PalveluCollection { get; set; }
     public ObservableCollection<ServiceOption> ServiceOptions { get; set; } = new ObservableCollection<ServiceOption>();
     public ObservableCollection<ServiceOption> VarusteluOptions { get; set; } = new ObservableCollection<ServiceOption>();
-    public ObservableCollection<Varaus> VarausCollection { get; set; }
 
     public HashSet<string> addedServices = new HashSet<string>();
     public HashSet<string> addedVarustelu = new HashSet<string>();
@@ -29,43 +28,12 @@ public partial class VarausPage : TabbedPage
         AlueCollection = new ObservableCollection<Alue>();
         MokkiCollection = new ObservableCollection<Mokki>();
         PalveluCollection = new ObservableCollection<Palvelu>();
-        VarausCollection = new ObservableCollection<Varaus>();
 
         BindingContext = this;
 
         SqlHaeAlueet();
         SqlHaePalvelut();
         SqlHaeMokit();
-        SqlHaeVaraus();
-    }
-    private void SqlHaeVaraus()
-    {
-        VarausCollection.Clear();
-
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = connstring;
-        con.Open();
-
-        string sql = "SELECT * FROM varaus";
-
-        MySqlCommand cmd = new MySqlCommand(sql, con);
-        MySqlDataReader reader = cmd.ExecuteReader();
-
-        while (reader.Read())
-        {
-            Varaus VARAUS = new Varaus();
-            VARAUS.varaus_id = reader["varaus_id"].ToString();
-            VARAUS.asiakas_id = reader["asiakas_id"].ToString();
-            VARAUS.mokki_id = reader["mokki_id"].ToString();
-            VARAUS.varattupvm = Convert.ToDateTime(reader["varattu_pvm"]).ToString("yyyy-MM-dd");
-            VARAUS.vahvistuspvm = Convert.ToDateTime(reader["vahvistus_pvm"]).ToString("yyyy-MM-dd");
-            VARAUS.varattualkupvm = Convert.ToDateTime(reader["varattu_alkupvm"]).ToString("yyyy-MM-dd");
-            VARAUS.varattuloppupvm = Convert.ToDateTime(reader["varattu_loppupvm"]).ToString("yyyy-MM-dd");
-
-            VarausCollection.Add(VARAUS);
-        };
-
-        VarausListaLv.ItemsSource = VarausCollection;
     }
     private void SqlHaeMokit()
     {
@@ -195,17 +163,7 @@ public partial class VarausPage : TabbedPage
         con.Close();
 
     }
-    private void LaskutusOnItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        if (e.SelectedItem == null)
-            return;
-        
-        LaskutusHaeBtn.IsVisible = false;
-        LaskutusHyvaksyMuutosBtn.IsVisible = true;
-        LaskutusHylkaaMuutosBtn.IsVisible = true;
-        LaskutusPoistaLaskuBtn.IsVisible = true;
 
-    }
     private void ResetButton_Clicked(object sender, EventArgs e)
     {
         //clear all lists
@@ -227,7 +185,6 @@ public partial class VarausPage : TabbedPage
         //reset checkboxes
         VarusteluOptions.Clear();
         ServiceOptions.Clear();
-
 
         //alkuper näkymä
         SqlHaeAlueet();

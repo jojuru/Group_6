@@ -1,560 +1,348 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage
+<ContentPage
     x:Class="Mokkivaraus.VarausPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Style="{StaticResource TabbedPageStyle}">
-
-    <ContentPage Title="Hae mökkejä" NavigationPage.HasNavigationBar="False">
-
-        <!--  jakaa sivun kahtia  -->
-        <Grid BackgroundColor="#f7f7f8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-
-            <!--  sivun vasen puoli, filterit ja haku  -->
-            <ScrollView VerticalScrollBarVisibility="Never">
-                <VerticalStackLayout
-                    Grid.Column="0"
-                    Margin="60,10"
-                    BackgroundColor="#f7f7f8"
-                    Spacing="-6">
-                    <Label
-                        FontFamily="PoppinsRegular"
-                        FontSize="30"
-                        Text="Syötä toiveet"
-                        TextColor="Black" />
-
-                    <!--  MÖKKI NIMI JA ALUE  -->
-                    <HorizontalStackLayout Margin="0,10" Spacing="48">
-                        <Border
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                x:Name="MokinNimiEntry"
-                                BackgroundColor="#e5e9f0"
-                                FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                Placeholder="Mökin nimi"
-                                TextColor="Black"
-                                WidthRequest="200" />
-                        </Border>
-                        <Border
-                            BackgroundColor="#e5e9f0"
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Picker
-                                x:Name="AlueListaPicker"
-                                Title="Valitse Alue"
-                                Background="Transparent"
-                                BackgroundColor="Transparent"
-                                FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                HeightRequest="80"
-                                ItemDisplayBinding="{Binding nimi}"
-                                ItemsSource="{Binding AlueCollection}"
-                                SelectedIndex="0"
-                                SelectedItem="Alue"
-                                TextColor="Black"
-                                TitleColor="Black"
-                                WidthRequest="400" />
-                        </Border>
-                    </HorizontalStackLayout>
-
-                    <!--  HINTA  -->
-                    <Label
-                        Margin="0,15"
-                        FontSize="26"
-                        Text="Hinta"
-                        TextColor="Black" />
-
-                    <HorizontalStackLayout Spacing="20">
-                        <Border
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                x:Name="MinHintaEntry"
-                                BackgroundColor="#e5e9f0"
-                                FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                HeightRequest="66"
-                                Placeholder="min. hinta"
-                                TextColor="Black"
-                                WidthRequest="150" />
-                        </Border>
-                        <Border
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                x:Name="MaxHintaEntry"
-                                BackgroundColor="#e5e9f0"
-                                FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                Placeholder="max. hinta"
-                                TextColor="Black"
-                                WidthRequest="150" />
-                        </Border>
-                    </HorizontalStackLayout>
-
-                    <!--  PALVELUT  -->
-                    <Label
-                        Margin="0,20"
-                        FontFamily="PoppinsRegular"
-                        FontSize="26"
-                        Text="Palvelut"
-                        TextColor="Black" />
-                    <CollectionView
-                        x:Name="PalveluCV"
-                        Margin="0,5,0,10"
-                        HorizontalOptions="Start"
-                        ItemsLayout="VerticalGrid,2"
-                        ItemsSource="{Binding ServiceOptions}"
-                        SelectionMode="None"
-                        VerticalOptions="Start"
-                        VerticalScrollBarVisibility="Never"
-                        WidthRequest="500">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <HorizontalStackLayout Padding="10">
-                                    <CheckBox
-                                        x:Name="checkboxx"
-                                        IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                        Scale="1.5"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        Grid.Column="1"
-                                        FontFamily="PoppinsRegular"
-                                        FontSize="18"
-                                        Text="{Binding Name}"
-                                        TextColor="Black"
-                                        VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <!--  VARUSTELUTASO  -->
-                    <Label
-                        Margin="0,20"
-                        FontFamily="PoppinsRegular"
-                        FontSize="26"
-                        Text="Varustelutaso"
-                        TextColor="Black" />
-
-                    <CollectionView
-                        x:Name="VarusteluCV"
-                        Margin="0,5,0,10"
-                        HorizontalOptions="Start"
-                        ItemsLayout="VerticalGrid,2"
-                        ItemsSource="{Binding VarusteluOptions}"
-                        SelectionMode="None"
-                        VerticalOptions="Start"
-                        VerticalScrollBarVisibility="Never"
-                        WidthRequest="500">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <HorizontalStackLayout Padding="10">
-                                    <CheckBox
-                                        IsChecked="{Binding IsSelected}"
-                                        Scale="1.5"
-                                        VerticalOptions="Center" />
-                                    <Label
-                                        Grid.Column="1"
-                                        FontFamily="PoppinsRegular"
-                                        FontSize="18"
-                                        Text="{Binding Name}"
-                                        TextColor="Black"
-                                        VerticalOptions="Center" />
-                                </HorizontalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
-                        <Button
-                            Margin="0,15"
-                            BackgroundColor="#DEE1E6"
-                            BorderColor="Black"
-                            BorderWidth="2"
-                            Clicked="HaeButton_Clicked"
-                            FontFamily="PoppinsRegular"
-                            FontSize="25"
-                            Text="Hae"
-                            TextColor="Black"
-                            WidthRequest="200" />
-                        <Button
-                            Margin="0,15"
-                            BackgroundColor="#DEE1E6"
-                            BorderColor="Black"
-                            BorderWidth="2"
-                            Clicked="ResetButton_Clicked"
-                            FontFamily="PoppinsRegular"
-                            FontSize="25"
-                            Text="Reset"
-                            TextColor="Black"
-                            WidthRequest="200" />
-                    </HorizontalStackLayout>
-
-                </VerticalStackLayout>
-            </ScrollView>
-
-            <!--  sivun oikea puoli, mökit  -->
-
-            <ScrollView
-                Grid.Column="1"
-                BackgroundColor="#f2f2f2"
-                VerticalScrollBarVisibility="Never">
-                <StackLayout Margin="2" BackgroundColor="#f2f2f2">
-                    <!--  lisätään mökit tänne  -->
-                    <CollectionView
-                        x:Name="MokkiListaLv"
-                        BackgroundColor="#f2f2f2"
-                        ItemsLayout="VerticalGrid, 3"
-                        ItemsSource="{Binding MokkiCollection}"
-                        VerticalScrollBarVisibility="Never">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Border
-                                        x:Name="mokkiBorder"
-                                        HeightRequest="630"
-                                        Stroke="Transparent"
-                                        StrokeShape="RoundRectangle 6,6,6,6"
-                                        StrokeThickness="1"
-                                        WidthRequest="360">
-                                        <StackLayout Padding="5" BackgroundColor="White">
-
-                                            <Border Stroke="Transparent" StrokeShape="RoundRectangle 8,8,8,8">
-                                                <Image Source="{Binding kuva}" />
-                                            </Border>
-
-                                            <!--  mokkiid,mokkinimi,alue  -->
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="30"
-                                                TextColor="#4c77cb">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}{0}, {1},">
-                                                        <Binding Path="mokki_id" />
-                                                        <Binding Path="mokkinimi" />
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
-
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="30"
-                                                Text="{Binding alue}"
-                                                TextColor="#4c77cb" />
-                                            <!--  henkilo,palvelu,varustelu  -->
-
-                                            <Label
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="15"
-                                                Text="{Binding henkilomaara, StringFormat='{0} Henkilöä'}"
-                                                TextColor="Black"
-                                                VerticalOptions="StartAndExpand" />
-
-                                            <Label
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="15"
-                                                Text="{Binding palvelut, StringFormat='Palvelut: {0}'}"
-                                                TextColor="Black"
-                                                VerticalOptions="StartAndExpand" />
-
-                                            <Label
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="15"
-                                                Text="{Binding varustelu, StringFormat='Varustelu: {0}'}"
-                                                TextColor="Black"
-                                                VerticalOptions="StartAndExpand" />
-
-                                            <!--  hinnat  -->
-                                            <Label
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="18"
-                                                TextColor="Red">
-                                                <Label.Text>
-                                                    <MultiBinding StringFormat="{}Päivähinta     {0}€">
-                                                        <Binding Path="hinta" />
-                                                    </MultiBinding>
-                                                </Label.Text>
-                                            </Label>
+    NavigationPage.HasNavigationBar="False">
 
 
 
-                                            <Button
-                                                x:Name="TutustuButton_{Binding mokki_id}"
-                                                BackgroundColor="Red"
-                                                BorderColor="Black"
-                                                BorderWidth="2"
-                                                Clicked="TutustuButton_Clicked"
-                                                CommandParameter="{Binding .}"
-                                                FontFamily="PoppinsRegular"
-                                                FontSize="18"
-                                                HorizontalOptions="Center"
-                                                Text="TUTUSTU JA VARAA"
-                                                TextColor="White"
-                                                VerticalOptions="Center"
-                                                WidthRequest="340" />
+    <!--  jakaa sivun kahtia  -->
+    <Grid BackgroundColor="#f7f7f8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
 
-                                        </StackLayout>
-                                    </Border>
-                                    <BoxView HeightRequest="30" Color="Transparent" />
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
-            </ScrollView>
-        </Grid>
-    </ContentPage>
-    <ContentPage Title="Hae varauksia" NavigationPage.HasNavigationBar="False">
-        <!--  jakaa sivun kahtia  -->
-        <Grid BackgroundColor="#f7f7f8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <ScrollView>
-                <VerticalStackLayout
-                    Grid.Column="0"
-                    Margin="60,10"
-                    BackgroundColor="#f7f7f8"
-                    Spacing="10">
-                    <Label
-                        Margin="0,20"
-                        FontFamily="PoppinsRegular"
-                        FontSize="26"
-                        Text="Syötä varaukseen tiedot"
-                        TextColor="Black" />
+        <!--  sivun vasen puoli, filterit ja haku  -->
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout
+                Grid.Column="0"
+                Margin="60,30"
+                BackgroundColor="#f7f7f8">
+                <Label
+                    FontFamily="PoppinsRegular"
+                    FontSize="50"
+                    Text="Syötä toiveet"
+                    TextColor="Grey" />
 
+                <!--  MÖKKI NIMI JA ALUE  -->
+                <HorizontalStackLayout Margin="0,10" Spacing="20">
                     <Border
-                        Margin="0,10"
                         Stroke="#9dabc4"
                         StrokeShape="RoundRectangle 3,3,3,3"
                         StrokeThickness="3">
                         <Entry
+                            x:Name="MokinNimiEntry"
                             BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
-                            Placeholder="VarausID"
-                            TextColor="Black" />
+                            Placeholder="Mökin nimi"
+                            TextColor="Black"
+                            WidthRequest="250" />
                     </Border>
-
-                    <HorizontalStackLayout Margin="0,10" Spacing="20">
-                        <Border
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                BackgroundColor="#e5e9f0"
-                                FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                Placeholder="AsiakasID"
-                                TextColor="Black"
-                                WidthRequest="200" />
-                        </Border>
-                        <Border
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="3">
-                            <Entry
-                                BackgroundColor="#e5e9f0"
-                                FontFamily="PoppinsRegular"
-                                FontSize="20"
-                                Placeholder="MokkiID"
-                                TextColor="Black"
-                                WidthRequest="200" />
-                        </Border>
-                    </HorizontalStackLayout>
-                    <!--  ajat  -->
-                    <HorizontalStackLayout Spacing="120">
-                        <!--  SAAPUMINEN-LÄHTÖ  -->
-                        <Label
+                    <Border
+                        BackgroundColor="#e5e9f0"
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Picker
+                            x:Name="AlueListaPicker"
+                            Title="Valitse Alue"
+                            Background="Transparent"
+                            BackgroundColor="Transparent"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
-                            Text="Varauksen alku"
-                            TextColor="Black" />
-                        <Label
+                            HeightRequest="80"
+                            ItemDisplayBinding="{Binding nimi}"
+                            ItemsSource="{Binding AlueCollection}"
+                            SelectedIndex="0"
+                            SelectedItem="Alue"
+                            TextColor="Black"
+                            TitleColor="Black"
+                            WidthRequest="250" />
+                    </Border>
+                </HorizontalStackLayout>
+
+                <!--  HINTA  -->
+                <Label
+                    Margin="0,15"
+                    FontAttributes="Bold"
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="Hinta"
+                    TextColor="Black" />
+
+                <HorizontalStackLayout Spacing="20">
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Entry
+                            x:Name="MinHintaEntry"
+                            BackgroundColor="#e5e9f0"
                             FontFamily="PoppinsRegular"
                             FontSize="20"
-                            Text="Varauksen loppu"
-                            TextColor="Black" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout
-                        Margin="27,5"
-                        Padding="5"
-                        Spacing="120">
-                        <Border
+                            HeightRequest="66"
+                            Placeholder="min. hinta"
+                            TextColor="Black"
+                            WidthRequest="150" />
+                    </Border>
+                    <Border
+                        Stroke="#9dabc4"
+                        StrokeShape="RoundRectangle 3,3,3,3"
+                        StrokeThickness="3">
+                        <Entry
+                            x:Name="MaxHintaEntry"
                             BackgroundColor="#e5e9f0"
-                            Scale="1.5"
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="2">
-                            <DatePicker
-                                x:Name="saapuminenDate"
-                                BackgroundColor="Transparent"
-                                FontFamily="PoppinsRegular"
-                                Scale="1.5"
-                                TextColor="Black" />
-                        </Border>
-                        <Border
-                            BackgroundColor="#e5e9f0"
-                            Scale="1.5"
-                            Stroke="#9dabc4"
-                            StrokeShape="RoundRectangle 3,3,3,3"
-                            StrokeThickness="2">
-                            <DatePicker
-                                x:Name="lahtoDate"
-                                BackgroundColor="Transparent"
-                                FontFamily="PoppinsRegular"
-                                Scale="1.5"
-                                TextColor="Black" />
-                        </Border>
-                    </HorizontalStackLayout>
-                    <!--  napit  -->
+                            FontFamily="PoppinsRegular"
+                            FontSize="20"
+                            Placeholder="max. hinta"
+                            TextColor="Black"
+                            WidthRequest="150" />
+                    </Border>
+                </HorizontalStackLayout>
 
+                <!--  PALVELUT  -->
+                <Label
+                    Margin="0,20,0,0"
+                    FontAttributes="Bold"
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="Palvelut"
+                    TextColor="Black" />
+                <CollectionView
+                    x:Name="PalveluCV"
+                    Margin="0,5,0,10"
+                    HorizontalOptions="Start"
+                    ItemsLayout="VerticalGrid,2"
+                    ItemsSource="{Binding ServiceOptions}"
+                    SelectionMode="None"
+                    VerticalOptions="Start"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="520">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Padding="5">
+                                <CheckBox
+                                    x:Name="checkboxx"
+                                    IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                    Scale="1.5"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    FontFamily="PoppinsRegular"
+                                    FontSize="18"
+                                    Text="{Binding Name}"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!--  VARUSTELUTASO  -->
+                <Label
+                    Margin="0,20,0,0"
+                    FontAttributes="Bold"
+                    FontFamily="PoppinsRegular"
+                    FontSize="26"
+                    Text="Varustelutaso"
+                    TextColor="Black" />
+
+                <CollectionView
+                    x:Name="VarusteluCV"
+                    Margin="0,5,0,10"
+                    HorizontalOptions="Start"
+                    ItemsLayout="VerticalGrid,2"
+                    ItemsSource="{Binding VarusteluOptions}"
+                    SelectionMode="None"
+                    VerticalOptions="Start"
+                    VerticalScrollBarVisibility="Never"
+                    WidthRequest="520">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Padding="5">
+                                <CheckBox
+                                    IsChecked="{Binding IsSelected}"
+                                    Scale="1.5"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    FontFamily="PoppinsRegular"
+                                    FontSize="20"
+                                    Text="{Binding Name}"
+                                    TextColor="Black"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
                     <Button
-                        x:Name="LaskutusHaeBtn"
+                        Margin="0,15"
                         BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
-                        HorizontalOptions="Start"
-                        Text="Hae laskuja"
+                        Clicked="HaeButton_Clicked"
+                        FontFamily="PoppinsRegular"
+                        FontSize="30"
+                        Text="Hae"
                         TextColor="Black"
-                        WidthRequest="160" />
-                    <!--  Muokkaus  -->
-                    <HorizontalStackLayout Spacing="13">
-                        <Button
-                            x:Name="LaskutusHyvaksyMuutosBtn"
-                            BackgroundColor="#DEE1E6"
-                            BorderColor="Black"
-                            BorderWidth="2"
-                            HorizontalOptions="Start"
-                            IsVisible="false"
-                            Text="Tallenna muutos"
-                            TextColor="Black"
-                            WidthRequest="160" />
-                        <Button
-                            x:Name="LaskutusHylkaaMuutosBtn"
-                            BackgroundColor="#C61E21"
-                            BorderColor="Black"
-                            BorderWidth="2"
-                            HorizontalOptions="Start"
-                            IsVisible="false"
-                            Text="Hylkää"
-                            TextColor="Black"
-                            WidthRequest="160" />
-                    </HorizontalStackLayout>
-
+                        WidthRequest="300" />
                     <Button
-                        x:Name="LaskutusPoistaLaskuBtn"
-                        BackgroundColor="#C61E21"
+                        Margin="0,15"
+                        BackgroundColor="#DEE1E6"
                         BorderColor="Black"
                         BorderWidth="2"
-                        HorizontalOptions="Start"
-                        IsVisible="false"
-                        Text="Poista lasku"
+                        Clicked="ResetButton_Clicked"
+                        FontFamily="PoppinsRegular"
+                        FontSize="30"
+                        Text="Reset"
                         TextColor="Black"
-                        WidthRequest="160" />
+                        WidthRequest="300" />
+                </HorizontalStackLayout>
 
-                </VerticalStackLayout>
-            </ScrollView>
-            <!--  sivun oikea puoli, varaukset  -->
-            <StackLayout Grid.Column="1" BackgroundColor="#f2f2f2">
-                <!--  Laskulista  -->
-                <Label
-                    FontSize="28"
-                    HorizontalOptions="Center"
-                    Text="VarausID | AsiakasID | MokkiID | Varauspvm Vahvistuspvm | Varauksen alku - loppu "
-                    TextColor="Black" />
-                <ListView
-                    x:Name="VarausListaLv"
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!--  sivun oikea puoli, mökit  -->
+
+        <ScrollView
+            Grid.Column="1"
+            BackgroundColor="#f2f2f2"
+            VerticalScrollBarVisibility="Never">
+            <StackLayout Margin="2" BackgroundColor="#f2f2f2">
+                <!--  lisätään mökit tänne  -->
+                <CollectionView
+                    x:Name="MokkiListaLv"
                     BackgroundColor="#f2f2f2"
-                    HorizontalOptions="Center"
-                    ItemSelected="LaskutusOnItemSelected"
-                    ItemsSource="{Binding VarausCollection}"
-                    VerticalScrollBarVisibility="Never"
-                    WidthRequest="900">
-                    <ListView.ItemTemplate>
+                    ItemsLayout="VerticalGrid, 3"
+                    ItemsSource="{Binding MokkiCollection}"
+                    VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <StackLayout>
                                 <Border
-                                    Margin="7"
-                                    BackgroundColor="White"
-                                    HeightRequest="57"
-                                    Stroke="#9dabc4"
+                                    x:Name="mokkiBorder"
+                                    HeightRequest="630"
+                                    Stroke="Transparent"
                                     StrokeShape="RoundRectangle 6,6,6,6"
-                                    StrokeThickness="2">
-                                    <StackLayout
-                                        Padding="5,0"
-                                        HorizontalOptions="Start"
-                                        Orientation="Horizontal">
+                                    StrokeThickness="1"
+                                    WidthRequest="355">
+                                    <StackLayout Padding="5" BackgroundColor="White">
+
+                                        <Border Stroke="Transparent" StrokeShape="RoundRectangle 8,8,8,8">
+                                            <Image Source="{Binding kuva}" />
+                                        </Border>
+
+                                        <!--  mokkiid,mokkinimi,alue  -->
                                         <Label
-                                            Padding="2"
                                             FontAttributes="Bold"
-                                            FontSize="20"
-                                            Text="{Binding varaus_id, StringFormat='{0} '}"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="30"
+                                            TextColor="#4c77cb">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0}, {1}">
+                                                    <Binding Path="mokki_id" />
+                                                    <Binding Path="mokkinimi" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="25"
+                                            Text="{Binding alue}"
+                                            TextColor="#4c77cb"
+                                            VerticalOptions="Start" />
+                                        <BoxView HeightRequest="6" Color="Transparent" />
+
+                                        <!--  henkilo,palvelu,varustelu  -->
+
+                                        <Label
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="15"
+                                            Text="Tilavuus:"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="20"
-                                            Text="{Binding asiakas_id, StringFormat='| {0} |'}"
+                                            FontAttributes="Italic"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="15"
+                                            Text="{Binding henkilomaara, StringFormat='{0} Henkilöä'}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <BoxView HeightRequest="6" Color="Transparent" />
+
+                                        <Label
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="15"
+                                            Text="Palvelut lähellä:"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="20"
-                                            Text="{Binding mokki_id, StringFormat='{0} |'}"
+                                            FontAttributes="Italic"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="14"
+                                            Text="{Binding palvelut}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center" />
+                                        <BoxView HeightRequest="6" Color="Transparent" />
+
+                                        <Label
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="15"
+                                            Text="Varustelu:"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
                                         <Label
-                                            Padding="2"
-                                            FontSize="20"
-                                            Text="{Binding varattupvm, StringFormat='{0} -'}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            Padding="2"
-                                            FontSize="20"
-                                            Text="{Binding vahvistuspvm, StringFormat='{0} |'}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            Padding="2"
-                                            FontSize="20"
-                                            Text="{Binding varattualkupvm, StringFormat='{0} -'}"
-                                            TextColor="Black"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            Padding="2"
-                                            FontSize="20"
-                                            Text="{Binding varattuloppupvm}"
+                                            FontAttributes="Italic"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="14"
+                                            Text="{Binding varustelu}"
                                             TextColor="Black"
                                             VerticalOptions="Center" />
 
-                                        <BoxView HorizontalOptions="FillAndExpand" Color="Transparent" />
+                                        <!--  hinnat  -->
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="18"
+                                            TextColor="Red"
+                                            VerticalOptions="EndAndExpand">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}Päivähinta {0}€">
+                                                    <Binding Path="hinta" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+
+                                        <Button
+                                            x:Name="TutustuButton_{Binding mokki_id}"
+                                            BackgroundColor="Red"
+                                            BorderColor="Black"
+                                            BorderWidth="2"
+                                            Clicked="TutustuButton_Clicked"
+                                            CommandParameter="{Binding .}"
+                                            FontFamily="PoppinsRegular"
+                                            FontSize="20"
+                                            HeightRequest="50"
+                                            HorizontalOptions="Center"
+                                            Text="TUTUSTU JA VARAA"
+                                            TextColor="White"
+                                            VerticalOptions="EndAndExpand"
+                                            WidthRequest="340" />
+
                                     </StackLayout>
                                 </Border>
-                            </ViewCell>
+                                <BoxView HeightRequest="10" Color="Transparent" />
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <!--  More content can be added here  -->
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
+        </ScrollView>
+    </Grid>
 
-        </Grid>
-    </ContentPage>
-
-</TabbedPage>
+</ContentPage>
