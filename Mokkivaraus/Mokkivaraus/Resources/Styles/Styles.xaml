@@ -396,10 +396,10 @@
         <Setter Property="IconColor" Value="{StaticResource Gray200}" />
     </Style>
 
-    <Style TargetType="TabbedPage" x:Key="TabbedPageStyle">
+    <Style x:Key="TabbedPageStyle" TargetType="TabbedPage">
         <Setter Property="BarBackground" Value="#f2f2f2" />
         <Setter Property="BarTextColor" Value="Black" />
-        <Setter Property="UnselectedTabColor" Value="LightGrey" />
+        <Setter Property="UnselectedTabColor" Value="Transparent" />
         <Setter Property="SelectedTabColor" Value="Grey" />
     </Style>
 

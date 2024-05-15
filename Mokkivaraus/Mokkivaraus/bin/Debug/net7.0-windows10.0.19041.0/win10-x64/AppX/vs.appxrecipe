@@ -29,7 +29,7 @@
     <AppXManifest Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-05-15T11:55:20.839</Modified>
+      <Modified>2024-05-15T12:01:12.353</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -43,11 +43,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.dll">
       <PackagePath>Mokkivaraus.dll</PackagePath>
-      <Modified>2024-05-15T11:55:19.336</Modified>
+      <Modified>2024-05-15T12:01:11.319</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>Mokkivaraus.exe</PackagePath>
-      <Modified>2024-05-15T11:55:19.378</Modified>
+      <Modified>2024-05-15T12:01:11.328</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\sisum\OneDrive\Työpöytä\mokki\mokki1\Group_6\Mokkivaraus\Mokkivaraus\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\Mokkivaraus.deps.json">
       <PackagePath>Mokkivaraus.deps.json</PackagePath>

@@ -146,7 +146,8 @@
                                     HorizontalOptions="Start"
                                     IsReadOnly="True"
                                     Placeholder="LoppuPvm"
-                                    TextColor="Black" WidthRequest="250" />
+                                    TextColor="Black"
+                                    WidthRequest="250" />
                             </Border>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
@@ -158,17 +159,18 @@
                             Text="Summa (€)"
                             TextColor="Black" />
                         <Border
-                            Stroke="#585A5C"
+                            Stroke="#9dabc4"
                             StrokeShape="RoundRectangle 3,3,3,3"
                             StrokeThickness="3">
                             <Entry
                                 x:Name="summaEntry"
-                                BackgroundColor="#DEE1E6"
+                                BackgroundColor="#e5e9f0"
                                 FontSize="20"
                                 HeightRequest="60"
                                 HorizontalOptions="Start"
                                 Placeholder="Summa"
-                                TextColor="Black" WidthRequest="250" />
+                                TextColor="Black"
+                                WidthRequest="250" />
                         </Border>
                         <Label FontSize="20" Text="ALV (24%)" />
                         <Border
@@ -181,7 +183,8 @@
                                 FontSize="20"
                                 HeightRequest="60"
                                 HorizontalOptions="Start"
-                                Placeholder="ALV" WidthRequest="250" />
+                                Placeholder="ALV"
+                                WidthRequest="250" />
                         </Border>
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
