@@ -1200,7 +1200,7 @@
                             StrokeShape="RoundRectangle 3,3,3,3"
                             StrokeThickness="2">
                             <DatePicker
-                                x:Name="varattuDp"
+                                x:Name="varattuloppDp"
                                 BackgroundColor="Transparent"
                                 IsEnabled="False"
                                 Scale="1.5"
