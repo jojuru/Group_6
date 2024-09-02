@@ -1,5 +1,3 @@
-# Toimintaympäristö
-Järjestelmä palvelee asiakkaan Village Newbies Oy mökkivuokraus-, lisäpalvelu- ja majoitusvarausliiketoimintaa, koostaen yhdeksi ohjelmistoksi asiakkuuksien, varausten, palveluiden, raportoinnin ja laskutuksen hallinnan.
 
 # Järjestelmäkuvaus
 Järjestelmä on työpöytäsovellus, joka tarjoaa graafisen käyttöliittymän mökkien, palveluiden, varausten ja asiakkuuksien hallintaan.
