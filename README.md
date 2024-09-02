@@ -13,5 +13,5 @@ Nykyinen tilanne Village Newbies Oy:ssä on haasteellinen, sillä varausjärjest
 Liiketoiminnallinen tarve/peruste projektille
 Projektin taustalla on Village Newbies Oy:n tarve parantaa varausjärjestelmää vastatakseen paremmin liiketoiminnan kasvaviin tarpeisiin ja asiakkaiden odotuksiin. Nykyinen varausjärjestelmä ei enää vastaa yrityksen tarpeita, ja sen puutteet aiheuttavat kustannuksia sekä asiakastyytyväisyyden että liiketoiminnan tehokkuuden osalta. Parannettu varausjärjestelmä on välttämätön askel, jotta Village Newbies Oy voi säilyttää asemansa vapaa-ajan matkailun edelläkävijänä ja palvella asiakkaitaan entistä paremmin.
 
-Lopputulos
+# Lopputulos
 Lopputuloksena oli korkealaatuinen ohjelmisto, joka vastasi määriteltyihin vaatimuksiin ja käyttäjien odotuksiin. Projektin onnistunut toteutus osoitti huolellisen suunnittelun, järjestelmällisen työskentelyn ja tehokkaan projektinhallinnan merkityksen. Tämä projekti toimii erinomaisena esimerkkinä siitä, kuinka hyvällä suunnittelulla ja toteutuksella voidaan saavuttaa kaikki asetetut tavoitteet aikataulussa ja budjetissa pysyen.
