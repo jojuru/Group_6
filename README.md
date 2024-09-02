@@ -1,17 +1,16 @@
-# Projektin tavoitteet
-Tämän projektin tavoitteena on parantaa Village Newbies Oy:n nykyistä varausjärjestelmää, jotta yritys pystyy tehokkaammin hallinnoimaan mökkien vuokrauksia ja asiakastietoja. 
+# Toimintaympäristö
+Järjestelmä palvelee asiakkaan Village Newbies Oy mökkivuokraus-, lisäpalvelu- ja majoitusvarausliiketoimintaa, koostaen yhdeksi ohjelmistoksi asiakkuuksien, varausten, palveluiden, raportoinnin ja laskutuksen hallinnan.
 
-Tehokkuuden ja tarkkuuden parantaminen: Nykyinen varausjärjestelmä aiheuttaa ongelmia päällekkäisistä varauksista ja epäselvyyksiä asiakkaiden majoittumisaikojen sekä lisä- ja ohjelmapalveluiden suhteen. Projektin avulla pyritään vähentämään virheitä ja epäselvyyksiä sekä varmistamaan, että kaikki varaustiedot ovat tarkkoja ja ajantasaisia.
-
-Asiakastyytyväisyyden parantaminen: Parannetun varausjärjestelmän avulla tavoitellaan parempaa asiakastyytyväisyyttä. Selkeämpi ja virheetön varausprosessi sekä oikein kohdistetut palvelut voivat selkeästi nopeuttaa asiakaspalvelua.
-
-Liiketoiminnan tehokkuuden kasvattaminen: Tehokkaampi varausprosessi säästää aikaa ja resursseja, mikä voi vaikuttaa myönteisesti yrityksen tulokseen.
-
-Lähtötilanne ja tavoiteltu muutos
-Nykyinen tilanne Village Newbies Oy:ssä on haasteellinen, sillä varausjärjestelmän puutteet aiheuttavat virheitä ja epäselvyyksiä sekä asiakkaille että yrityksen henkilöstölle. Sesongin aikana kiire ja päällekkäiset varaukset ovat arkipäivää, mikä heikentää sekä asiakastyytyväisyyttä että liiketoiminnan tehokkuutta. Projektin tavoitteena on muuttaa tämä tilanne ja luoda varausjärjestelmä, joka on selkeämpi, luotettavampi ja tehokkaampi.
-
-Liiketoiminnallinen tarve/peruste projektille
-Projektin taustalla on Village Newbies Oy:n tarve parantaa varausjärjestelmää vastatakseen paremmin liiketoiminnan kasvaviin tarpeisiin ja asiakkaiden odotuksiin. Nykyinen varausjärjestelmä ei enää vastaa yrityksen tarpeita, ja sen puutteet aiheuttavat kustannuksia sekä asiakastyytyväisyyden että liiketoiminnan tehokkuuden osalta. Parannettu varausjärjestelmä on välttämätön askel, jotta Village Newbies Oy voi säilyttää asemansa vapaa-ajan matkailun edelläkävijänä ja palvella asiakkaitaan entistä paremmin.
-
-# Lopputulos
-Lopputuloksena oli korkealaatuinen ohjelmisto, joka vastasi määriteltyihin vaatimuksiin ja käyttäjien odotuksiin. Projektin onnistunut toteutus osoitti huolellisen suunnittelun, järjestelmällisen työskentelyn ja tehokkaan projektinhallinnan merkityksen. Tämä projekti toimii erinomaisena esimerkkinä siitä, kuinka hyvällä suunnittelulla ja toteutuksella voidaan saavuttaa kaikki asetetut tavoitteet aikataulussa ja budjetissa pysyen.
+# Järjestelmäkuvaus
+Järjestelmä on työpöytäsovellus, joka tarjoaa graafisen käyttöliittymän mökkien, palveluiden, varausten ja asiakkuuksien hallintaan.
+Järjestelmä raportoi mökkien majoitusvarausten aikavälin sekä ostettujen lisäpalveluiden halutut toimituspäivät graafisesti.
+Varausjärjestelmä ja asiakkuustiedot liitetään ohjelmiston laskutushallintaan, jonka kautta lähetetään asiakaskohtaiset laskut valitulla toimitustavalla.
+Järjestelmä koostetaan kolmesta kerroksesta:
+- Esityskerros
+-- Helppokäyttöinen graafinen käyttöliittymä, joka on suunniteltu käytettäväksi tietokoneen työpöydältä.
+- Bisnestoiminnallisuus kerros
+-- Toteuttaa varausten, asiakastietojen ja palveluiden hallinnan, kuten tilaukset, muokkaukset jne.
+-- Hoitaa erilaisten raporttien koostamisen ja esittämisen.
+-- Hoitaa laskujen koostamisen ja lähettämisen sekä mahdolliset muokkaukset.
+- Tietojenkäsittelykerros
+-- SQL tietokanta, joka tallettaa varaustiedot, palvelutiedot, asiakastiedot ja laskutustiedot.
